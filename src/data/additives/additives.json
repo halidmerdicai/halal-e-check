@@ -1,0 +1,2067 @@
+[
+  {
+    "id": "e120",
+    "eNumber": "E120",
+    "numericCode": "120",
+    "name": "Carmine",
+    "aliases": [
+      "cochineal",
+      "carminic acid",
+      "natural red 4",
+      "crimson lake"
+    ],
+    "category": "Color",
+    "status": "haram",
+    "summary": "A red color made from cochineal insects. Many halal consumers avoid it because it is insect-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Cochineal insects"
+    ],
+    "halalWhen": [
+      "Only if a trusted halal authority accepts the specific source and process"
+    ],
+    "haramWhen": [
+      "Listed as carmine, cochineal, or carminic acid without trusted halal certification"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Ingredient names such as carmine or cochineal",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Avoid unless the product has reliable halal certification that specifically covers this color.",
+    "commonFoods": [
+      "Yogurt",
+      "Candy",
+      "Juices",
+      "Ice cream",
+      "Cosmetics"
+    ],
+    "notes": [
+      "A vegan label usually excludes carmine because it is insect-derived."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e322",
+      "e471"
+    ]
+  },
+  {
+    "id": "e322",
+    "eNumber": "E322",
+    "numericCode": "322",
+    "name": "Lecithins",
+    "aliases": [
+      "lecithin",
+      "soy lecithin",
+      "sunflower lecithin",
+      "egg lecithin"
+    ],
+    "category": "Emulsifier",
+    "status": "halal",
+    "summary": "Usually halal when made from soy, sunflower, or egg. It is still worth checking the source if it is not stated.",
+    "sourceSensitivity": "medium",
+    "usuallyDerivedFrom": [
+      "Soy",
+      "Sunflower",
+      "Egg",
+      "Rapeseed"
+    ],
+    "halalWhen": [
+      "Declared as soy lecithin or sunflower lecithin",
+      "Covered by halal certification",
+      "Suitable for vegetarians or vegans when no alcohol carrier is used"
+    ],
+    "haramWhen": [
+      "Processed with a non-halal alcohol carrier",
+      "Source is unclear and the product is doubtful"
+    ],
+    "whatToCheck": [
+      "Plant source on label",
+      "Halal or vegan mark",
+      "Manufacturer confirmation for processing aids"
+    ],
+    "saferAction": "Generally acceptable when plant-based; verify if the source is not shown.",
+    "commonFoods": [
+      "Chocolate",
+      "Bakery products",
+      "Margarine",
+      "Instant drinks"
+    ],
+    "notes": [
+      "Vegan labeling helps identify plant-based lecithin but does not replace halal certification."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472a",
+      "e476"
+    ]
+  },
+  {
+    "id": "e406",
+    "eNumber": "E406",
+    "numericCode": "406",
+    "name": "Agar",
+    "aliases": [
+      "agar agar",
+      "agar-agar"
+    ],
+    "category": "Gelling agent",
+    "status": "halal",
+    "summary": "A plant-like seaweed-derived gelling agent that is generally considered halal.",
+    "sourceSensitivity": "low",
+    "usuallyDerivedFrom": [
+      "Red algae",
+      "Seaweed"
+    ],
+    "halalWhen": [
+      "Used as plain agar from seaweed",
+      "No doubtful carriers or alcohol-based flavor systems are present"
+    ],
+    "haramWhen": [
+      "Combined with haram ingredients elsewhere in the product"
+    ],
+    "whatToCheck": [
+      "Ingredient list",
+      "Halal certification for the finished product"
+    ],
+    "saferAction": "Usually fine, but still check the full product ingredients.",
+    "commonFoods": [
+      "Jellies",
+      "Desserts",
+      "Bakery fillings",
+      "Plant-based gel products"
+    ],
+    "notes": [
+      "Agar is often used as a vegetarian alternative to gelatin."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e412",
+      "e441"
+    ]
+  },
+  {
+    "id": "e412",
+    "eNumber": "E412",
+    "numericCode": "412",
+    "name": "Guar gum",
+    "aliases": [
+      "guar",
+      "guaran"
+    ],
+    "category": "Thickener",
+    "status": "halal",
+    "summary": "A plant-derived thickener from guar beans, generally considered halal.",
+    "sourceSensitivity": "low",
+    "usuallyDerivedFrom": [
+      "Guar beans"
+    ],
+    "halalWhen": [
+      "Used as plain plant-derived guar gum"
+    ],
+    "haramWhen": [
+      "The finished product contains other haram ingredients"
+    ],
+    "whatToCheck": [
+      "Full ingredient list",
+      "Halal certification for complex products"
+    ],
+    "saferAction": "Usually acceptable as an additive; evaluate the full food product.",
+    "commonFoods": [
+      "Ice cream",
+      "Sauces",
+      "Gluten-free foods",
+      "Dairy products"
+    ],
+    "notes": [
+      "Source concerns are usually low for E412."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e406",
+      "e473"
+    ]
+  },
+  {
+    "id": "e441",
+    "eNumber": "E441",
+    "numericCode": "441",
+    "name": "Gelatin",
+    "aliases": [
+      "gelatine",
+      "hydrolyzed gelatin",
+      "collagen"
+    ],
+    "category": "Gelling agent",
+    "status": "mashbooh",
+    "summary": "Gelatin is animal-derived, so its halal status depends on the animal source and slaughter method.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Pork skin or bones",
+      "Beef hide or bones",
+      "Fish"
+    ],
+    "halalWhen": [
+      "Made from halal-slaughtered bovine source",
+      "Made from fish and accepted by the relevant halal authority",
+      "Clearly certified halal"
+    ],
+    "haramWhen": [
+      "Made from pork",
+      "Made from non-halal-slaughtered animals",
+      "Animal source is hidden or unclear"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Animal source",
+      "Manufacturer confirmation",
+      "Vegetarian alternatives such as agar or pectin"
+    ],
+    "saferAction": "Avoid if the source is not disclosed; choose halal-certified gelatin or a plant-based alternative.",
+    "commonFoods": [
+      "Gummy candy",
+      "Marshmallows",
+      "Desserts",
+      "Capsules",
+      "Yogurt"
+    ],
+    "notes": [
+      "Do not assume gelatin is halal. Pork gelatin is haram."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e406",
+      "e120"
+    ]
+  },
+  {
+    "id": "e432",
+    "eNumber": "E432",
+    "numericCode": "432",
+    "name": "Polyoxyethylene (20) sorbitan monolaurate",
+    "aliases": [
+      "polysorbate 20",
+      "tween 20",
+      "sorbitan monolaurate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Lauric acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Beverage emulsions",
+      "Sauces",
+      "Desserts",
+      "Flavor systems"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e433",
+      "e434",
+      "e435",
+      "e436"
+    ]
+  },
+  {
+    "id": "e433",
+    "eNumber": "E433",
+    "numericCode": "433",
+    "name": "Polyoxyethylene (20) sorbitan monooleate",
+    "aliases": [
+      "polysorbate 80",
+      "tween 80",
+      "sorbitan monooleate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Oleic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Ice cream",
+      "Sauces",
+      "Dressings",
+      "Desserts"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e432",
+      "e434",
+      "e435",
+      "e436"
+    ]
+  },
+  {
+    "id": "e434",
+    "eNumber": "E434",
+    "numericCode": "434",
+    "name": "Polyoxyethylene (20) sorbitan monopalmitate",
+    "aliases": [
+      "polysorbate 40",
+      "tween 40",
+      "sorbitan monopalmitate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Palmitic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Desserts",
+      "Beverage emulsions",
+      "Sauces",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e432",
+      "e433",
+      "e435",
+      "e436"
+    ]
+  },
+  {
+    "id": "e435",
+    "eNumber": "E435",
+    "numericCode": "435",
+    "name": "Polyoxyethylene (20) sorbitan monostearate",
+    "aliases": [
+      "polysorbate 60",
+      "tween 60",
+      "sorbitan monostearate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Stearic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Cakes",
+      "Whipped toppings",
+      "Desserts",
+      "Creamers"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e432",
+      "e433",
+      "e434",
+      "e436"
+    ]
+  },
+  {
+    "id": "e436",
+    "eNumber": "E436",
+    "numericCode": "436",
+    "name": "Polyoxyethylene (20) sorbitan tristearate",
+    "aliases": [
+      "polysorbate 65",
+      "tween 65",
+      "sorbitan tristearate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Stearic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Desserts",
+      "Whipped toppings",
+      "Bakery products",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e432",
+      "e433",
+      "e435",
+      "e491"
+    ]
+  },
+  {
+    "id": "e442",
+    "eNumber": "E442",
+    "numericCode": "442",
+    "name": "Ammonium salts of phosphatidic acid",
+    "aliases": [
+      "ammonium phosphatides",
+      "yn",
+      "phosphatidic acid ammonium salts"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Usually used in chocolate and often made from vegetable oils, but it should still be checked when source is not declared.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Vegetable oils",
+      "Glycerol",
+      "Fatty acids",
+      "Phosphorus compounds"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Chocolate",
+      "Compound chocolate",
+      "Cocoa coatings"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e322",
+      "e476",
+      "e471"
+    ]
+  },
+  {
+    "id": "e444",
+    "eNumber": "E444",
+    "numericCode": "444",
+    "name": "Sucrose acetate isobutyrate",
+    "aliases": [
+      "saib",
+      "sucrose acetate isobutyrate"
+    ],
+    "category": "Emulsifier / stabilizer",
+    "status": "halal",
+    "summary": "A beverage emulsifier and stabilizer that is generally lower concern, though the finished product still matters.",
+    "sourceSensitivity": "low",
+    "usuallyDerivedFrom": [
+      "Sucrose",
+      "Acetic acid",
+      "Isobutyric acid"
+    ],
+    "halalWhen": [
+      "Used from its usual non-animal source",
+      "No haram carrier, solvent, or other ingredient is present",
+      "The finished product is halal-certified"
+    ],
+    "haramWhen": [
+      "The finished product contains haram ingredients",
+      "A doubtful carrier or processing aid is used"
+    ],
+    "whatToCheck": [
+      "Full ingredient list",
+      "Halal certification for complex products",
+      "Manufacturer confirmation if the label is unclear"
+    ],
+    "saferAction": "Usually acceptable as an additive, but check the finished product.",
+    "commonFoods": [
+      "Soft drinks",
+      "Cloudy beverages",
+      "Flavor emulsions"
+    ],
+    "notes": [
+      "The additive source is usually lower concern than source-dependent fatty-acid emulsifiers."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e445",
+      "e473"
+    ]
+  },
+  {
+    "id": "e445",
+    "eNumber": "E445",
+    "numericCode": "445",
+    "name": "Glycerol esters of wood rosin",
+    "aliases": [
+      "glycerol ester of rosin",
+      "ester gum",
+      "wood rosin ester"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Usually based on wood rosin, but glycerol can be plant, synthetic, or animal-derived, so source checking is useful.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Wood rosin",
+      "Glycerol",
+      "Vegetable glycerol",
+      "Animal-derived glycerol"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Soft drinks",
+      "Cloudy beverages",
+      "Flavor emulsions"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e444",
+      "e422",
+      "e476"
+    ]
+  },
+  {
+    "id": "e470",
+    "eNumber": "E470",
+    "numericCode": "470",
+    "name": "Salts of fatty acids",
+    "aliases": [
+      "fatty acid salts",
+      "salts of fatty acids"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Vegetable fatty acids",
+      "Animal fatty acids",
+      "Sodium salts",
+      "Potassium salts",
+      "Calcium salts"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Powdered foods",
+      "Tablets",
+      "Bakery products",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e470a",
+      "e470b",
+      "e570"
+    ]
+  },
+  {
+    "id": "e470a",
+    "eNumber": "E470a",
+    "numericCode": "470a",
+    "name": "Sodium, potassium and calcium salts of fatty acids",
+    "aliases": [
+      "sodium salts of fatty acids",
+      "potassium salts of fatty acids",
+      "calcium salts of fatty acids"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Powdered foods",
+      "Tablets",
+      "Bakery products",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e470",
+      "e470b",
+      "e570"
+    ]
+  },
+  {
+    "id": "e470b",
+    "eNumber": "E470b",
+    "numericCode": "470b",
+    "name": "Magnesium salts of fatty acids",
+    "aliases": [
+      "magnesium stearate",
+      "magnesium salts of fatty acids"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Vegetable fatty acids",
+      "Animal fatty acids",
+      "Stearic acid"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Supplements",
+      "Tablets",
+      "Powdered foods",
+      "Dry mixes"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e470",
+      "e470a",
+      "e570"
+    ]
+  },
+  {
+    "id": "e471",
+    "eNumber": "E471",
+    "numericCode": "471",
+    "name": "Mono- and diglycerides of fatty acids",
+    "aliases": [
+      "mono and diglycerides",
+      "mono-diglycerides",
+      "glycerol monostearate",
+      "glycerol esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier can be made from plant oils or animal fats, so it needs source verification.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Vegetable oils",
+      "Animal fats",
+      "Synthetic processing from fatty acids"
+    ],
+    "halalWhen": [
+      "Made from plant oils",
+      "Made synthetically without haram inputs",
+      "Certified halal"
+    ],
+    "haramWhen": [
+      "Made from pork fat",
+      "Made from non-halal animal fat",
+      "Source is undisclosed in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer statement on fatty acid source"
+    ],
+    "saferAction": "Verify with the manufacturer or choose halal-certified or vegan-labeled products.",
+    "commonFoods": [
+      "Bread",
+      "Cakes",
+      "Margarine",
+      "Ice cream",
+      "Whipped toppings"
+    ],
+    "notes": [
+      "Vegan labeling is helpful for source, but halal certification is stronger for the full product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e472a",
+      "e472b",
+      "e472c",
+      "e322"
+    ]
+  },
+  {
+    "id": "e472a",
+    "eNumber": "E472a",
+    "numericCode": "472a",
+    "name": "Acetic acid esters of mono- and diglycerides",
+    "aliases": [
+      "acetic esters",
+      "acetylated mono and diglycerides",
+      "acetic acid esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Related to E471 and source-dependent because the fatty acid base may come from plant or animal sources.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Mono- and diglycerides",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Base fatty acids are plant-derived",
+      "Covered by halal certification",
+      "Confirmed vegan with no alcohol concern"
+    ],
+    "haramWhen": [
+      "Base fatty acids come from pork or non-halal animal fat",
+      "Source is not disclosed"
+    ],
+    "whatToCheck": [
+      "Source of mono- and diglycerides",
+      "Halal certificate",
+      "Vegan label"
+    ],
+    "saferAction": "Treat as source-dependent; verify before relying on it.",
+    "commonFoods": [
+      "Bread improvers",
+      "Cakes",
+      "Desserts",
+      "Processed bakery foods"
+    ],
+    "notes": [
+      "The suffix letter does not make it automatically halal."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472b",
+      "e472c"
+    ]
+  },
+  {
+    "id": "e472b",
+    "eNumber": "E472b",
+    "numericCode": "472b",
+    "name": "Lactic acid esters of mono- and diglycerides",
+    "aliases": [
+      "lactic esters",
+      "lactylated mono and diglycerides"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "The fatty acid part can be plant or animal based, so source confirmation is needed.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Mono- and diglycerides",
+      "Lactic acid",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Fatty acids are plant-derived",
+      "Product is halal-certified",
+      "Lactic acid is produced by acceptable fermentation"
+    ],
+    "haramWhen": [
+      "Fatty acids come from pork or non-halal animal sources",
+      "Source remains unclear"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Fatty acid source",
+      "Manufacturer confirmation"
+    ],
+    "saferAction": "Verify source or choose certified products.",
+    "commonFoods": [
+      "Bread",
+      "Cakes",
+      "Whipped toppings",
+      "Dessert mixes"
+    ],
+    "notes": [
+      "Lactic acid itself is usually not from milk, but the fatty acids still matter."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472a",
+      "e472c"
+    ]
+  },
+  {
+    "id": "e472c",
+    "eNumber": "E472c",
+    "numericCode": "472c",
+    "name": "Citric acid esters of mono- and diglycerides",
+    "aliases": [
+      "citric esters",
+      "citrem",
+      "citric acid esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Often plant-based in modern production, but still source-dependent because it is made from mono- and diglycerides.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Mono- and diglycerides",
+      "Citric acid",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Made from plant-derived fatty acids",
+      "Halal-certified",
+      "Confirmed by manufacturer"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fats",
+      "Source is unknown"
+    ],
+    "whatToCheck": [
+      "Source declaration",
+      "Halal or vegan mark",
+      "Manufacturer statement"
+    ],
+    "saferAction": "Use when plant-based or certified; verify if only the E-number is listed.",
+    "commonFoods": [
+      "Margarine",
+      "Bakery products",
+      "Meat alternatives",
+      "Desserts"
+    ],
+    "notes": [
+      "A plant-based label helps but is not equal to a halal audit."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472d",
+      "e476"
+    ]
+  },
+  {
+    "id": "e472d",
+    "eNumber": "E472d",
+    "numericCode": "472d",
+    "name": "Tartaric acid esters of mono- and diglycerides",
+    "aliases": [
+      "tartaric esters",
+      "tartaric acid esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "The halal concern is mainly the fatty acid source used in the mono- and diglycerides.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Mono- and diglycerides",
+      "Tartaric acid",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Fatty acids are from plant oils",
+      "Certified halal"
+    ],
+    "haramWhen": [
+      "Fatty acids are from pork or non-halal animal sources",
+      "Source is hidden"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Fat source",
+      "Vegan or plant-based statement"
+    ],
+    "saferAction": "Verify the source before treating it as halal.",
+    "commonFoods": [
+      "Bakery mixes",
+      "Bread",
+      "Cake mixes"
+    ],
+    "notes": [
+      "Related E472 additives should be checked individually."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472e",
+      "e472f"
+    ]
+  },
+  {
+    "id": "e472e",
+    "eNumber": "E472e",
+    "numericCode": "472e",
+    "name": "Mono- and diacetyl tartaric acid esters of mono- and diglycerides",
+    "aliases": [
+      "datem",
+      "diacetyl tartaric acid esters",
+      "datem emulsifier"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Common in bread, DATEM can be plant-based but depends on the source of the fatty acid ingredients.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Mono- and diglycerides",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Made from plant-derived fatty acids",
+      "Certified halal",
+      "Confirmed suitable for vegans with no doubtful processing aids"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fats",
+      "No source information is available"
+    ],
+    "whatToCheck": [
+      "Halal mark",
+      "DATEM source",
+      "Manufacturer confirmation"
+    ],
+    "saferAction": "Prefer halal-certified bread products or ask the manufacturer.",
+    "commonFoods": [
+      "Bread",
+      "Buns",
+      "Pizza dough",
+      "Cakes"
+    ],
+    "notes": [
+      "DATEM is not automatically haram, but it is not automatically halal either."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472a",
+      "e481"
+    ]
+  },
+  {
+    "id": "e472f",
+    "eNumber": "E472f",
+    "numericCode": "472f",
+    "name": "Mixed acetic and tartaric acid esters of mono- and diglycerides",
+    "aliases": [
+      "mixed acetic tartaric esters",
+      "mixed esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Source-dependent because the mono- and diglyceride base may be plant or animal derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Mono- and diglycerides",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "Halal certification is present"
+    ],
+    "haramWhen": [
+      "Pork or non-halal animal fats are used",
+      "Source is unknown"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Fatty acid source",
+      "Vegan label"
+    ],
+    "saferAction": "Verify source; avoid doubtful products if no information is available.",
+    "commonFoods": [
+      "Bakery products",
+      "Cake mixes",
+      "Processed desserts"
+    ],
+    "notes": [
+      "It shares the same main source concern as E471."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472d",
+      "e472e"
+    ]
+  },
+  {
+    "id": "e473",
+    "eNumber": "E473",
+    "numericCode": "473",
+    "name": "Sucrose esters of fatty acids",
+    "aliases": [
+      "sucrose esters",
+      "sugar esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Can be made with fatty acids from plant or animal sources, so it requires source checking.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sugar",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Fatty acids are plant-derived",
+      "Certified halal"
+    ],
+    "haramWhen": [
+      "Fatty acids come from pork or non-halal animals",
+      "Source is not disclosed"
+    ],
+    "whatToCheck": [
+      "Fatty acid source",
+      "Halal certificate",
+      "Vegan claim"
+    ],
+    "saferAction": "Use only when source is plant-based or certified halal.",
+    "commonFoods": [
+      "Desserts",
+      "Sauces",
+      "Bakery products",
+      "Beverage emulsions"
+    ],
+    "notes": [
+      "The word sucrose does not remove the fatty-acid source concern."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e476",
+      "e481"
+    ]
+  },
+  {
+    "id": "e474",
+    "eNumber": "E474",
+    "numericCode": "474",
+    "name": "Sucroglycerides",
+    "aliases": [
+      "sucroglyceride",
+      "sugar glycerides"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Made from sugar and glycerides, so the glyceride or fatty-acid source can make it source-dependent.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sugar",
+      "Mono- and diglycerides",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Desserts",
+      "Margarine",
+      "Bakery products",
+      "Sauces"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e473",
+      "e475"
+    ]
+  },
+  {
+    "id": "e475",
+    "eNumber": "E475",
+    "numericCode": "475",
+    "name": "Polyglycerol esters of fatty acids",
+    "aliases": [
+      "polyglycerol esters",
+      "pge",
+      "polyglycerol fatty acid esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Glycerol",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Cakes",
+      "Margarine",
+      "Desserts",
+      "Sauces",
+      "Whipped toppings"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e476",
+      "e477"
+    ]
+  },
+  {
+    "id": "e476",
+    "eNumber": "E476",
+    "numericCode": "476",
+    "name": "Polyglycerol polyricinoleate",
+    "aliases": [
+      "pgpr",
+      "polyglycerol esters",
+      "polyricinoleate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Often derived from castor oil, but source and processing should still be verified for halal confidence.",
+    "sourceSensitivity": "medium",
+    "usuallyDerivedFrom": [
+      "Castor oil",
+      "Glycerol",
+      "Fatty acids"
+    ],
+    "halalWhen": [
+      "Plant source is confirmed",
+      "Halal-certified",
+      "Suitable for vegan products with acceptable processing"
+    ],
+    "haramWhen": [
+      "Animal-derived glycerol or fatty acids are used",
+      "Source is unclear"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan label",
+      "Source of glycerol and fatty acids"
+    ],
+    "saferAction": "Usually lower concern than E471 when castor-based, but verify if doubtful.",
+    "commonFoods": [
+      "Chocolate",
+      "Compound chocolate",
+      "Spreads",
+      "Coatings"
+    ],
+    "notes": [
+      "Vegan chocolate using E476 is often plant-based, but certification is still best."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e322",
+      "e471",
+      "e473"
+    ]
+  },
+  {
+    "id": "e477",
+    "eNumber": "E477",
+    "numericCode": "477",
+    "name": "Propylene glycol esters of fatty acids",
+    "aliases": [
+      "propylene glycol esters",
+      "pg esters",
+      "propylene glycol fatty acid esters"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Propylene glycol",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Cakes",
+      "Whipped toppings",
+      "Desserts",
+      "Bakery products"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e475",
+      "e1520"
+    ]
+  },
+  {
+    "id": "e479b",
+    "eNumber": "E479b",
+    "numericCode": "479b",
+    "name": "Thermally oxidised soya bean oil interacted with mono- and diglycerides of fatty acids",
+    "aliases": [
+      "thermally oxidised soybean oil",
+      "toso",
+      "oxidised soya bean oil with mono and diglycerides"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Soya bean oil is plant-derived, but the mono- and diglyceride part can still be source-dependent.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Soya bean oil",
+      "Mono- and diglycerides",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Frying oils",
+      "Specialty processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e471",
+      "e472a",
+      "e475"
+    ]
+  },
+  {
+    "id": "e481",
+    "eNumber": "E481",
+    "numericCode": "481",
+    "name": "Sodium stearoyl lactylate",
+    "aliases": [
+      "ssl",
+      "sodium stearoyl-2-lactylate",
+      "stearoyl lactylate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "The stearic acid part can be plant or animal based, so source verification is needed.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Stearic acid",
+      "Lactic acid",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Stearic acid is plant-derived",
+      "Halal-certified"
+    ],
+    "haramWhen": [
+      "Stearic acid comes from pork or non-halal animal fat",
+      "Source is undisclosed"
+    ],
+    "whatToCheck": [
+      "Source of stearic acid",
+      "Halal certification",
+      "Manufacturer confirmation"
+    ],
+    "saferAction": "Verify before use, especially in bread and bakery products.",
+    "commonFoods": [
+      "Bread",
+      "Baked goods",
+      "Dessert mixes",
+      "Creamers"
+    ],
+    "notes": [
+      "Lactylate does not mean dairy; the fatty acid source is the key issue."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e482",
+      "e472e",
+      "e471"
+    ]
+  },
+  {
+    "id": "e482",
+    "eNumber": "E482",
+    "numericCode": "482",
+    "name": "Calcium stearoyl lactylate",
+    "aliases": [
+      "csl",
+      "calcium stearoyl-2-lactylate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "Like E481, it depends on whether the stearic acid is plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Stearic acid",
+      "Lactic acid",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Stearic acid is plant-derived",
+      "Product is halal-certified"
+    ],
+    "haramWhen": [
+      "Stearic acid comes from pork or non-halal animal fat",
+      "No source information is provided"
+    ],
+    "whatToCheck": [
+      "Stearic acid source",
+      "Halal mark",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Choose certified products or verify the source.",
+    "commonFoods": [
+      "Bread",
+      "Rolls",
+      "Cake mixes",
+      "Processed bakery foods"
+    ],
+    "notes": [
+      "Closely related to E481."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e481",
+      "e471",
+      "e472e"
+    ]
+  },
+  {
+    "id": "e483",
+    "eNumber": "E483",
+    "numericCode": "483",
+    "name": "Stearyl tartrate",
+    "aliases": [
+      "stearyl tartrate",
+      "stearyl tartaric acid ester"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "The stearyl part can come from plant or animal stearic acid, so source verification is needed.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Stearic acid",
+      "Tartaric acid",
+      "Vegetable oils",
+      "Animal fats"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Bread",
+      "Bakery products",
+      "Desserts"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e481",
+      "e482",
+      "e472d"
+    ]
+  },
+  {
+    "id": "e491",
+    "eNumber": "E491",
+    "numericCode": "491",
+    "name": "Sorbitan monostearate",
+    "aliases": [
+      "span 60",
+      "sorbitan stearate",
+      "sorbitan monostearate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Stearic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Cakes",
+      "Desserts",
+      "Creamers",
+      "Whipped toppings"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e492",
+      "e493",
+      "e494",
+      "e495"
+    ]
+  },
+  {
+    "id": "e492",
+    "eNumber": "E492",
+    "numericCode": "492",
+    "name": "Sorbitan tristearate",
+    "aliases": [
+      "span 65",
+      "sorbitan tristearate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Stearic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Chocolate",
+      "Desserts",
+      "Bakery products",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e491",
+      "e493",
+      "e494",
+      "e495"
+    ]
+  },
+  {
+    "id": "e493",
+    "eNumber": "E493",
+    "numericCode": "493",
+    "name": "Sorbitan monolaurate",
+    "aliases": [
+      "span 20",
+      "sorbitan laurate",
+      "sorbitan monolaurate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Lauric acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Desserts",
+      "Sauces",
+      "Beverage emulsions",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e491",
+      "e492",
+      "e494",
+      "e495"
+    ]
+  },
+  {
+    "id": "e494",
+    "eNumber": "E494",
+    "numericCode": "494",
+    "name": "Sorbitan monooleate",
+    "aliases": [
+      "span 80",
+      "sorbitan oleate",
+      "sorbitan monooleate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Oleic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Sauces",
+      "Desserts",
+      "Beverage emulsions",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e491",
+      "e492",
+      "e493",
+      "e495"
+    ]
+  },
+  {
+    "id": "e495",
+    "eNumber": "E495",
+    "numericCode": "495",
+    "name": "Sorbitan monopalmitate",
+    "aliases": [
+      "span 40",
+      "sorbitan palmitate",
+      "sorbitan monopalmitate"
+    ],
+    "category": "Emulsifier",
+    "status": "mashbooh",
+    "summary": "This emulsifier may use fatty acids, glycerol, or related ingredients that can be plant-derived or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sorbitol",
+      "Palmitic acid",
+      "Vegetable fatty acids",
+      "Animal fatty acids"
+    ],
+    "halalWhen": [
+      "Plant-derived source is confirmed",
+      "The product is halal-certified",
+      "A manufacturer confirms no haram animal source or doubtful processing aid"
+    ],
+    "haramWhen": [
+      "Made from pork or non-halal animal fat",
+      "Animal source is not halal",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegan or plant-based label",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "commonFoods": [
+      "Desserts",
+      "Bakery products",
+      "Sauces",
+      "Processed foods"
+    ],
+    "notes": [
+      "Vegan labeling helps with source checking, but it does not replace halal certification for the finished product."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e491",
+      "e492",
+      "e493",
+      "e494"
+    ]
+  },
+  {
+    "id": "e542",
+    "eNumber": "E542",
+    "numericCode": "542",
+    "name": "Bone phosphate",
+    "aliases": [
+      "edible bone phosphate",
+      "bone ash",
+      "calcium phosphate from bone"
+    ],
+    "category": "Anti-caking agent",
+    "status": "mashbooh",
+    "summary": "Derived from animal bones, so halal status depends on the animal source and processing.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Animal bones"
+    ],
+    "halalWhen": [
+      "Animal source is halal and accepted by a trusted halal certifier"
+    ],
+    "haramWhen": [
+      "Source is pork",
+      "Animal source or slaughter status is unknown",
+      "Non-halal animal bones are used"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Animal source",
+      "Manufacturer confirmation"
+    ],
+    "saferAction": "Avoid unless halal-certified or clearly verified.",
+    "commonFoods": [
+      "Supplements",
+      "Tableted foods",
+      "Dry mixes"
+    ],
+    "notes": [
+      "Animal-derived additives need more verification than mineral additives from non-animal sources."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e441",
+      "e631",
+      "e635"
+    ]
+  },
+  {
+    "id": "e627",
+    "eNumber": "E627",
+    "numericCode": "627",
+    "name": "Disodium guanylate",
+    "aliases": [
+      "sodium guanylate",
+      "guanylate",
+      "gmp"
+    ],
+    "category": "Flavor enhancer",
+    "status": "mashbooh",
+    "summary": "May be produced by fermentation or from animal sources. It is source-dependent.",
+    "sourceSensitivity": "medium",
+    "usuallyDerivedFrom": [
+      "Yeast extract",
+      "Fish",
+      "Microbial fermentation"
+    ],
+    "halalWhen": [
+      "Produced by acceptable microbial fermentation",
+      "Plant or yeast source is confirmed",
+      "Halal-certified"
+    ],
+    "haramWhen": [
+      "Animal source is non-halal",
+      "Alcohol or haram processing aids are involved",
+      "Source is unclear in a doubtful product"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Source statement",
+      "Vegetarian or vegan suitability"
+    ],
+    "saferAction": "Verify source for savory snacks and instant foods.",
+    "commonFoods": [
+      "Chips",
+      "Instant noodles",
+      "Seasoning blends",
+      "Soups"
+    ],
+    "notes": [
+      "Often used together with E631 or E635."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e631",
+      "e635"
+    ]
+  },
+  {
+    "id": "e631",
+    "eNumber": "E631",
+    "numericCode": "631",
+    "name": "Disodium inosinate",
+    "aliases": [
+      "sodium inosinate",
+      "inosinate",
+      "imp"
+    ],
+    "category": "Flavor enhancer",
+    "status": "mashbooh",
+    "summary": "Can come from meat, fish, or fermentation. The source must be checked.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Meat",
+      "Fish",
+      "Microbial fermentation"
+    ],
+    "halalWhen": [
+      "Made from fish or acceptable fermentation",
+      "Made from halal-slaughtered animal source",
+      "Halal-certified"
+    ],
+    "haramWhen": [
+      "Made from pork",
+      "Made from non-halal animal sources",
+      "Source is not disclosed"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Vegetarian or vegan claim",
+      "Manufacturer source statement"
+    ],
+    "saferAction": "Avoid if the source is unknown and no halal certification is present.",
+    "commonFoods": [
+      "Instant noodles",
+      "Savory snacks",
+      "Stock cubes",
+      "Seasonings"
+    ],
+    "notes": [
+      "E631 is one of the more commonly questioned flavor enhancers."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e627",
+      "e635",
+      "e542"
+    ]
+  },
+  {
+    "id": "e635",
+    "eNumber": "E635",
+    "numericCode": "635",
+    "name": "Disodium 5'-ribonucleotides",
+    "aliases": [
+      "ribonucleotides",
+      "disodium ribonucleotides",
+      "i+g",
+      "flavour enhancer 635"
+    ],
+    "category": "Flavor enhancer",
+    "status": "mashbooh",
+    "summary": "A mixture often containing E627 and E631, so it is source-dependent and needs verification.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Yeast extract",
+      "Fish",
+      "Meat",
+      "Microbial fermentation"
+    ],
+    "halalWhen": [
+      "Made from acceptable fermentation or halal sources",
+      "Halal-certified",
+      "Vegan source is confirmed"
+    ],
+    "haramWhen": [
+      "Includes pork or non-halal animal sources",
+      "Source is unknown"
+    ],
+    "whatToCheck": [
+      "Halal certification",
+      "Source of E627 and E631",
+      "Vegan or vegetarian label"
+    ],
+    "saferAction": "Verify source or avoid when certification is missing.",
+    "commonFoods": [
+      "Seasoned chips",
+      "Instant noodles",
+      "Soups",
+      "Sauces"
+    ],
+    "notes": [
+      "Because it can include E631, source checking is important."
+    ],
+    "lastReviewed": "2026-06-01",
+    "related": [
+      "e627",
+      "e631"
+    ]
+  }
+]
