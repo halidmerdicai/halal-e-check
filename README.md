@@ -15,8 +15,8 @@ A production-minded static web app for checking whether food additive E-numbers 
 - Private recent checks on `/check` stored in browser `localStorage`
 - Missing additive request helper at `/request`
 - Correction suggestion helper at `/corrections`
-- High-risk review queue at `/review-queue`
-- Data quality dashboard at `/data-quality`
+- Internal high-risk review queue at `/review-queue` hidden from public navigation
+- Internal data quality dashboard at `/data-quality` hidden from public navigation
 - Mobile-first responsive UI with dark mode token support
 - Basic localization structure in `src/i18n`
 
@@ -61,7 +61,7 @@ The dataset includes source-sensitive entries such as E120, E304, E422, E441, E4
 
 Each additive follows the typed schema in `src/data/additives/schema.ts`, including source sensitivity, halal and haram conditions, packaging checks, safer action guidance, common foods, notes, review date, confidence level, reviewer label, review notes, and sources.
 
-Search and browse views are data-driven from `src/data/additives/additives.json`; additive-specific behavior is not hardcoded in UI components.
+Search, checker, and detail views are data-driven from `src/data/additives/additives.json`; additive-specific behavior is not hardcoded in UI components.
 
 ## Data maintenance
 

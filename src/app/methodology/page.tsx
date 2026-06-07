@@ -157,13 +157,13 @@ export default function MethodologyPage() {
         </section>
 
         <section className="rounded-lg border bg-accent p-5">
-          <h2 className="text-xl font-semibold">How this connects to data quality</h2>
+          <h2 className="text-xl font-semibold">How this improves over time</h2>
           <p className="mt-2 text-sm leading-6">
-            The data-quality dashboard tracks weak records, missing source categories, missing external URLs, and
-            high-risk additives that still need stronger halal-guidance or regulatory support.
+            Source-sensitive records can improve as stronger references, manufacturer statements, and halal guidance
+            become available. If a page looks incomplete or a source is weak, send a correction suggestion.
           </p>
-          <Link href="/data-quality" className="mt-3 inline-flex text-sm font-semibold text-primary hover:underline">
-            Open data quality dashboard
+          <Link href="/corrections" className="mt-3 inline-flex text-sm font-semibold text-primary hover:underline">
+            Suggest a correction
           </Link>
         </section>
 

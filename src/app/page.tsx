@@ -1,6 +1,4 @@
 import Link from "next/link";
-import { additives } from "@/data/additives";
-import { AdditiveBrowser } from "@/components/additive-browser";
 import { DisclaimerBox } from "@/components/disclaimer-box";
 import { SearchBar } from "@/components/search-bar";
 import { StatusBadge } from "@/components/status-badge";
@@ -36,6 +34,23 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="container grid gap-4 py-7 sm:grid-cols-2 sm:py-10">
+        <Link href="/check" className="rounded-lg border bg-card p-4 hover:bg-accent sm:p-5">
+          <p className="text-sm font-semibold uppercase tracking-wide text-primary">Full ingredient label</p>
+          <h2 className="mt-2 text-xl font-bold">Paste and check a label</h2>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Detect known E-numbers, additive names, and aliases from a complete ingredient list.
+          </p>
+        </Link>
+        <Link href="/guide" className="rounded-lg border bg-card p-4 hover:bg-accent sm:p-5">
+          <p className="text-sm font-semibold uppercase tracking-wide text-primary">Source-dependent additives</p>
+          <h2 className="mt-2 text-xl font-bold">Learn what to verify</h2>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Understand why some E-numbers need source, carrier, manufacturer, or certification checks.
+          </p>
+        </Link>
+      </section>
+
       <section className="container grid gap-5 py-7 sm:gap-6 sm:py-10">
         <div>
           <h2 className="text-xl font-bold sm:text-2xl">The three statuses</h2>
@@ -50,8 +65,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      <AdditiveBrowser additives={additives} />
 
       <section className="container pb-10 sm:pb-14">
         <DisclaimerBox />

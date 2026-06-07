@@ -9,7 +9,11 @@ import { sensitivityCopy } from "@/lib/status";
 
 export const metadata: Metadata = {
   title: "Data Quality",
-  description: "Dataset coverage, source quality, confidence, and review readiness for Halal E-Check additive records."
+  description: "Dataset coverage, source quality, confidence, and review readiness for Halal E-Check additive records.",
+  robots: {
+    index: false,
+    follow: false
+  }
 };
 
 const metricCards = [

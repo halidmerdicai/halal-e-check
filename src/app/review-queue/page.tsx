@@ -7,7 +7,11 @@ import { sensitivityCopy } from "@/lib/status";
 
 export const metadata: Metadata = {
   title: "Review Queue",
-  description: "High-risk and source-dependent additive records that need the most careful halal review."
+  description: "High-risk and source-dependent additive records that need the most careful halal review.",
+  robots: {
+    index: false,
+    follow: false
+  }
 };
 
 export default function ReviewQueuePage() {

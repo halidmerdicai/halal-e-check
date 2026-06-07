@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button";
 const secondaryLinks = [
   { href: "/guide", label: "Guide" },
   { href: "/methodology", label: "Method" },
-  { href: "/review-queue", label: "Review" },
-  { href: "/data-quality", label: "Quality" },
   { href: "/request", label: "Request" },
   { href: "/corrections", label: "Corrections" },
   { href: "/about", label: "About" }
@@ -42,12 +40,6 @@ export function Header() {
           </Button>
           <Button asChild variant="ghost" size="sm">
             <Link href="/check">Check</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/review-queue">Review</Link>
-          </Button>
-          <Button asChild variant="ghost" size="sm">
-            <Link href="/data-quality">Quality</Link>
           </Button>
           <Button asChild variant="ghost" size="sm">
             <Link href="/request">Request</Link>

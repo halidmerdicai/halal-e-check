@@ -6,6 +6,8 @@ import { Copy, Mail, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+const contactEmail = "halidmerdicai@gmail.com";
+
 function cleanParam(value: string | null) {
   return value?.trim() ?? "";
 }
@@ -54,7 +56,7 @@ export function AdditiveRequestForm() {
   const mailtoHref = useMemo(() => {
     const subject = encodeURIComponent(`Halal E-Check additive request${code ? `: ${code}` : ""}`);
     const body = encodeURIComponent(requestText);
-    return `mailto:?subject=${subject}&body=${body}`;
+    return `mailto:${contactEmail}?subject=${subject}&body=${body}`;
   }, [code, requestText]);
 
   async function copyRequest() {

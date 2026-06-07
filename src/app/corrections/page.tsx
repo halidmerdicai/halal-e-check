@@ -16,8 +16,7 @@ export default function CorrectionsPage() {
         <h1 className="text-3xl font-bold leading-tight sm:text-4xl">Suggest a correction</h1>
         <p className="text-base leading-7 text-muted-foreground">
           Use this form when an additive page looks incomplete, a source link is weak, or the halal guidance needs
-          review. This static version does not send submissions to a server yet, so copy the correction or open it in
-          your email app.
+          review. You can copy the correction or open it in your email app addressed to the Halal E-Check contact email.
         </p>
       </div>
       <div className="mt-6 sm:mt-8">
