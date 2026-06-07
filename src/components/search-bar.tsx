@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { StatusBadge } from "@/components/status-badge";
-import { normalizeCode, searchAdditives } from "@/lib/search";
+import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
+import { searchAdditives } from "@/lib/search";
 import { cn } from "@/lib/utils";
 
 export function SearchBar({ className, autoFocus = false }: { className?: string; autoFocus?: boolean }) {
@@ -22,8 +23,7 @@ export function SearchBar({ className, autoFocus = false }: { className?: string
       return;
     }
 
-    const normalized = normalizeCode(query);
-    if (normalized.length > 1) router.push(`/e/${normalized.replace(/^e/, "")}`);
+    return;
   }
 
   return (
@@ -38,9 +38,11 @@ export function SearchBar({ className, autoFocus = false }: { className?: string
             id="additive-search"
             autoFocus={autoFocus}
             value={query}
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => {
+              setQuery(event.target.value);
+            }}
             placeholder="Search E471, E120, E322..."
-            className="h-14 pl-12 pr-4 text-lg"
+            className="h-[3.25rem] pl-12 pr-4 text-base sm:h-14 sm:text-lg"
             autoComplete="off"
           />
         </div>
@@ -49,12 +51,12 @@ export function SearchBar({ className, autoFocus = false }: { className?: string
       {query.trim().length > 0 ? (
         <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-lg border bg-card shadow-soft">
           {results.length > 0 ? (
-            <ul className="max-h-96 overflow-auto p-2" role="listbox" aria-label="Search results">
+            <ul className="max-h-[70vh] overflow-auto p-2 sm:max-h-96" role="listbox" aria-label="Search results">
               {results.map((additive) => (
                 <li key={additive.id}>
                   <Link
                     href={`/e/${additive.numericCode}`}
-                    className="flex min-h-16 items-center justify-between gap-3 rounded-md px-3 py-2 hover:bg-accent"
+                    className="flex min-h-16 flex-col gap-2 rounded-md px-3 py-3 hover:bg-accent min-[520px]:flex-row min-[520px]:items-center min-[520px]:justify-between"
                   >
                     <span className="min-w-0">
                       <span className="block font-semibold">
@@ -62,7 +64,10 @@ export function SearchBar({ className, autoFocus = false }: { className?: string
                       </span>
                       <span className="block truncate text-sm text-muted-foreground">{additive.category}</span>
                     </span>
-                    <StatusBadge status={additive.status} className="flex-none" />
+                    <span className="flex flex-wrap gap-2 min-[520px]:flex-none min-[520px]:flex-col min-[520px]:items-end">
+                      <StatusBadge status={additive.status} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+                      <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -70,6 +75,17 @@ export function SearchBar({ className, autoFocus = false }: { className?: string
           ) : (
             <div className="p-4 text-sm text-muted-foreground">
               No matching additive yet. Try a code like E471 or a name like lecithin.
+              {query.trim() ? (
+                <div className="mt-2 text-foreground">
+                  <p>{query.trim().toUpperCase()} is not in the current dataset, so we will not open a detail page for it yet.</p>
+                  <Link
+                    href={`/request?code=${encodeURIComponent(query.trim().toUpperCase())}`}
+                    className="mt-3 inline-flex min-h-10 items-center rounded-md border px-3 py-2 text-sm font-semibold text-primary hover:bg-accent"
+                  >
+                    Request this additive
+                  </Link>
+                </div>
+              ) : null}
             </div>
           )}
         </div>

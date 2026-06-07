@@ -1,7 +1,7 @@
 import additivesJson from "@/data/additives/additives.json";
-import type { Additive, HalalStatus, SourceSensitivity } from "@/data/additives/schema";
+import type { Additive, AdditiveSource, GuidanceConfidence, HalalStatus, SourceSensitivity } from "@/data/additives/schema";
 
-export type { Additive, HalalStatus, SourceSensitivity };
+export type { Additive, AdditiveSource, GuidanceConfidence, HalalStatus, SourceSensitivity };
 
 function assertAdditive(value: unknown): asserts value is Additive {
   if (!value || typeof value !== "object") {
@@ -19,7 +19,10 @@ function assertAdditive(value: unknown): asserts value is Additive {
     "summary",
     "sourceSensitivity",
     "saferAction",
-    "lastReviewed"
+    "lastReviewed",
+    "guidanceConfidence",
+    "reviewedBy",
+    "reviewNotes"
   ];
   const requiredArrays: Array<keyof Additive> = [
     "aliases",
@@ -28,7 +31,8 @@ function assertAdditive(value: unknown): asserts value is Additive {
     "haramWhen",
     "whatToCheck",
     "commonFoods",
-    "notes"
+    "notes",
+    "sources"
   ];
 
   for (const key of requiredStrings) {
@@ -49,6 +53,10 @@ function assertAdditive(value: unknown): asserts value is Additive {
 
   if (!["low", "medium", "high"].includes(additive.sourceSensitivity as string)) {
     throw new Error(`Invalid additive record ${additive.id}: unsupported source sensitivity`);
+  }
+
+  if (!["low", "medium", "high"].includes(additive.guidanceConfidence as string)) {
+    throw new Error(`Invalid additive record ${additive.id}: unsupported guidance confidence`);
   }
 }
 

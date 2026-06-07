@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import type { Additive } from "@/data/additives";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatusBadge } from "@/components/status-badge";
+import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
 
 export function AdditiveCard({ additive }: { additive: Additive }) {
   return (
@@ -14,7 +15,10 @@ export function AdditiveCard({ additive }: { additive: Additive }) {
           </CardTitle>
           <p className="mt-1 text-sm text-muted-foreground">{additive.category}</p>
         </div>
-        <StatusBadge status={additive.status} />
+        <div className="flex flex-col items-end gap-2">
+          <StatusBadge status={additive.status} />
+          <RiskGuidanceBadge additive={additive} />
+        </div>
       </CardHeader>
       <CardContent>
         <p className="text-sm leading-6 text-muted-foreground">{additive.summary}</p>

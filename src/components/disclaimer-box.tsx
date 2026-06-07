@@ -6,9 +6,9 @@ export function DisclaimerBox() {
       <div className="flex gap-3">
         <AlertTriangle className="mt-0.5 h-5 w-5 flex-none" aria-hidden="true" />
         <p>
-          This tool provides general halal ingredient guidance. A final product ruling may depend on source,
-          processing, contamination risk, and certification. Verify doubtful ingredients with the manufacturer
-          or a trusted halal certifier.
+          This tool provides general halal ingredient guidance, not a product certification or fatwa. A final product
+          ruling may depend on source, processing, contamination risk, and certification. Verify doubtful ingredients
+          with the manufacturer or a trusted halal certifier.
         </p>
       </div>
     </section>

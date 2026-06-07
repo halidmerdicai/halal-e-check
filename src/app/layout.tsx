@@ -5,9 +5,10 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://halal-e-check.local";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://halal-e-check.local"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Halal E-Check | E-number halal checker",
     template: "%s | Halal E-Check"
