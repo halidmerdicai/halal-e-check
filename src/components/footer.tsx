@@ -9,6 +9,9 @@ export function Footer() {
           <Link href="/disclaimer" className="hover:text-foreground">
             Disclaimer
           </Link>
+          <Link href="/privacy" className="hover:text-foreground">
+            Privacy
+          </Link>
           <Link href="/guide" className="hover:text-foreground">
             Guide
           </Link>

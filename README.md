@@ -15,6 +15,7 @@ A production-minded static web app for checking whether food additive E-numbers 
 - Private recent checks on `/check` stored in browser `localStorage`
 - Missing additive request helper at `/request`
 - Correction suggestion helper at `/corrections`
+- Privacy and contact notes at `/privacy`
 - Internal high-risk review queue at `/review-queue` hidden from public navigation
 - Internal data quality dashboard at `/data-quality` hidden from public navigation
 - Mobile-first responsive UI with dark mode token support
@@ -34,6 +35,25 @@ For production metadata and sitemap URLs, set:
 ```bash
 NEXT_PUBLIC_SITE_URL=https://your-domain.example
 ```
+
+For GitHub Pages project sites, include the repository path if the app is not served from a custom domain:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://halidmerdicai.github.io/halal-e-check
+```
+
+## Launch checklist
+
+After each deploy, verify the live GitHub Pages site:
+
+- Open `https://halidmerdicai.github.io/halal-e-check/`
+- Confirm the homepage is search-first and does not show the full additive list
+- Search direct detail pages such as `/e/120/`, `/e/471/`, and `/e/476/`
+- Check `/check/`, `/request/`, `/corrections/`, `/guide/`, `/methodology/`, `/privacy/`, and `/disclaimer/`
+- Confirm `/sitemap.xml` uses `https://halidmerdicai.github.io/halal-e-check`
+- Confirm `/og-image.svg` loads
+- Check the homepage on a mobile viewport for horizontal overflow
+- Confirm `/data-quality/` and `/review-queue/` are not linked in public navigation or sitemap
 
 ## Useful scripts
 

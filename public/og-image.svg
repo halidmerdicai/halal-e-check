@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Halal E-Check</title>
+  <desc id="desc">Social preview image for Halal E-Check, an E-number halal checker.</desc>
+  <rect width="1200" height="630" fill="#f8faf7"/>
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="#ffffff" stroke="#d8e2d3" stroke-width="2"/>
+  <circle cx="170" cy="170" r="54" fill="#16803c"/>
+  <path d="M146 170l18 18 40-45" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="240" y="160" fill="#102014" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700">Halal E-Check</text>
+  <text x="240" y="214" fill="#52615a" font-family="Arial, Helvetica, sans-serif" font-size="28">E-number halal checker</text>
+  <rect x="126" y="290" width="842" height="92" rx="18" fill="#f3f7f1" stroke="#d8e2d3" stroke-width="2"/>
+  <text x="166" y="351" fill="#102014" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Search E471, E120, E476, additives, and aliases</text>
+  <g transform="translate(126 430)">
+    <rect width="172" height="54" rx="27" fill="#e7f4eb"/>
+    <text x="33" y="36" fill="#16803c" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">Halal</text>
+    <rect x="196" width="198" height="54" rx="27" fill="#fff7df"/>
+    <text x="230" y="36" fill="#876200" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">Verify source</text>
+    <rect x="418" width="166" height="54" rx="27" fill="#fde7e7"/>
+    <text x="456" y="36" fill="#a32020" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">Avoid</text>
+  </g>
+  <text x="126" y="528" fill="#52615a" font-family="Arial, Helvetica, sans-serif" font-size="24">General guidance only. Verify unclear products with a qualified source.</text>
+</svg>

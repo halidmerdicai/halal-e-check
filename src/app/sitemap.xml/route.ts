@@ -1,8 +1,7 @@
 import { additives } from "@/data/additives";
+import { siteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
-
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://halal-e-check.local").replace(/\/$/, "");
 
 function escapeXml(value: string) {
   return value
@@ -21,6 +20,7 @@ const staticRoutes = [
   { path: "/request", changeFrequency: "monthly", priority: "0.6" },
   { path: "/corrections", changeFrequency: "monthly", priority: "0.5" },
   { path: "/about", changeFrequency: "monthly", priority: "0.5" },
+  { path: "/privacy", changeFrequency: "yearly", priority: "0.4" },
   { path: "/disclaimer", changeFrequency: "yearly", priority: "0.3" }
 ];
 
