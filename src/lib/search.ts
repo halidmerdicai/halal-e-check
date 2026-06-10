@@ -11,6 +11,7 @@ export function normalizeText(input: string) {
   const normalized = input
     .toLowerCase()
     .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^\w\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -21,25 +22,57 @@ export function normalizeText(input: string) {
 const spellingReplacements: Array<[RegExp, string]> = [
   [/\bemulgators?\b/g, "emulsifier"],
   [/\bemulgatorima\b/g, "emulsifiers"],
+  [/\bemulz?gator\b/g, "emulsifier"],
   [/\bemulsifiers?\b/g, "emulsifier"],
+  [/\baditivi?\b/g, "additive"],
+  [/\bboj(a|e|ilo|ila)\b/g, "color"],
+  [/\bkonzervansi?\b/g, "preservative"],
+  [/\bstabilizatori?\b/g, "stabilizer"],
+  [/\bzgusnjivaci?\b/g, "thickener"],
+  [/\bzagusnjivaci?\b/g, "thickener"],
+  [/\bsredstva?\s+za\s+dizanje\b/g, "raising agent"],
+  [/\bpojaci?vaci?\s+(okusa|ukusa|arome)\b/g, "flavour enhancer"],
+  [/\bzasladivaci?\b/g, "sweetener"],
+  [/\bzasladjivaci?\b/g, "sweetener"],
   [/\blecitins?\b/g, "lecithin"],
   [/\blecithins?\b/g, "lecithin"],
+  [/\bzelatin(a|e)?\b/g, "gelatin"],
+  [/\bzelatina\b/g, "gelatin"],
   [/\bglyserol\b/g, "glycerol"],
+  [/\bglicerol\b/g, "glycerol"],
   [/\bglyserin\b/g, "glycerin"],
+  [/\bglicerin\b/g, "glycerin"],
   [/\bglyserine\b/g, "glycerine"],
+  [/\bglicerine\b/g, "glycerine"],
   [/\bglyserides?\b/g, "glycerides"],
+  [/\bgliceridi?\b/g, "glycerides"],
   [/\bmonoglyserides?\b/g, "mono glycerides"],
+  [/\bmonogliceridi?\b/g, "mono glycerides"],
+  [/\bmono\s+i\s+digliceridi?\b/g, "mono and diglycerides"],
+  [/\bmono\s+i\s+diglyserides?\b/g, "mono and diglycerides"],
   [/\bdiglyserides?\b/g, "diglycerides"],
+  [/\bdigliceridi?\b/g, "diglycerides"],
   [/\bmonoglycerides?\b/g, "mono glycerides"],
   [/\bdiglycerides?\b/g, "diglycerides"],
   [/\bcarmine\b/g, "carmine"],
   [/\bkarmin\b/g, "carmine"],
   [/\bcochenille\b/g, "cochineal"],
   [/\bcochineal\b/g, "cochineal"],
+  [/\bselak\b/g, "shellac"],
   [/\bshellack\b/g, "shellac"],
   [/\bshellac\b/g, "shellac"],
+  [/\bpcelinji\s+vosak\b/g, "beeswax"],
+  [/\bpcelji\s+vosak\b/g, "beeswax"],
   [/\binosinat\b/g, "inosinate"],
-  [/\bguanylat\b/g, "guanylate"]
+  [/\binozinat\b/g, "inosinate"],
+  [/\bnatrijev\s+inosinate\b/g, "sodium inosinate"],
+  [/\bnatrijum\s+inosinate\b/g, "sodium inosinate"],
+  [/\bnatrijev\s+inosinat\b/g, "sodium inosinate"],
+  [/\bnatrijum\s+inosinat\b/g, "sodium inosinate"],
+  [/\bguanylat\b/g, "guanylate"],
+  [/\bguanilat\b/g, "guanylate"],
+  [/\bnatrijev\s+guanilat\b/g, "sodium guanylate"],
+  [/\bnatrijum\s+guanilat\b/g, "sodium guanylate"]
 ];
 
 function applyCommonSpellings(input: string) {

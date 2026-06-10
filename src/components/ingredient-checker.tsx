@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   AlertTriangle,
+  Camera,
   CheckCircle2,
   ClipboardCheck,
   Copy,
@@ -11,6 +12,7 @@ import {
   HelpCircle,
   History,
   MessageSquareText,
+  ScanText,
   Trash2,
   RotateCcw,
   ShieldAlert
@@ -29,6 +31,12 @@ const maxHistoryItems = 10;
 
 const example =
   "Ingredients: wheat flour, sugar, vegetable oil, emulsifier E471, soy lecithin (E322), color E120, raising agent E500, flavour enhancer E631.";
+
+type OcrState = {
+  status: "idle" | "reading" | "success" | "error";
+  message: string;
+  progress: number;
+};
 
 type GuidanceCounts = Record<RiskGuidance, number>;
 
@@ -216,6 +224,114 @@ function readHistory(): RecentCheck[] {
 
 function writeHistory(items: RecentCheck[]) {
   window.localStorage.setItem(historyKey, JSON.stringify(items.slice(0, maxHistoryItems)));
+}
+
+function OcrPanel({ onText }: { onText: (text: string) => void }) {
+  const [ocrState, setOcrState] = useState<OcrState>({
+    status: "idle",
+    message: "Upload or take a clear photo of the ingredients label.",
+    progress: 0
+  });
+
+  async function readImage(file: File) {
+    if (!file.type.startsWith("image/")) {
+      setOcrState({ status: "error", message: "Please choose an image file.", progress: 0 });
+      return;
+    }
+
+    setOcrState({ status: "reading", message: "Preparing OCR engine...", progress: 5 });
+
+    try {
+      const { createWorker } = await import("tesseract.js");
+      const worker = await createWorker("eng", 1, {
+        logger: (message) => {
+          if (message.status === "recognizing text" && typeof message.progress === "number") {
+            setOcrState({
+              status: "reading",
+              message: "Reading ingredients from image...",
+              progress: Math.max(5, Math.round(message.progress * 100))
+            });
+          }
+        }
+      });
+
+      const result = await worker.recognize(file);
+      await worker.terminate();
+
+      const text = result.data.text.trim();
+      if (!text) {
+        setOcrState({
+          status: "error",
+          message: "No readable text was found. Try a brighter, closer, sharper photo.",
+          progress: 0
+        });
+        return;
+      }
+
+      onText(text);
+      setOcrState({
+        status: "success",
+        message: "Text extracted. Review it below before trusting the result.",
+        progress: 100
+      });
+    } catch {
+      setOcrState({
+        status: "error",
+        message: "OCR could not read this image. Try another photo or paste the ingredients manually.",
+        progress: 0
+      });
+    }
+  }
+
+  return (
+    <section className="rounded-lg border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <div className="flex items-center gap-2">
+            <ScanText className="h-5 w-5 text-primary" aria-hidden="true" />
+            <h2 className="font-semibold">Scan ingredients from image</h2>
+          </div>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Works best with clear English or Bosnian/Croatian/Serbian Latin-script labels. Always review OCR text before relying on results.
+          </p>
+        </div>
+        <label className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+          <Camera className="h-4 w-4" aria-hidden="true" />
+          Choose photo
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            className="sr-only"
+            disabled={ocrState.status === "reading"}
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              event.target.value = "";
+              if (file) void readImage(file);
+            }}
+          />
+        </label>
+      </div>
+
+      <div className="mt-4">
+        <div className="h-2 overflow-hidden rounded-full bg-muted">
+          <div
+            className="h-full rounded-full bg-primary transition-all"
+            style={{ width: `${ocrState.status === "idle" ? 0 : ocrState.progress}%` }}
+          />
+        </div>
+        <p
+          className={cn(
+            "mt-2 text-sm",
+            ocrState.status === "error" ? "text-red-700 dark:text-red-300" : "text-muted-foreground",
+            ocrState.status === "success" ? "font-medium text-primary" : null
+          )}
+        >
+          {ocrState.message}
+        </p>
+      </div>
+    </section>
+  );
 }
 
 function RecentChecks({
@@ -511,6 +627,8 @@ export function IngredientChecker() {
 
   return (
     <div className="grid gap-5 sm:gap-6">
+      <OcrPanel onText={(text) => setInput(text)} />
+
       <section className="rounded-lg border bg-card p-4 sm:p-5">
         <label htmlFor="ingredients" className="text-sm font-semibold">
           Ingredients label

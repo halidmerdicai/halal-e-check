@@ -292,7 +292,11 @@
       "cochineal",
       "carminic acid",
       "natural red 4",
-      "crimson lake"
+      "crimson lake",
+      "karmin",
+      "karminska kiselina",
+      "kosinela",
+      "crvena boja 4"
     ],
     "category": "Color",
     "status": "haram",
@@ -5432,7 +5436,11 @@
       "lecithin",
       "soy lecithin",
       "sunflower lecithin",
-      "egg lecithin"
+      "egg lecithin",
+      "lecitin",
+      "sojin lecitin",
+      "suncokretov lecitin",
+      "jajni lecitin"
     ],
     "category": "Emulsifier",
     "status": "halal",
@@ -7887,7 +7895,10 @@
     "name": "Glycerol",
     "aliases": [
       "glycerin",
-      "glycerine"
+      "glycerine",
+      "glicerol",
+      "glicerin",
+      "biljni glicerin"
     ],
     "category": "Humectant / carrier",
     "status": "mashbooh",
@@ -8601,7 +8612,13 @@
     "aliases": [
       "gelatine",
       "hydrolyzed gelatin",
-      "collagen"
+      "collagen",
+      "zelatin",
+      "zelatina",
+      "govedji zelatin",
+      "svinjski zelatin",
+      "ribiji zelatin",
+      "kolagen"
     ],
     "category": "Gelling agent",
     "status": "mashbooh",
@@ -9623,7 +9640,9 @@
     "name": "Salts of fatty acids",
     "aliases": [
       "fatty acid salts",
-      "salts of fatty acids"
+      "salts of fatty acids",
+      "soli masnih kiselina",
+      "masne kiseline"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -9706,7 +9725,10 @@
     "aliases": [
       "sodium salts of fatty acids",
       "potassium salts of fatty acids",
-      "calcium salts of fatty acids"
+      "calcium salts of fatty acids",
+      "natrijeve soli masnih kiselina",
+      "kalijeve soli masnih kiselina",
+      "kalcijumove soli masnih kiselina"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -9785,7 +9807,9 @@
     "name": "Magnesium salts of fatty acids",
     "aliases": [
       "magnesium stearate",
-      "magnesium salts of fatty acids"
+      "magnesium salts of fatty acids",
+      "magnezijumove soli masnih kiselina",
+      "magnezijeve soli masnih kiselina"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -9867,7 +9891,11 @@
       "mono and diglycerides",
       "mono-diglycerides",
       "glycerol monostearate",
-      "glycerol esters"
+      "glycerol esters",
+      "mono i digliceridi",
+      "mono i digliceridi masnih kiselina",
+      "monogliceridi",
+      "digliceridi"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -9950,7 +9978,9 @@
     "aliases": [
       "acetic esters",
       "acetylated mono and diglycerides",
-      "acetic acid esters"
+      "acetic acid esters",
+      "esteri mono i diglicerida",
+      "acetatni esteri mono i diglicerida"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10030,7 +10060,8 @@
     "name": "Lactic acid esters of mono- and diglycerides",
     "aliases": [
       "lactic esters",
-      "lactylated mono and diglycerides"
+      "lactylated mono and diglycerides",
+      "laktatni esteri mono i diglicerida"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10112,7 +10143,8 @@
     "aliases": [
       "citric esters",
       "citrem",
-      "citric acid esters"
+      "citric acid esters",
+      "citratni esteri mono i diglicerida"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10193,7 +10225,8 @@
     "name": "Tartaric acid esters of mono- and diglycerides",
     "aliases": [
       "tartaric esters",
-      "tartaric acid esters"
+      "tartaric acid esters",
+      "tartaratni esteri mono i diglicerida"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10274,7 +10307,8 @@
     "aliases": [
       "datem",
       "diacetyl tartaric acid esters",
-      "datem emulsifier"
+      "datem emulsifier",
+      "mono i diacetil vinska kiselina esteri mono i diglicerida"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10433,7 +10467,9 @@
     "name": "Sucrose esters of fatty acids",
     "aliases": [
       "sucrose esters",
-      "sugar esters"
+      "sugar esters",
+      "esteri saharoze masnih kiselina",
+      "secerna jedinjenja masnih kiselina"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10513,7 +10549,9 @@
     "name": "Sucroglycerides",
     "aliases": [
       "sucroglyceride",
-      "sugar glycerides"
+      "sugar glycerides",
+      "saharo gliceridi",
+      "sukrogliceridi"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10595,7 +10633,8 @@
     "aliases": [
       "polyglycerol esters",
       "pge",
-      "polyglycerol fatty acid esters"
+      "polyglycerol fatty acid esters",
+      "poliglicerol esteri masnih kiselina"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10677,7 +10716,8 @@
     "aliases": [
       "pgpr",
       "polyglycerol esters",
-      "polyricinoleate"
+      "polyricinoleate",
+      "poliglicerol poliricinoleat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10758,7 +10798,8 @@
     "aliases": [
       "propylene glycol esters",
       "pg esters",
-      "propylene glycol fatty acid esters"
+      "propylene glycol fatty acid esters",
+      "propilen glikol esteri masnih kiselina"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10919,7 +10960,9 @@
     "aliases": [
       "ssl",
       "sodium stearoyl-2-lactylate",
-      "stearoyl lactylate"
+      "stearoyl lactylate",
+      "natrijev stearoil laktilat",
+      "natrijum stearoil laktilat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11000,7 +11043,9 @@
     "name": "Calcium stearoyl lactylate",
     "aliases": [
       "csl",
-      "calcium stearoyl-2-lactylate"
+      "calcium stearoyl-2-lactylate",
+      "kalcij stearoil laktilat",
+      "kalcijum stearoil laktilat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11081,7 +11126,8 @@
     "name": "Stearyl tartrate",
     "aliases": [
       "stearyl tartrate",
-      "stearyl tartaric acid ester"
+      "stearyl tartaric acid ester",
+      "stearil tartarat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11162,7 +11208,8 @@
     "aliases": [
       "span 60",
       "sorbitan stearate",
-      "sorbitan monostearate"
+      "sorbitan monostearate",
+      "sorbitan monostearat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11244,7 +11291,8 @@
     "name": "Sorbitan tristearate",
     "aliases": [
       "span 65",
-      "sorbitan tristearate"
+      "sorbitan tristearate",
+      "sorbitan tristearat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11327,7 +11375,8 @@
     "aliases": [
       "span 20",
       "sorbitan laurate",
-      "sorbitan monolaurate"
+      "sorbitan monolaurate",
+      "sorbitan monolaurat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11410,7 +11459,8 @@
     "aliases": [
       "span 80",
       "sorbitan oleate",
-      "sorbitan monooleate"
+      "sorbitan monooleate",
+      "sorbitan monooleat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11493,7 +11543,8 @@
     "aliases": [
       "span 40",
       "sorbitan palmitate",
-      "sorbitan monopalmitate"
+      "sorbitan monopalmitate",
+      "sorbitan monopalmitat"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -13176,7 +13227,10 @@
     "aliases": [
       "edible bone phosphate",
       "bone ash",
-      "calcium phosphate from bone"
+      "calcium phosphate from bone",
+      "kostani fosfat",
+      "kostani pepeo",
+      "fosfat iz kostiju"
     ],
     "category": "Anti-caking agent",
     "status": "mashbooh",
@@ -13592,7 +13646,10 @@
     "aliases": [
       "stearic acid",
       "palmitic acid",
-      "fatty acids"
+      "fatty acids",
+      "masne kiseline",
+      "stearinska kiselina",
+      "palmitinska kiselina"
     ],
     "category": "Anti-caking agent / glazing agent",
     "status": "mashbooh",
@@ -14427,7 +14484,9 @@
     "name": "Guanylic acid",
     "aliases": [
       "guanylic acid",
-      "gmp"
+      "gmp",
+      "gvanilna kiselina",
+      "guanilna kiselina"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14514,7 +14573,11 @@
     "aliases": [
       "sodium guanylate",
       "guanylate",
-      "gmp"
+      "gmp",
+      "dinatrijev gvanilat",
+      "dinatrijum guanilat",
+      "natrijev guanilat",
+      "natrijum guanilat"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14599,7 +14662,9 @@
     "numericCode": "628",
     "name": "Dipotassium guanylate",
     "aliases": [
-      "potassium guanylate"
+      "potassium guanylate",
+      "dikalijev gvanilat",
+      "dikalijum guanilat"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14684,7 +14749,9 @@
     "numericCode": "629",
     "name": "Calcium guanylate",
     "aliases": [
-      "calcium guanylate"
+      "calcium guanylate",
+      "kalcijum guanilat",
+      "kalcij guanilat"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14770,7 +14837,9 @@
     "name": "Inosinic acid",
     "aliases": [
       "inosinic acid",
-      "imp"
+      "imp",
+      "inozinska kiselina",
+      "inosinska kiselina"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14857,7 +14926,11 @@
     "aliases": [
       "sodium inosinate",
       "inosinate",
-      "imp"
+      "imp",
+      "dinatrijev inosinat",
+      "dinatrijum inosinat",
+      "natrijev inosinat",
+      "natrijum inosinat"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14943,7 +15016,9 @@
     "numericCode": "632",
     "name": "Potassium inosinate",
     "aliases": [
-      "dipotassium inosinate"
+      "dipotassium inosinate",
+      "kalijev inosinat",
+      "kalijum inosinat"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -15028,7 +15103,9 @@
     "numericCode": "633",
     "name": "Calcium inosinate",
     "aliases": [
-      "calcium inosinate"
+      "calcium inosinate",
+      "kalcijum inosinat",
+      "kalcij inosinat"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -15113,7 +15190,9 @@
     "numericCode": "634",
     "name": "Calcium ribonucleotides",
     "aliases": [
-      "calcium 5-ribonucleotides"
+      "calcium 5-ribonucleotides",
+      "kalcijum ribonukleotidi",
+      "kalcij ribonukleotidi"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -15202,7 +15281,10 @@
       "ribonucleotides",
       "disodium ribonucleotides",
       "i+g",
-      "flavour enhancer 635"
+      "flavour enhancer 635",
+      "dinatrijev ribonukleotid",
+      "dinatrijum ribonukleotid",
+      "ribonukleotidi"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -15507,7 +15589,11 @@
     "name": "Beeswax",
     "aliases": [
       "white beeswax",
-      "yellow beeswax"
+      "yellow beeswax",
+      "pcelinji vosak",
+      "pcelji vosak",
+      "bijeli pcelinji vosak",
+      "zuti pcelinji vosak"
     ],
     "category": "Glazing agent",
     "status": "mashbooh",
@@ -15687,7 +15773,11 @@
     "name": "Shellac",
     "aliases": [
       "bleached shellac",
-      "lac resin"
+      "lac resin",
+      "selak",
+      "šelak",
+      "lak smola",
+      "konditorska glazura"
     ],
     "category": "Glazing agent",
     "status": "mashbooh",
@@ -15930,7 +16020,10 @@
     "name": "L-Cysteine",
     "aliases": [
       "cysteine",
-      "l-cysteine hydrochloride"
+      "l-cysteine hydrochloride",
+      "l cistein",
+      "cistein",
+      "l-cistein"
     ],
     "category": "Flour treatment agent",
     "status": "mashbooh",
@@ -17644,7 +17737,9 @@
     "numericCode": "1105",
     "name": "Lysozyme",
     "aliases": [
-      "lysozyme"
+      "lysozyme",
+      "lizozim",
+      "lisozim"
     ],
     "category": "Preservative / enzyme",
     "status": "mashbooh",
@@ -18748,7 +18843,9 @@
     "numericCode": "1518",
     "name": "Triacetin",
     "aliases": [
-      "glycerol triacetate"
+      "glycerol triacetate",
+      "triacetin",
+      "glicerol triacetat"
     ],
     "category": "Carrier / solvent",
     "status": "mashbooh",
@@ -18820,7 +18917,8 @@
     "numericCode": "1519",
     "name": "Benzyl alcohol",
     "aliases": [
-      "benzyl alcohol"
+      "benzyl alcohol",
+      "benzil alkohol"
     ],
     "category": "Carrier / solvent",
     "status": "mashbooh",

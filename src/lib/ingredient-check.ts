@@ -23,7 +23,8 @@ export type IngredientCheckResult = {
 };
 
 const additiveByCode = new Map(additives.map((additive) => [additive.id, additive]));
-const additiveContextPattern = /\b(e\s*[-]?\s*)?(number|additive|emulsifier|emulgator|stabilizer|stabiliser|color|colour|preservative|raising agent|antioxidant)s?\b/i;
+const additiveContextPattern =
+  /\b(e\s*[-]?\s*)?(number|additive|aditiv|emulsifier|emulgator|stabilizer|stabiliser|stabilizator|color|colour|boja|bojilo|preservative|konzervans|raising agent|sredstvo za dizanje|antioxidant|antioksidans|thickener|zgusnjivac|zgušnjivač|zagusnjivac|zgušnjivač|flavour enhancer|flavor enhancer|pojacivac okusa|pojačivač okusa|pojacivac ukusa|pojačivač ukusa|sweetener|zasladivac|zaslađivač)s?\b/i;
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
