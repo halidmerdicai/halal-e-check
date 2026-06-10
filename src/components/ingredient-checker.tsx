@@ -15,7 +15,8 @@ import {
   ScanText,
   Trash2,
   RotateCcw,
-  ShieldAlert
+  ShieldAlert,
+  Upload
 } from "lucide-react";
 import { checkIngredients } from "@/lib/ingredient-check";
 import { getRiskGuidance, riskGuidanceCopy, type RiskGuidance } from "@/lib/risk-guidance";
@@ -37,6 +38,175 @@ type OcrState = {
   message: string;
   progress: number;
 };
+
+type TesseractLoggerMessage = {
+  status?: string;
+  progress?: number;
+};
+
+type BrowserTesseract = {
+  recognize: (
+    image: File | Blob,
+    language?: string,
+    options?: { logger?: (message: TesseractLoggerMessage) => void }
+  ) => Promise<{ data: { text: string } }>;
+};
+
+declare global {
+  interface Window {
+    Tesseract?: BrowserTesseract;
+  }
+}
+
+function loadTesseract() {
+  if (typeof window === "undefined") {
+    return Promise.reject(new Error("OCR is only available in the browser."));
+  }
+
+  if (window.Tesseract) return Promise.resolve(window.Tesseract);
+
+  return new Promise<BrowserTesseract>((resolve, reject) => {
+    const existing = document.querySelector<HTMLScriptElement>('script[data-halal-e-check-ocr="true"]');
+
+    if (existing) {
+      existing.addEventListener("load", () => {
+        if (window.Tesseract) resolve(window.Tesseract);
+        else reject(new Error("OCR script loaded without Tesseract."));
+      });
+      existing.addEventListener("error", () => reject(new Error("OCR script failed to load.")));
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
+    script.async = true;
+    script.defer = true;
+    script.dataset.halalECheckOcr = "true";
+    script.onload = () => {
+      if (window.Tesseract) resolve(window.Tesseract);
+      else reject(new Error("OCR script loaded without Tesseract."));
+    };
+    script.onerror = () => reject(new Error("OCR script failed to load."));
+    document.head.appendChild(script);
+  });
+}
+
+type PreprocessMode = "enhanced" | "threshold";
+
+const maxOcrImageSide = 2200;
+const usefulTextSignals = [
+  "ingredient",
+  "ingredients",
+  "sastojci",
+  "sastav",
+  "emulsifier",
+  "emulgator",
+  "lecithin",
+  "lecitin",
+  "gelatin",
+  "zelatin",
+  "karmin",
+  "carmine",
+  "shellac",
+  "selak"
+];
+
+function loadImageElement(file: File) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const image = new Image();
+
+    image.onload = () => {
+      URL.revokeObjectURL(url);
+      resolve(image);
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("Image could not be loaded."));
+    };
+    image.src = url;
+  });
+}
+
+function canvasToBlob(canvas: HTMLCanvasElement) {
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob(
+      (blob) => {
+        if (blob) resolve(blob);
+        else reject(new Error("Image preprocessing failed."));
+      },
+      "image/png",
+      1
+    );
+  });
+}
+
+async function preprocessOcrImage(file: File, mode: PreprocessMode) {
+  const image = await loadImageElement(file);
+  const scale = Math.min(1, maxOcrImageSide / Math.max(image.naturalWidth, image.naturalHeight));
+  const width = Math.max(1, Math.round(image.naturalWidth * scale));
+  const height = Math.max(1, Math.round(image.naturalHeight * scale));
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+
+  if (!context) throw new Error("Image preprocessing is not supported in this browser.");
+
+  canvas.width = width;
+  canvas.height = height;
+  context.fillStyle = "#ffffff";
+  context.fillRect(0, 0, width, height);
+  context.imageSmoothingEnabled = true;
+  context.imageSmoothingQuality = "high";
+  context.drawImage(image, 0, 0, width, height);
+
+  const imageData = context.getImageData(0, 0, width, height);
+  const { data } = imageData;
+  let totalLuminance = 0;
+
+  for (let index = 0; index < data.length; index += 4) {
+    const luminance = data[index] * 0.299 + data[index + 1] * 0.587 + data[index + 2] * 0.114;
+    totalLuminance += luminance;
+  }
+
+  const averageLuminance = totalLuminance / (data.length / 4);
+  const threshold = Math.max(120, Math.min(190, averageLuminance * 0.92));
+
+  for (let index = 0; index < data.length; index += 4) {
+    const luminance = data[index] * 0.299 + data[index + 1] * 0.587 + data[index + 2] * 0.114;
+    const value =
+      mode === "threshold"
+        ? luminance > threshold
+          ? 255
+          : 0
+        : Math.max(0, Math.min(255, (luminance - 128) * 1.45 + 142));
+
+    data[index] = value;
+    data[index + 1] = value;
+    data[index + 2] = value;
+    data[index + 3] = 255;
+  }
+
+  context.putImageData(imageData, 0, 0);
+  return canvasToBlob(canvas);
+}
+
+function scoreOcrText(text: string) {
+  const normalized = text.toLowerCase();
+  const eNumberMatches = normalized.match(/\be[\s-]?\d{3,4}[a-z]?\b/g)?.length ?? 0;
+  const signalMatches = usefulTextSignals.filter((signal) => normalized.includes(signal)).length;
+  const alphaNumericCount = normalized.replace(/[^a-z0-9]/g, "").length;
+
+  return alphaNumericCount + eNumberMatches * 60 + signalMatches * 35;
+}
+
+function looksLikeUsefulOcrText(text: string) {
+  const normalized = text.toLowerCase();
+  const compactLength = normalized.replace(/\s+/g, "").length;
+
+  if (compactLength >= 80) return true;
+  if (/\be[\s-]?\d{3,4}[a-z]?\b/.test(normalized)) return true;
+  return compactLength >= 24 && usefulTextSignals.some((signal) => normalized.includes(signal));
+}
 
 type GuidanceCounts = Record<RiskGuidance, number>;
 
@@ -242,23 +412,37 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
     setOcrState({ status: "reading", message: "Preparing OCR engine...", progress: 5 });
 
     try {
-      const { createWorker } = await import("tesseract.js");
-      const worker = await createWorker("eng", 1, {
-        logger: (message) => {
-          if (message.status === "recognizing text" && typeof message.progress === "number") {
-            setOcrState({
-              status: "reading",
-              message: "Reading ingredients from image...",
-              progress: Math.max(5, Math.round(message.progress * 100))
-            });
+      const tesseract = await loadTesseract();
+      setOcrState({ status: "reading", message: "Improving image contrast...", progress: 10 });
+      const enhancedImage = await preprocessOcrImage(file, "enhanced");
+
+      const recognizeImage = async (image: File | Blob, messageText: string, startProgress: number, endProgress: number) => {
+        const result = await tesseract.recognize(image, "eng", {
+          logger: (message) => {
+            if (message.status === "recognizing text" && typeof message.progress === "number") {
+              setOcrState({
+                status: "reading",
+                message: messageText,
+                progress: Math.max(startProgress, Math.round(startProgress + message.progress * (endProgress - startProgress)))
+              });
+            }
           }
-        }
-      });
+        });
 
-      const result = await worker.recognize(file);
-      await worker.terminate();
+        return result.data.text.trim();
+      };
 
-      const text = result.data.text.trim();
+      const enhancedText = await recognizeImage(enhancedImage, "Reading ingredients from enhanced image...", 15, 72);
+      let text = enhancedText;
+
+      if (!looksLikeUsefulOcrText(enhancedText)) {
+        setOcrState({ status: "reading", message: "Trying a sharper text scan...", progress: 74 });
+        const thresholdImage = await preprocessOcrImage(file, "threshold");
+        const thresholdText = await recognizeImage(thresholdImage, "Reading ingredients from sharper image...", 76, 98);
+
+        text = scoreOcrText(thresholdText) > scoreOcrText(enhancedText) ? thresholdText : enhancedText;
+      }
+
       if (!text) {
         setOcrState({
           status: "error",
@@ -271,7 +455,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
       onText(text);
       setOcrState({
         status: "success",
-        message: "Text extracted. Review it below before trusting the result.",
+        message: "Text extracted. Review and fix the OCR text below before trusting the result.",
         progress: 100
       });
     } catch {
@@ -281,6 +465,12 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
         progress: 0
       });
     }
+  }
+
+  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (file) void readImage(file);
   }
 
   return (
@@ -295,22 +485,31 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
             Works best with clear English or Bosnian/Croatian/Serbian Latin-script labels. Always review OCR text before relying on results.
           </p>
         </div>
-        <label className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
-          <Camera className="h-4 w-4" aria-hidden="true" />
-          Choose photo
-          <input
-            type="file"
-            accept="image/*"
-            capture="environment"
-            className="sr-only"
-            disabled={ocrState.status === "reading"}
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              event.target.value = "";
-              if (file) void readImage(file);
-            }}
-          />
-        </label>
+        <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:flex sm:flex-wrap sm:justify-end">
+          <label className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+            <Camera className="h-4 w-4" aria-hidden="true" />
+            Take photo
+            <input
+              type="file"
+              accept="image/*"
+              capture="environment"
+              className="sr-only"
+              disabled={ocrState.status === "reading"}
+              onChange={handleFileChange}
+            />
+          </label>
+          <label className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent">
+            <Upload className="h-4 w-4" aria-hidden="true" />
+            Upload photo
+            <input
+              type="file"
+              accept="image/*"
+              className="sr-only"
+              disabled={ocrState.status === "reading"}
+              onChange={handleFileChange}
+            />
+          </label>
+        </div>
       </div>
 
       <div className="mt-4">
@@ -329,6 +528,11 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
         >
           {ocrState.message}
         </p>
+      </div>
+      <div className="mt-4 grid gap-2 text-xs leading-5 text-muted-foreground sm:grid-cols-3">
+        <p className="rounded-md border bg-background p-2">Use bright light and keep the label flat.</p>
+        <p className="rounded-md border bg-background p-2">Crop close to ingredients when possible.</p>
+        <p className="rounded-md border bg-background p-2">Fix OCR mistakes in the text box before trusting results.</p>
       </div>
     </section>
   );

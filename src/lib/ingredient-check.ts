@@ -26,6 +26,9 @@ const additiveByCode = new Map(additives.map((additive) => [additive.id, additiv
 const additiveContextPattern =
   /\b(e\s*[-]?\s*)?(number|additive|aditiv|emulsifier|emulgator|stabilizer|stabiliser|stabilizator|color|colour|boja|bojilo|preservative|konzervans|raising agent|sredstvo za dizanje|antioxidant|antioksidans|thickener|zgusnjivac|zgušnjivač|zagusnjivac|zgušnjivač|flavour enhancer|flavor enhancer|pojacivac okusa|pojačivač okusa|pojacivac ukusa|pojačivač ukusa|sweetener|zasladivac|zaslađivač)s?\b/i;
 
+const codeCandidatePattern = /\b[eE]\s*[-]?\s*(\d{3,4}(?:\s*[a-zA-Z]{1,3})?)\b/g;
+const numericCandidatePattern = /\b(\d{3,4}(?:\s*[a-zA-Z]{1,3})?)\b/g;
+
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -53,39 +56,83 @@ function addMatch(matches: Map<string, IngredientMatch>, match: IngredientMatch)
   }
 }
 
+function cleanUnknownCode(rawCode: string) {
+  return normalizeCode(rawCode).toUpperCase();
+}
+
+function resolveAdditiveCode(rawCode: string) {
+  const exactCode = normalizeCode(rawCode);
+  const exactAdditive = additiveByCode.get(exactCode);
+  if (exactAdditive) return { additive: exactAdditive, normalizedCode: exactCode };
+
+  const numericOnly = exactCode.replace(/^e/, "").match(/^\d{3,4}/)?.[0];
+  if (!numericOnly) return { additive: undefined, normalizedCode: exactCode };
+
+  const numericCode = `e${numericOnly}`;
+  const numericAdditive = additiveByCode.get(numericCode);
+  if (numericAdditive) return { additive: numericAdditive, normalizedCode: numericCode };
+
+  return { additive: undefined, normalizedCode: exactCode };
+}
+
+function resolvedCodeMatch(rawCode: string, start: number, normalizedCode: string) {
+  if (normalizeCode(rawCode) === normalizedCode) {
+    return { matchedText: rawCode, start, end: start + rawCode.length };
+  }
+
+  const numericOnly = normalizedCode.replace(/^e/, "");
+  const prefixPattern = rawCode.trimStart().toLowerCase().startsWith("e")
+    ? new RegExp(`^[eE]\\s*[-]?\\s*${numericOnly}`)
+    : new RegExp(`^${numericOnly}`);
+  const leadingWhitespace = rawCode.length - rawCode.trimStart().length;
+  const prefixMatch = prefixPattern.exec(rawCode.trimStart());
+
+  if (!prefixMatch) return { matchedText: rawCode, start, end: start + rawCode.length };
+
+  const matchedText = rawCode.slice(leadingWhitespace, leadingWhitespace + prefixMatch[0].length);
+  return {
+    matchedText,
+    start: start + leadingWhitespace,
+    end: start + leadingWhitespace + matchedText.length
+  };
+}
+
 export function checkIngredients(input: string): IngredientCheckResult {
   const matches = new Map<string, IngredientMatch>();
   const unknownCodes = new Map<string, UnknownIngredientCode>();
   const normalizedInput = normalizeText(input);
 
-  const codePattern = /\b[eE]\s*[-]?\s*(\d{3,4}\s*[a-zA-Z]{0,3})\b/g;
-  for (const match of Array.from(input.matchAll(codePattern))) {
+  for (const match of Array.from(input.matchAll(codeCandidatePattern))) {
     const rawCode = match[0];
     const start = match.index ?? 0;
     const end = start + rawCode.length;
-    const normalized = normalizeCode(rawCode);
-    const additive = additiveByCode.get(normalized);
+    const { additive, normalizedCode } = resolveAdditiveCode(rawCode);
     if (additive) {
-      addMatch(matches, { additive, matchedBy: "code", matchedText: rawCode, start, end });
+      addMatch(matches, { additive, matchedBy: "code", ...resolvedCodeMatch(rawCode, start, normalizedCode) });
+      unknownCodes.delete(normalizedCode.toUpperCase());
     } else {
-      const code = rawCode.toUpperCase().replace(/\s+/g, "").replace("E-", "E");
+      const code = cleanUnknownCode(rawCode);
       unknownCodes.set(code, { code, matchedText: rawCode, start, end });
     }
   }
 
-  const numericPattern = /\b(\d{3,4}\s*[a-zA-Z]{0,3})\b/g;
-  for (const match of Array.from(input.matchAll(numericPattern))) {
+  for (const match of Array.from(input.matchAll(numericCandidatePattern))) {
     const rawNumber = match[0];
     const index = match.index ?? 0;
     const end = index + rawNumber.length;
     const context = input.slice(Math.max(0, index - 28), Math.min(input.length, index + rawNumber.length + 28));
     if (!additiveContextPattern.test(context)) continue;
 
-    const additive = additiveByCode.get(normalizeCode(rawNumber));
+    const { additive, normalizedCode } = resolveAdditiveCode(rawNumber);
     if (additive) {
-      addMatch(matches, { additive, matchedBy: "numeric-context", matchedText: rawNumber, start: index, end });
+      addMatch(matches, {
+        additive,
+        matchedBy: "numeric-context",
+        ...resolvedCodeMatch(rawNumber, index, normalizedCode)
+      });
+      unknownCodes.delete(normalizedCode.toUpperCase());
     } else {
-      const code = `E${rawNumber.toUpperCase().replace(/\s+/g, "")}`;
+      const code = cleanUnknownCode(rawNumber);
       unknownCodes.set(code, { code, matchedText: rawNumber, start: index, end });
     }
   }
