@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/footer";
@@ -8,9 +8,14 @@ import { absoluteSiteUrl, siteUrl } from "@/lib/site";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const ogImage = absoluteSiteUrl("/og-image.svg");
 
+export const viewport: Viewport = {
+  themeColor: "#16803c"
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Halal E-Check",
+  manifest: absoluteSiteUrl("/manifest.webmanifest"),
   title: {
     default: "Halal E-Check | E-number halal checker",
     template: "%s | Halal E-Check"
@@ -27,6 +32,22 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: siteUrl
+  },
+  appleWebApp: {
+    title: "Halal E-Check",
+    capable: true,
+    statusBarStyle: "default"
+  },
+  formatDetection: {
+    telephone: false
+  },
+  icons: {
+    icon: [
+      { url: absoluteSiteUrl("/icon.svg"), type: "image/svg+xml" },
+      { url: absoluteSiteUrl("/icon-192.png"), sizes: "192x192", type: "image/png" },
+      { url: absoluteSiteUrl("/icon-512.png"), sizes: "512x512", type: "image/png" }
+    ],
+    apple: [{ url: absoluteSiteUrl("/apple-touch-icon.png"), sizes: "180x180", type: "image/png" }]
   },
   openGraph: {
     title: "Halal E-Check | E-number halal checker",

@@ -1,5 +1,6 @@
 import type { Additive } from "@/data/additives";
 import Link from "next/link";
+import { CheckCircle2, HelpCircle, XCircle } from "lucide-react";
 import { sensitivityCopy, statusCopy } from "@/lib/status";
 import { StatusBadge } from "@/components/status-badge";
 import { DisclaimerBox } from "@/components/disclaimer-box";
@@ -8,6 +9,7 @@ import { VerificationChecklist } from "@/components/verification-checklist";
 import { cn } from "@/lib/utils";
 import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
 import { getRiskGuidance, riskGuidanceCopy } from "@/lib/risk-guidance";
+import { getManufacturerQuestions } from "@/lib/decision-guide";
 
 function ListSection({ title, items }: { title: string; items: string[] }) {
   return (
@@ -29,6 +31,68 @@ const confidenceStyles = {
   medium: "border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200",
   high: "border-emerald-200 bg-emerald-50 text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-200"
 };
+
+const decisionIconStyles = {
+  use: "text-emerald-700 dark:text-emerald-300",
+  avoid: "text-red-700 dark:text-red-300",
+  ask: "text-sky-700 dark:text-sky-300"
+};
+
+function DecisionColumn({
+  title,
+  items,
+  tone
+}: {
+  title: string;
+  items: string[];
+  tone: keyof typeof decisionIconStyles;
+}) {
+  const Icon = tone === "use" ? CheckCircle2 : tone === "avoid" ? XCircle : HelpCircle;
+
+  return (
+    <div className="min-w-0 space-y-3">
+      <div className="flex items-center gap-2">
+        <Icon className={cn("h-5 w-5 flex-none", decisionIconStyles[tone])} aria-hidden="true" />
+        <h3 className="text-base font-semibold">{title}</h3>
+      </div>
+      <ul className="grid gap-2 text-sm leading-6 text-muted-foreground">
+        {items.slice(0, 3).map((item) => (
+          <li key={item} className="border-l pl-3">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function DecisionGuide({ additive, riskGuidance }: { additive: Additive; riskGuidance: ReturnType<typeof getRiskGuidance> }) {
+  const shouldShow = additive.sourceSensitivity !== "low" || additive.status !== "halal" || riskGuidance !== "permissible";
+
+  if (!shouldShow) return null;
+
+  return (
+    <section className="rounded-lg border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h2 className="text-lg font-semibold sm:text-xl">Decision guide</h2>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Use this as the practical next step when the label does not give enough source detail.
+          </p>
+        </div>
+        <span className="inline-flex w-fit rounded-full border bg-background px-3 py-1 text-sm font-semibold text-muted-foreground">
+          {riskGuidanceCopy[riskGuidance].label}
+        </span>
+      </div>
+
+      <div className="mt-5 grid gap-5 border-t pt-5 md:grid-cols-3">
+        <DecisionColumn title="Use when" items={additive.halalWhen} tone="use" />
+        <DecisionColumn title="Avoid when" items={additive.haramWhen} tone="avoid" />
+        <DecisionColumn title="Ask manufacturer" items={getManufacturerQuestions(additive)} tone="ask" />
+      </div>
+    </section>
+  );
+}
 
 function TrustSection({ additive }: { additive: Additive }) {
   return (
@@ -130,6 +194,8 @@ export function AdditiveDetail({ additive }: { additive: Additive }) {
           <h2 className="text-lg font-semibold sm:text-xl">Status meaning</h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">{statusCopy[additive.status].meaning}</p>
         </section>
+
+        <DecisionGuide additive={additive} riskGuidance={riskGuidance} />
 
         <ListSection title="Usually derived from" items={additive.usuallyDerivedFrom} />
         <ListSection title="When it is halal" items={additive.halalWhen} />

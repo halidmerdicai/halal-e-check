@@ -10,12 +10,14 @@ import {
   Download,
   HelpCircle,
   History,
+  MessageSquareText,
   Trash2,
   RotateCcw,
   ShieldAlert
 } from "lucide-react";
 import { checkIngredients } from "@/lib/ingredient-check";
 import { getRiskGuidance, riskGuidanceCopy, type RiskGuidance } from "@/lib/risk-guidance";
+import { getDecisionReason, getManufacturerQuestions } from "@/lib/decision-guide";
 import { StatusBadge } from "@/components/status-badge";
 import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
 import { Button } from "@/components/ui/button";
@@ -318,6 +320,54 @@ const highlightStyles: Record<RiskGuidance | "unknown", string> = {
   unknown: "border-muted bg-muted text-foreground"
 };
 
+type IngredientMatchItem = ReturnType<typeof checkIngredients>["matches"][number];
+
+function MatchCard({ additive, matchedBy, matchedText }: IngredientMatchItem) {
+  const guidance = getRiskGuidance(additive);
+  const primaryQuestion = getManufacturerQuestions(additive)[0];
+  const askText =
+    guidance === "permissible"
+      ? "Is the finished product halal-certified or otherwise suitable for your standard?"
+      : primaryQuestion;
+
+  return (
+    <article className="p-3 sm:p-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <Link href={`/e/${additive.numericCode}`} className="font-semibold text-primary hover:underline">
+            {additive.eNumber} · {additive.name}
+          </Link>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Matched {matchedBy.replace("-", " ")}: {matchedText}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2 sm:max-w-48 sm:justify-end">
+          <StatusBadge status={additive.status} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+          <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+        </div>
+      </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-3">
+        <div className="rounded-md border bg-background p-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Why it matters</p>
+          <p className="mt-2 text-sm leading-6">{getDecisionReason(additive)}</p>
+        </div>
+        <div className="rounded-md border bg-background p-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Next action</p>
+          <p className="mt-2 text-sm leading-6">{additive.saferAction}</p>
+        </div>
+        <div className="rounded-md border bg-background p-3">
+          <div className="flex items-center gap-2">
+            <MessageSquareText className="h-4 w-4 flex-none text-primary" aria-hidden="true" />
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Ask this</p>
+          </div>
+          <p className="mt-2 text-sm leading-6">{askText}</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function HighlightedLabel({ input, result }: { input: string; result: ReturnType<typeof checkIngredients> }) {
   const ranges = [
     ...result.matches
@@ -510,24 +560,8 @@ export function IngredientChecker() {
                       <p className="mt-1 text-sm text-muted-foreground">{riskGuidanceCopy[group].description}</p>
                     </div>
                     <div className="divide-y">
-                      {matches.map(({ additive, matchedBy, matchedText }) => (
-                        <Link key={additive.id} href={`/e/${additive.numericCode}`} className="block p-3 hover:bg-accent sm:p-4">
-                          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                            <div className="min-w-0">
-                              <p className="font-semibold">
-                                {additive.eNumber} · {additive.name}
-                              </p>
-                              <p className="mt-1 text-sm text-muted-foreground">
-                                Matched {matchedBy.replace("-", " ")}: {matchedText}
-                              </p>
-                              <p className="mt-2 text-sm leading-6 text-muted-foreground">{additive.saferAction}</p>
-                            </div>
-                            <div className="flex flex-wrap gap-2 sm:max-w-48 sm:justify-end">
-                              <StatusBadge status={additive.status} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
-                              <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
-                            </div>
-                          </div>
-                        </Link>
+                      {matches.map((match) => (
+                        <MatchCard key={match.additive.id} {...match} />
                       ))}
                     </div>
                   </div>
@@ -556,7 +590,14 @@ export function IngredientChecker() {
             </div>
           ) : (
             <div className="rounded-lg border bg-card p-6 text-sm leading-6 text-muted-foreground">
-              No E-numbers, names, or aliases were detected. Try including a code like E471 or an ingredient name like lecithin.
+              <h3 className="font-semibold text-foreground">No additives detected</h3>
+              <p className="mt-2">
+                No E-numbers, additive names, or known aliases were found. Check whether the label uses plain names like
+                lecithin, mono- and diglycerides, carmine, shellac, gelatin, or disodium inosinate instead of E-numbers.
+              </p>
+              <p className="mt-2">
+                If the ingredient still looks source-dependent, use the request page and include the full label text.
+              </p>
             </div>
           )}
         </section>

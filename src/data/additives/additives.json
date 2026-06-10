@@ -13180,35 +13180,40 @@
     ],
     "category": "Anti-caking agent",
     "status": "mashbooh",
-    "summary": "Bone phosphate is animal bone-derived, so halal status depends on species, slaughter status, and certification.",
+    "summary": "Bone phosphate is animal-derived phosphate. Halal status depends on animal species, slaughter status, and certification.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
-      "Animal bones"
+      "Animal bones",
+      "Bovine bone may be possible",
+      "Pork bone may be possible"
     ],
     "halalWhen": [
-      "Animal source is halal and accepted by a trusted halal certifier"
+      "Made from halal-slaughtered animal source",
+      "Made from a source accepted by a trusted halal certifier",
+      "The finished product is halal-certified"
     ],
     "haramWhen": [
-      "Source is pork",
-      "Animal source or slaughter status is unknown",
-      "Non-halal animal bones are used"
+      "Made from pork bone",
+      "Made from non-halal-slaughtered animal bone",
+      "Animal source is undisclosed"
     ],
     "whatToCheck": [
       "Halal certification",
       "Animal species",
       "Slaughter status",
-      "Manufacturer confirmation"
+      "Manufacturer source statement"
     ],
-    "saferAction": "Avoid unless halal-certified or clearly verified.",
+    "saferAction": "Avoid if the animal source and halal certification are not clear.",
     "commonFoods": [
       "Supplements",
       "Tableted foods",
       "Dry mixes"
     ],
     "notes": [
-      "Animal-derived additives need more verification than mineral additives from non-animal sources."
+      "Animal-derived additives need more verification than mineral additives from non-animal sources.",
+      "Treat bone-derived phosphates like other animal-derived additives: the source and certification matter."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-06-07",
     "related": [
       "e441",
       "e631",
@@ -13216,7 +13221,7 @@
     ],
     "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority animal-derived record: bone phosphate requires explicit source verification.",
+    "reviewNotes": "Reviewed as animal-derived phosphate with explicit species/slaughter verification guidance.",
     "sources": [
       {
         "type": "identity",
@@ -13228,6 +13233,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14414,31 +14431,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Guanylic acid is source-dependent or process-dependent, so the E-number alone is not enough for halal confidence.",
+    "summary": "Guanylic acid is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -14446,14 +14463,14 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14465,6 +14482,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14489,31 +14518,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "May be produced by fermentation or from animal sources. It is source-dependent.",
+    "summary": "Disodium guanylate is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Chips",
       "Instant noodles",
@@ -14521,18 +14550,18 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-06-07",
     "related": [
       "e631",
       "e635"
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14544,6 +14573,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14562,31 +14603,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Dipotassium guanylate is source-dependent or process-dependent, so the E-number alone is not enough for halal confidence.",
+    "summary": "Dipotassium guanylate is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -14594,14 +14635,14 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14613,6 +14654,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14635,31 +14688,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Calcium guanylate is source-dependent or process-dependent, so the E-number alone is not enough for halal confidence.",
+    "summary": "Calcium guanylate is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -14667,14 +14720,14 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14686,6 +14739,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14709,31 +14774,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Inosinic acid is source-dependent or process-dependent, so the E-number alone is not enough for halal confidence.",
+    "summary": "Inosinic acid is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -14741,14 +14806,14 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14760,6 +14825,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14784,31 +14861,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Can come from meat, fish, or fermentation. The source must be checked.",
+    "summary": "Disodium inosinate is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Instant noodles",
       "Savory snacks",
@@ -14816,11 +14893,11 @@
       "Seasonings"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-06-07",
     "related": [
       "e627",
       "e635",
@@ -14828,7 +14905,7 @@
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14840,6 +14917,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14858,31 +14947,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Potassium inosinate is source-dependent or process-dependent, so the E-number alone is not enough for halal confidence.",
+    "summary": "Potassium inosinate is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -14890,14 +14979,14 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14909,6 +14998,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -14931,31 +15032,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Calcium inosinate is source-dependent or process-dependent, so the E-number alone is not enough for halal confidence.",
+    "summary": "Calcium inosinate is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -14963,14 +15064,14 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -14982,6 +15083,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -15004,31 +15117,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "Calcium ribonucleotides is source-dependent or process-dependent, so the E-number alone is not enough for halal confidence.",
+    "summary": "Calcium ribonucleotides is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -15036,14 +15149,14 @@
       "Soups"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -15055,6 +15168,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -15081,31 +15206,31 @@
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
-    "summary": "A mixture often containing E627 and E631, so it is source-dependent and needs verification.",
+    "summary": "Disodium 5'-ribonucleotides is a nucleotide flavor enhancer. It may be fermentation-derived, fish-derived, or animal-derived depending on supplier, so the E-number alone is not enough for halal confidence.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Microbial fermentation",
-      "Yeast extract",
+      "Yeast or plant carbohydrate fermentation",
       "Fish",
-      "Meat or animal-derived material may be possible"
+      "Animal extract may be possible"
     ],
     "halalWhen": [
-      "Made by acceptable microbial fermentation",
-      "Made from fish or halal animal source accepted by certifier",
-      "Vegan or halal-certified source is confirmed"
+      "Produced by acceptable microbial fermentation",
+      "Produced from fish or halal-certified animal source accepted by the user's certifier",
+      "Vegetarian, vegan, or halal-certified source is confirmed"
     ],
     "haramWhen": [
-      "Made from pork",
-      "Made from non-halal animal source",
-      "Source is unknown and no halal certification is present"
+      "Produced from pork",
+      "Produced from non-halal animal extract",
+      "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
       "Halal certification",
+      "Manufacturer source statement for the nucleotide",
       "Vegetarian or vegan suitability",
-      "Manufacturer source statement",
-      "Whether E631 or animal-derived IMP/GMP is included"
+      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
     ],
-    "saferAction": "Verify the source for snacks, instant noodles, soups, and seasoning blends; avoid if unclear.",
+    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
     "commonFoods": [
       "Seasoned chips",
       "Instant noodles",
@@ -15113,18 +15238,18 @@
       "Sauces"
     ],
     "notes": [
-      "These flavor enhancers are often used together, so check the whole flavor-enhancer system.",
-      "Vegetarian or vegan labeling is helpful evidence for source, but halal certification is stronger.",
-      "E631 and E635 are especially common in savory snacks and instant noodles."
+      "These flavor enhancers are often used together, so check the whole flavor-enhancer system, not only one E-number.",
+      "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
+      "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-06-07",
     "related": [
       "e627",
       "e631"
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flavor-enhancer record: source can be fermentation, fish, or animal-derived.",
+    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
     "sources": [
       {
         "type": "identity",
@@ -15136,6 +15261,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -15374,7 +15511,7 @@
     ],
     "category": "Glazing agent",
     "status": "mashbooh",
-    "summary": "Beeswax is bee-derived. Many halal consumers accept it, but it is not vegan and may need certifier preference checking.",
+    "summary": "Beeswax is bee-derived. It is commonly treated as lower risk than insect colors or shellac, but users may still want certification or certifier preference checking.",
     "sourceSensitivity": "medium",
     "usuallyDerivedFrom": [
       "Bee-derived wax"
@@ -15382,16 +15519,16 @@
     "halalWhen": [
       "Accepted by the user's halal authority",
       "The finished product is halal-certified",
-      "No haram solvents or carriers are used"
+      "No haram solvents, carriers, or non-halal coatings are used"
     ],
     "haramWhen": [
-      "A user's certifier or school avoids insect/bee-derived glazing agents",
+      "A user's certifier or standard avoids bee-derived glazing agents",
       "Used with haram carriers or in a non-halal finished product"
     ],
     "whatToCheck": [
       "Halal certification",
-      "Whether the product is vegan if that matters",
-      "Manufacturer statement on glazing agents"
+      "Manufacturer statement on glazing/coating system",
+      "Whether vegan status matters to the user"
     ],
     "saferAction": "Use certified products if avoiding bee-derived ingredients or if the finished product is doubtful.",
     "commonFoods": [
@@ -15401,12 +15538,13 @@
       "Bakery glazes"
     ],
     "notes": [
-      "Bee-derived; many halal consumers accept it, but it is not vegan and may require school/certifier preference checking."
+      "Bee-derived; many halal consumers accept it, but it is not vegan.",
+      "Finished-product context still matters because glazing agents can be combined with carriers or solvents."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Preference-sensitive bee-derived record: halal acceptance may vary by certifier or user standard.",
+    "reviewNotes": "Reviewed as preference-sensitive bee-derived glazing agent with lower risk than shellac/carmine but still source/context dependent.",
     "sources": [
       {
         "type": "identity",
@@ -15418,6 +15556,12 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
       },
       {
         "type": "manufacturer-needed",
@@ -15547,23 +15691,26 @@
     ],
     "category": "Glazing agent",
     "status": "mashbooh",
-    "summary": "Shellac is a glazing agent from lac insect resin, so many users treat it as questionable or avoid it unless certified.",
+    "summary": "Shellac is a glazing agent from lac insect resin. Acceptance can vary, and coatings may also involve solvents or carrier systems, so certification is safest.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Lac insect resin"
     ],
     "halalWhen": [
       "A trusted halal certifier accepts the specific source and process",
-      "No haram solvents or carriers are used"
+      "No haram solvents or carriers are used",
+      "The finished product is halal-certified"
     ],
     "haramWhen": [
       "Insect-derived glazing agents are not accepted by the user's halal authority",
-      "Source or processing solvent is unclear"
+      "Source, solvent, or carrier system is unclear",
+      "Used in a non-halal finished product"
     ],
     "whatToCheck": [
       "Halal certification",
-      "Vegan label",
-      "Manufacturer statement on shellac source and solvent"
+      "Manufacturer statement on shellac source",
+      "Coating solvent/carrier system",
+      "Vegan label if avoiding insect-derived ingredients"
     ],
     "saferAction": "Avoid if insect-derived glazing agents are not accepted by your halal authority; choose certified or vegan alternatives.",
     "commonFoods": [
@@ -15573,12 +15720,13 @@
       "Bakery glazes"
     ],
     "notes": [
-      "Product-level halal status can still depend on formulation, carriers, processing aids, and certification."
+      "Also appears as confectioner's glaze in some markets.",
+      "Product-level halal status can depend on formulation, carriers, processing aids, and certification."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority insect-derived glazing record: acceptance varies, so certification or avoidance is safest.",
+    "reviewNotes": "Reviewed as insect-derived glazing agent with explicit solvent/carrier verification guidance.",
     "sources": [
       {
         "type": "identity",
@@ -15590,6 +15738,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation packaging requirements",
+        "url": "https://halalfoundation.org/halal-certification-requirements-for-packaging-manufacturers/",
+        "note": "Highlights source concerns for stearates, animal-based glycerins, shellac, coatings, solvents, and residual alcohol in materials that can contact food."
       },
       {
         "type": "manufacturer-needed",
@@ -15774,7 +15934,7 @@
     ],
     "category": "Flour treatment agent",
     "status": "mashbooh",
-    "summary": "L-Cysteine can be synthetic, fermentation-derived, or animal-derived in some supply chains, so source verification is important.",
+    "summary": "L-Cysteine can be synthetic, fermentation-derived, or animal-derived in some supply chains. It should be verified in bakery and flour-treatment use.",
     "sourceSensitivity": "high",
     "usuallyDerivedFrom": [
       "Synthetic production",
@@ -15795,7 +15955,8 @@
     "whatToCheck": [
       "Halal certification",
       "Manufacturer source statement",
-      "Vegan or microbial/synthetic source claim"
+      "Vegan, microbial, or synthetic source claim",
+      "Whether it is used in bread improvers or flour treatment"
     ],
     "saferAction": "Verify source or choose halal-certified bakery products.",
     "commonFoods": [
@@ -15803,12 +15964,13 @@
       "Packaged foods"
     ],
     "notes": [
+      "Historically source-sensitive; do not infer halal status from the E-number alone.",
       "Product-level halal status can still depend on formulation, carriers, processing aids, and certification."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority flour-treatment record: source has historically varied and should be verified.",
+    "reviewNotes": "Reviewed as high-risk flour-treatment additive because feather/hair or other animal-derived sources may require verification.",
     "sources": [
       {
         "type": "identity",
@@ -15820,6 +15982,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies ingredients such as gelatin, animal fats, L-cysteine, shellac, animal glycerin, and other animal-derived inputs as higher halal risk requiring verification."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -17474,7 +17648,7 @@
     ],
     "category": "Preservative / enzyme",
     "status": "mashbooh",
-    "summary": "Lysozyme is commonly egg-derived, so it is usually not a pork concern but still needs checking for source, allergen, and certification.",
+    "summary": "Lysozyme is commonly egg-derived. It is not usually a pork concern, but it still needs product-context checking, especially in cheese and fermentation-related foods.",
     "sourceSensitivity": "medium",
     "usuallyDerivedFrom": [
       "Egg white",
@@ -17482,16 +17656,19 @@
     ],
     "halalWhen": [
       "Egg-derived source is acceptable and the finished product is halal",
-      "The product is halal-certified"
+      "The product is halal-certified",
+      "No haram processing aids or carriers are used"
     ],
     "haramWhen": [
       "Used in a non-halal finished product",
-      "Source or processing aids are doubtful"
+      "Used with haram processing aids",
+      "Source or processing context is doubtful"
     ],
     "whatToCheck": [
       "Egg allergen declaration",
       "Halal certification",
-      "Manufacturer source statement"
+      "Manufacturer source statement",
+      "Food category and processing context"
     ],
     "saferAction": "Check source and product certification, especially in cheese and wine-related processing contexts.",
     "commonFoods": [
@@ -17499,12 +17676,13 @@
       "Packaged foods"
     ],
     "notes": [
-      "Product-level halal status can still depend on formulation, carriers, processing aids, and certification."
+      "Egg source can be acceptable for many users, but the finished product and processing context matter.",
+      "Also relevant for allergen review."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Source/allergen-sensitive enzyme record: usually egg-derived, but product context matters.",
+    "reviewNotes": "Reviewed as enzyme/source-context record: usually egg-derived, but finished-product process determines confidence.",
     "sources": [
       {
         "type": "identity",
@@ -17516,6 +17694,12 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",
@@ -18640,39 +18824,42 @@
     ],
     "category": "Carrier / solvent",
     "status": "mashbooh",
-    "summary": "Benzyl alcohol is an alcohol-named carrier or solvent. Product-level ruling depends on use, amount, transformation, and certifier guidance.",
+    "summary": "Benzyl alcohol is an alcohol-named carrier/solvent. Halal concern depends on how it is used, residual presence, finished-product formulation, and certifier standard.",
     "sourceSensitivity": "medium",
     "usuallyDerivedFrom": [
       "Synthetic production",
-      "Natural aromatic sources"
+      "Natural flavor systems",
+      "Carrier or solvent systems"
     ],
     "halalWhen": [
-      "A halal certifier accepts its technical use",
-      "It is not used as an intoxicating ingredient",
+      "Used in a manner accepted by the certifier",
+      "No intoxicating alcohol remains in the finished product beyond accepted limits",
       "The finished product is halal-certified"
     ],
     "haramWhen": [
       "Used as part of a haram flavor or solvent system",
-      "Certifier guidance rejects the specific use",
-      "Finished product contains other haram ingredients"
+      "Certifier does not accept the residual alcohol context",
+      "Finished product contains impermissible alcohol or haram carriers"
     ],
     "whatToCheck": [
       "Halal certification",
-      "Role as carrier or solvent",
-      "Manufacturer/certifier statement"
+      "Flavor or carrier system",
+      "Residual alcohol policy",
+      "Manufacturer or certifier statement"
     ],
-    "saferAction": "For strict halal shopping, prefer certified products when benzyl alcohol appears in flavors or extracts.",
+    "saferAction": "For flavors and extracts, rely on halal certification or manufacturer confirmation; avoid unclear products if following stricter alcohol-carrier standards.",
     "commonFoods": [
       "Processed foods",
       "Packaged foods"
     ],
     "notes": [
-      "Alcohol named ingredient; product-level ruling depends on use, amount, and certifier guidance."
+      "The word alcohol in a chemical name does not automatically mean the ingredient is an intoxicating beverage alcohol.",
+      "Finished-product use, residual level, and certifier standard are the important checks."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-06-07",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Context-sensitive alcohol-named carrier record: needs certifier or manufacturer context.",
+    "reviewNotes": "Reviewed as context-sensitive carrier/solvent record; kept mashbooh because finished-product use and certifier standard matter.",
     "sources": [
       {
         "type": "identity",
@@ -18684,6 +18871,18 @@
         "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation packaging requirements",
+        "url": "https://halalfoundation.org/halal-certification-requirements-for-packaging-manufacturers/",
+        "note": "Highlights source concerns for stearates, animal-based glycerins, shellac, coatings, solvents, and residual alcohol in materials that can contact food."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation halal standards",
+        "url": "https://halalfoundation.org/ahf-halal-standards/",
+        "note": "General halal standard reference for animal derivatives, haram contamination, processing aids, and certification controls."
       },
       {
         "type": "manufacturer-needed",

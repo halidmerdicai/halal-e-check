@@ -16,6 +16,7 @@ A production-minded static web app for checking whether food additive E-numbers 
 - Missing additive request helper at `/request`
 - Correction suggestion helper at `/corrections`
 - Privacy and contact notes at `/privacy`
+- PWA manifest and app icons for mobile add-to-home-screen support
 - Internal high-risk review queue at `/review-queue` hidden from public navigation
 - Internal data quality dashboard at `/data-quality` hidden from public navigation
 - Mobile-first responsive UI with dark mode token support
@@ -62,6 +63,12 @@ npm run dev
 npm run build
 npm run typecheck
 npm run lint
+```
+
+Regenerate PWA icon PNGs after changing `public/icon.svg`:
+
+```bash
+node scripts/generate-pwa-icons.cjs
 ```
 
 ## Dataset
