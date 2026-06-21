@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "react-image-crop/dist/ReactCrop.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { absoluteSiteUrl, siteUrl } from "@/lib/site";

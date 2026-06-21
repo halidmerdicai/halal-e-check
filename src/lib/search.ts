@@ -4,7 +4,13 @@ import type { Additive } from "@/data/additives";
 export function normalizeCode(input: string) {
   const compact = input.trim().toLowerCase().replace(/[\s-]/g, "");
   if (!compact) return "";
-  return compact.startsWith("e") ? compact : `e${compact}`;
+  const withPrefix = compact.startsWith("e") ? compact : `e${compact}`;
+  const body = withPrefix.slice(1);
+  const numericLike = body.match(/^[0-9o]{3,4}/)?.[0];
+
+  if (!numericLike) return withPrefix;
+
+  return `e${numericLike.replace(/o/g, "0")}${body.slice(numericLike.length)}`;
 }
 
 export function normalizeText(input: string) {

@@ -22,12 +22,21 @@ export type IngredientCheckResult = {
   unknownCodes: UnknownIngredientCode[];
 };
 
+export type IngredientCodeCorrection = {
+  from: string;
+  to: string;
+};
+
 const additiveByCode = new Map(additives.map((additive) => [additive.id, additive]));
 const additiveContextPattern =
   /\b(e\s*[-]?\s*)?(number|additive|aditiv|emulsifier|emulgator|stabilizer|stabiliser|stabilizator|color|colour|boja|bojilo|preservative|konzervans|raising agent|sredstvo za dizanje|antioxidant|antioksidans|thickener|zgusnjivac|zgušnjivač|zagusnjivac|zgušnjivač|flavour enhancer|flavor enhancer|pojacivac okusa|pojačivač okusa|pojacivac ukusa|pojačivač ukusa|sweetener|zasladivac|zaslađivač)s?\b/i;
 
-const codeCandidatePattern = /\b[eE]\s*[-]?\s*(\d{3,4}(?:\s*[a-zA-Z]{1,3})?)\b/g;
-const numericCandidatePattern = /\b(\d{3,4}(?:\s*[a-zA-Z]{1,3})?)\b/g;
+const codeCandidatePattern = /\b[eE]\s*[-]?\s*([0-9oO]{3,4}(?:\s*[a-zA-Z]{1,3})?)\b/g;
+const numericCandidatePattern = /\b([0-9oO]{3,4}(?:\s*[a-zA-Z]{1,3})?)\b/g;
+const ocrDigitSuffixCorrections: Record<string, string> = {
+  "1": "i",
+  "4": "a"
+};
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -38,7 +47,7 @@ function phrasePattern(phrase: string) {
   if (normalized.length < 4) return null;
   const words = normalized.split(" ").filter(Boolean);
   if (words.length === 1 && words[0].length < 5) return null;
-  return new RegExp(`(^|\\b)${words.map(escapeRegExp).join("[\\\\s,-]+")}(\\b|$)`, "i");
+  return new RegExp(`(^|\\b)${words.map(escapeRegExp).join("[\\s,-]+")}(\\b|$)`, "i");
 }
 
 function rawPhrasePattern(phrase: string) {
@@ -46,7 +55,7 @@ function rawPhrasePattern(phrase: string) {
   if (normalized.length < 4) return null;
   const words = normalized.split(" ").filter(Boolean);
   if (words.length === 1 && words[0].length < 5) return null;
-  return new RegExp(`\\b${words.map(escapeRegExp).join("[\\\\s,-]+")}\\b`, "i");
+  return new RegExp(`\\b${words.map(escapeRegExp).join("[\\s,-]+")}\\b`, "i");
 }
 
 function addMatch(matches: Map<string, IngredientMatch>, match: IngredientMatch) {
@@ -65,7 +74,22 @@ function resolveAdditiveCode(rawCode: string) {
   const exactAdditive = additiveByCode.get(exactCode);
   if (exactAdditive) return { additive: exactAdditive, normalizedCode: exactCode };
 
-  const numericOnly = exactCode.replace(/^e/, "").match(/^\d{3,4}/)?.[0];
+  const compactCode = exactCode.replace(/^e/, "");
+  const fourDigitOcrCode = compactCode.match(/^(\d{3})(\d)([a-z]{0,3})$/);
+  if (fourDigitOcrCode) {
+    const correctedSuffix = ocrDigitSuffixCorrections[fourDigitOcrCode[2]];
+    if (correctedSuffix) {
+      const correctedCode = `e${fourDigitOcrCode[1]}${correctedSuffix}${fourDigitOcrCode[3]}`;
+      const correctedAdditive = additiveByCode.get(correctedCode);
+      if (correctedAdditive) return { additive: correctedAdditive, normalizedCode: correctedCode };
+    }
+
+    const baseCode = `e${fourDigitOcrCode[1]}`;
+    const baseAdditive = additiveByCode.get(baseCode);
+    if (baseAdditive) return { additive: baseAdditive, normalizedCode: baseCode };
+  }
+
+  const numericOnly = compactCode.match(/^\d{3,4}/)?.[0];
   if (!numericOnly) return { additive: undefined, normalizedCode: exactCode };
 
   const numericCode = `e${numericOnly}`;
@@ -81,9 +105,10 @@ function resolvedCodeMatch(rawCode: string, start: number, normalizedCode: strin
   }
 
   const numericOnly = normalizedCode.replace(/^e/, "");
+  const numericPrefix = numericOnly.match(/^\d{3,4}/)?.[0] ?? numericOnly;
   const prefixPattern = rawCode.trimStart().toLowerCase().startsWith("e")
-    ? new RegExp(`^[eE]\\s*[-]?\\s*${numericOnly}`)
-    : new RegExp(`^${numericOnly}`);
+    ? new RegExp(`^[eE]\\s*[-]?\\s*${numericPrefix}`)
+    : new RegExp(`^${numericPrefix}`);
   const leadingWhitespace = rawCode.length - rawCode.trimStart().length;
   const prefixMatch = prefixPattern.exec(rawCode.trimStart());
 
@@ -95,6 +120,27 @@ function resolvedCodeMatch(rawCode: string, start: number, normalizedCode: strin
     start: start + leadingWhitespace,
     end: start + leadingWhitespace + matchedText.length
   };
+}
+
+export function cleanIngredientCodeText(input: string): { text: string; corrections: IngredientCodeCorrection[] } {
+  const corrections = new Map<string, IngredientCodeCorrection>();
+  const text = input.replace(codeCandidatePattern, (rawCode) => {
+    const { additive } = resolveAdditiveCode(rawCode);
+    if (!additive) return rawCode;
+
+    const compactRaw = rawCode.toUpperCase().replace(/[\s-]/g, "");
+    if (compactRaw !== additive.eNumber.toUpperCase()) {
+      corrections.set(`${rawCode}:${additive.eNumber}`, { from: rawCode, to: additive.eNumber });
+    }
+
+    return additive.eNumber;
+  });
+
+  return { text, corrections: Array.from(corrections.values()) };
+}
+
+export function normalizeIngredientCodeText(input: string) {
+  return cleanIngredientCodeText(input).text;
 }
 
 export function checkIngredients(input: string): IngredientCheckResult {

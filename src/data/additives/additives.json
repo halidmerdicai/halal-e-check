@@ -2410,7 +2410,11 @@
     "numericCode": "202",
     "name": "Potassium sorbate",
     "aliases": [
-      "potassium sorbate"
+      "potassium sorbate",
+      "kalijum sorbat",
+      "kalijum-sorbat",
+      "kalijev sorbat",
+      "kalijev-sorbat"
     ],
     "category": "Preservative",
     "status": "halal",
@@ -5503,7 +5507,8 @@
     "numericCode": "330",
     "name": "Citric acid",
     "aliases": [
-      "citric acid"
+      "citric acid",
+      "limunska kiselina"
     ],
     "category": "Acidity regulator",
     "status": "halal",
@@ -7397,7 +7402,9 @@
     "name": "Guar gum",
     "aliases": [
       "guar",
-      "guaran"
+      "guaran",
+      "guar gum",
+      "guar guma"
     ],
     "category": "Thickener",
     "status": "halal",
@@ -7563,7 +7570,9 @@
     "numericCode": "415",
     "name": "Xanthan gum",
     "aliases": [
-      "xanthan gum"
+      "xanthan gum",
+      "ksantan guma",
+      "xantan guma"
     ],
     "category": "Stabilizer / thickener",
     "status": "halal",
