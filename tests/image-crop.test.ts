@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getSourceCropRect } from "../src/lib/image-crop";
+import { getSourceCropRect, getSourceCropRectFromPercent } from "../src/lib/image-crop";
 
 test("maps a portrait preview crop to the original label pixels", () => {
   assert.deepEqual(
@@ -27,5 +27,19 @@ test("rejects unavailable rendered dimensions", () => {
   assert.throws(
     () => getSourceCropRect(1600, 1200, 0, 600, { x: 0, y: 0, width: 100, height: 100 }),
     /positive/
+  );
+});
+
+test("maps a percent crop directly to original image pixels", () => {
+  assert.deepEqual(
+    getSourceCropRectFromPercent(3024, 4032, { x: 5, y: 10, width: 90, height: 40 }),
+    { x: 151, y: 403, width: 2722, height: 1613 }
+  );
+});
+
+test("clamps a percent crop to the source image bounds", () => {
+  assert.deepEqual(
+    getSourceCropRectFromPercent(1600, 1200, { x: 95, y: 90, width: 20, height: 20 }),
+    { x: 1520, y: 1080, width: 80, height: 120 }
   );
 });

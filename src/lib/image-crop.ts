@@ -28,3 +28,19 @@ export function getSourceCropRect(
     height: Math.max(1, Math.min(Math.round(crop.height * scaleY), naturalHeight - y))
   };
 }
+
+export function getSourceCropRectFromPercent(naturalWidth: number, naturalHeight: number, crop: PixelCropRect) {
+  if (naturalWidth <= 0 || naturalHeight <= 0) {
+    throw new Error("Image dimensions must be positive.");
+  }
+
+  const x = Math.max(0, Math.min(Math.round((crop.x / 100) * naturalWidth), naturalWidth - 1));
+  const y = Math.max(0, Math.min(Math.round((crop.y / 100) * naturalHeight), naturalHeight - 1));
+
+  return {
+    x,
+    y,
+    width: Math.max(1, Math.min(Math.round((crop.width / 100) * naturalWidth), naturalWidth - x)),
+    height: Math.max(1, Math.min(Math.round((crop.height / 100) * naturalHeight), naturalHeight - y))
+  };
+}

@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop";
+import ReactCrop, { convertToPixelCrop, type Crop, type PixelCrop } from "react-image-crop";
 import {
   AlertTriangle,
   Camera,
@@ -28,11 +28,12 @@ import { StatusBadge } from "@/components/status-badge";
 import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { getSourceCropRect } from "@/lib/image-crop";
 
 const groups: RiskGuidance[] = ["avoid", "avoid-if-unclear", "verify", "permissible"];
 const historyKey = "halal-e-check:recent-checks";
+const ocrReportsKey = "halal-e-check:ocr-correction-reports";
 const maxHistoryItems = 10;
+const maxOcrReports = 25;
 
 const example =
   "Ingredients: wheat flour, sugar, vegetable oil, emulsifier E471, soy lecithin (E322), color E120, raising agent E500, flavour enhancer E631.";
@@ -57,11 +58,22 @@ type BrowserTesseract = {
 };
 
 type OcrReview = {
+  originalText: string;
   text: string;
   confidence: number | null;
   imageUrl: string;
   corrections: IngredientCodeCorrection[];
   suspiciousCodes: string[];
+};
+
+type OcrCorrectionReport = {
+  id: string;
+  createdAt: string;
+  originalText: string;
+  correctedText: string;
+  confidence: number | null;
+  suspiciousCodes: string[];
+  corrections: IngredientCodeCorrection[];
 };
 
 declare global {
@@ -166,16 +178,34 @@ function defaultCrop(): Crop {
   return { unit: "%", x: 5, y: 5, width: 90, height: 90 };
 }
 
-async function createCroppedImage(image: HTMLImageElement, cropArea: PixelCrop, fileName: string) {
+async function createCroppedImageFromVisibleSelection(image: HTMLImageElement, cropRoot: HTMLElement, fileName: string) {
+  const selection = cropRoot.querySelector<HTMLElement>(".ReactCrop__crop-selection");
+  if (!selection) throw new Error("No crop selection was found.");
+
+  const imageRect = image.getBoundingClientRect();
+  const selectionRect = selection.getBoundingClientRect();
+  const left = Math.max(selectionRect.left, imageRect.left);
+  const top = Math.max(selectionRect.top, imageRect.top);
+  const right = Math.min(selectionRect.right, imageRect.right);
+  const bottom = Math.min(selectionRect.bottom, imageRect.bottom);
+
+  if (right <= left || bottom <= top || imageRect.width <= 0 || imageRect.height <= 0) {
+    throw new Error("The selected crop is outside the image.");
+  }
+
+  const scaleX = image.naturalWidth / imageRect.width;
+  const scaleY = image.naturalHeight / imageRect.height;
+  const sourceX = Math.max(0, Math.round((left - imageRect.left) * scaleX));
+  const sourceY = Math.max(0, Math.round((top - imageRect.top) * scaleY));
+  const sourceWidth = Math.max(1, Math.min(Math.round((right - left) * scaleX), image.naturalWidth - sourceX));
+  const sourceHeight = Math.max(1, Math.min(Math.round((bottom - top) * scaleY), image.naturalHeight - sourceY));
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d", { willReadFrequently: true });
   if (!context) throw new Error("Image cropping is not supported in this browser.");
 
-  const source = getSourceCropRect(image.naturalWidth, image.naturalHeight, image.width, image.height, cropArea);
-
-  canvas.width = source.width;
-  canvas.height = source.height;
-  context.drawImage(image, source.x, source.y, source.width, source.height, 0, 0, source.width, source.height);
+  canvas.width = sourceWidth;
+  canvas.height = sourceHeight;
+  context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, sourceWidth, sourceHeight);
 
   const blob = await canvasToBlob(canvas);
   return new File([blob], fileName.replace(/\.[^.]+$/, "") + "-cropped.png", { type: "image/png" });
@@ -472,7 +502,23 @@ function writeHistory(items: RecentCheck[]) {
   window.localStorage.setItem(historyKey, JSON.stringify(items.slice(0, maxHistoryItems)));
 }
 
+function readOcrReports(): OcrCorrectionReport[] {
+  try {
+    const raw = window.localStorage.getItem(ocrReportsKey);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeOcrReports(items: OcrCorrectionReport[]) {
+  window.localStorage.setItem(ocrReportsKey, JSON.stringify(items.slice(0, maxOcrReports)));
+}
+
 function OcrPanel({ onText }: { onText: (text: string) => void }) {
+  const cropRootRef = useRef<HTMLDivElement | null>(null);
   const cropImageRef = useRef<HTMLImageElement | null>(null);
   const [ocrState, setOcrState] = useState<OcrState>({
     status: "idle",
@@ -482,14 +528,27 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
   const [ocrCorrections, setOcrCorrections] = useState<IngredientCodeCorrection[]>([]);
   const [ocrReview, setOcrReview] = useState<OcrReview | null>(null);
   const [pendingImage, setPendingImage] = useState<{ url: string; fileName: string } | null>(null);
+  const [cropPreview, setCropPreview] = useState<{ file: File; url: string } | null>(null);
   const [crop, setCrop] = useState<Crop>(defaultCrop());
   const [completedCrop, setCompletedCrop] = useState<PixelCrop | null>(null);
+  const [ocrReportCount, setOcrReportCount] = useState(0);
+  const [ocrReportStatus, setOcrReportStatus] = useState("");
+
+  useEffect(() => {
+    setOcrReportCount(readOcrReports().length);
+  }, []);
 
   useEffect(() => {
     return () => {
       if (pendingImage) URL.revokeObjectURL(pendingImage.url);
     };
   }, [pendingImage]);
+
+  useEffect(() => {
+    return () => {
+      if (cropPreview) URL.revokeObjectURL(cropPreview.url);
+    };
+  }, [cropPreview]);
 
   useEffect(() => {
     return () => {
@@ -500,6 +559,14 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
   function resetCropEditor() {
     setCrop(defaultCrop());
     setCompletedCrop(null);
+    setCropPreview(null);
+  }
+
+  function clearCropPreview() {
+    setCropPreview((preview) => {
+      if (preview) URL.revokeObjectURL(preview.url);
+      return null;
+    });
   }
 
   async function readImage(file: File, imageUrl: string) {
@@ -559,6 +626,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
       const cleaned = cleanIngredientCodeText(text);
       setOcrCorrections(cleaned.corrections);
       setOcrReview({
+        originalText: cleaned.text || text,
         text: cleaned.text || text,
         confidence: selectedResult.confidence,
         imageUrl,
@@ -592,32 +660,54 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
 
     resetCropEditor();
     setOcrCorrections([]);
+    setOcrReportStatus("");
     setOcrReview(null);
+    clearCropPreview();
     setPendingImage({ url: URL.createObjectURL(file), fileName: file.name || "ingredients.jpg" });
     setOcrState({ status: "idle", message: "Image ready for cropping.", progress: 0 });
   }
 
-  async function scanCroppedImage() {
-    if (!pendingImage || !completedCrop || !cropImageRef.current) {
+  async function createSelectedCropFile() {
+    if (!pendingImage || !completedCrop || !cropImageRef.current || !cropRootRef.current) {
       setOcrState({ status: "error", message: "The crop area is not ready yet.", progress: 0 });
-      return;
+      return null;
     }
 
-    let reviewImageUrl: string | null = null;
     try {
-      setOcrState({ status: "reading", message: "Preparing cropped image...", progress: 3 });
-      const croppedFile = await createCroppedImage(cropImageRef.current, completedCrop, pendingImage.fileName);
-      reviewImageUrl = URL.createObjectURL(croppedFile);
-      const succeeded = await readImage(croppedFile, reviewImageUrl);
-      if (succeeded) setPendingImage(null);
-      else URL.revokeObjectURL(reviewImageUrl);
+      return await createCroppedImageFromVisibleSelection(cropImageRef.current, cropRootRef.current, pendingImage.fileName);
     } catch {
-      if (reviewImageUrl) URL.revokeObjectURL(reviewImageUrl);
       setOcrState({
         status: "error",
         message: "The selected crop could not be processed. Reset the image and try again.",
         progress: 0
       });
+      return null;
+    }
+  }
+
+  async function previewSelectedCrop() {
+    setOcrState({ status: "reading", message: "Preparing selected crop preview...", progress: 3 });
+    const croppedFile = await createSelectedCropFile();
+    if (!croppedFile) return;
+
+    clearCropPreview();
+    setCropPreview({ file: croppedFile, url: URL.createObjectURL(croppedFile) });
+    setOcrState({ status: "idle", message: "Crop preview ready. Scan it or adjust the crop.", progress: 0 });
+  }
+
+  async function scanSelectedCrop() {
+    setOcrState({ status: "reading", message: "Preparing selected crop...", progress: 3 });
+    const croppedFile = await createSelectedCropFile();
+    if (!croppedFile) return;
+
+    const reviewImageUrl = URL.createObjectURL(croppedFile);
+    const succeeded = await readImage(croppedFile, reviewImageUrl);
+
+    if (succeeded) {
+      setPendingImage(null);
+      clearCropPreview();
+    } else {
+      URL.revokeObjectURL(reviewImageUrl);
     }
   }
 
@@ -629,6 +719,38 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
     setOcrState({ status: "success", message: "Reviewed OCR text applied to the additive check.", progress: 100 });
   }
 
+  function saveOcrCorrectionReport() {
+    if (!ocrReview) return;
+
+    const originalText = ocrReview.originalText.trim();
+    const correctedText = ocrReview.text.trim();
+
+    if (!correctedText) {
+      setOcrReportStatus("Correct the OCR text before saving the example.");
+      return;
+    }
+
+    if (originalText === correctedText) {
+      setOcrReportStatus("No change detected. Edit the OCR text first if it was wrong.");
+      return;
+    }
+
+    const report: OcrCorrectionReport = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      createdAt: new Date().toISOString(),
+      originalText,
+      correctedText,
+      confidence: ocrReview.confidence,
+      suspiciousCodes: ocrReview.suspiciousCodes,
+      corrections: ocrReview.corrections
+    };
+    const reports = [report, ...readOcrReports()].slice(0, maxOcrReports);
+
+    writeOcrReports(reports);
+    setOcrReportCount(reports.length);
+    setOcrReportStatus("OCR mistake saved privately in this browser.");
+  }
+
   async function rotatePendingImage() {
     if (!pendingImage) return;
 
@@ -636,6 +758,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
       setOcrState({ status: "reading", message: "Rotating image...", progress: 2 });
       const rotatedImage = await rotateImageUrl(pendingImage.url, pendingImage.fileName);
       resetCropEditor();
+      clearCropPreview();
       setPendingImage(rotatedImage);
       setOcrState({ status: "idle", message: "Image rotated. Resize the crop box around the ingredients.", progress: 0 });
     } catch {
@@ -647,6 +770,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
   const reviewRequired = Boolean(
     ocrReview && (ocrReview.confidence === null || ocrReview.confidence < 85 || ocrReview.corrections.length > 0)
   );
+  const reviewHasManualCorrection = Boolean(ocrReview && ocrReview.originalText.trim() !== ocrReview.text.trim());
 
   return (
     <section className="rounded-lg border bg-card p-4 sm:p-5">
@@ -727,6 +851,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
                 disabled={ocrState.status === "reading"}
                 onClick={() => {
                   setPendingImage(null);
+                  clearCropPreview();
                   resetCropEditor();
                   setOcrState({ status: "idle", message: "Upload or take a clear photo of the ingredients label.", progress: 0 });
                 }}
@@ -736,7 +861,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
             </div>
           </div>
 
-          <div className="mt-4 flex max-h-[34rem] justify-center overflow-auto rounded-md bg-black p-2 sm:p-4">
+          <div ref={cropRootRef} className="mt-4 flex max-h-[34rem] justify-center overflow-auto rounded-md bg-black p-2 sm:p-4">
             <ReactCrop
               crop={crop}
               minWidth={40}
@@ -744,8 +869,14 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
               keepSelection
               ruleOfThirds
               disabled={ocrState.status === "reading"}
-              onChange={(_, percentCrop) => setCrop(percentCrop)}
-              onComplete={(pixelCrop) => setCompletedCrop(pixelCrop)}
+              onChange={(_, percentCrop) => {
+                clearCropPreview();
+                setCrop(percentCrop);
+              }}
+              onComplete={(pixelCrop) => {
+                clearCropPreview();
+                setCompletedCrop(pixelCrop);
+              }}
               className="max-w-full"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -757,14 +888,9 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
                 onLoad={(event) => {
                   const image = event.currentTarget;
                   cropImageRef.current = image;
-                  setCrop(defaultCrop());
-                  setCompletedCrop({
-                    unit: "px",
-                    x: image.width * 0.05,
-                    y: image.height * 0.05,
-                    width: image.width * 0.9,
-                    height: image.height * 0.9
-                  });
+                  const nextCrop = defaultCrop();
+                  setCrop(nextCrop);
+                  setCompletedCrop(convertToPixelCrop(nextCrop, image.width, image.height));
                 }}
               />
             </ReactCrop>
@@ -772,16 +898,50 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
 
           <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-muted-foreground">Only the area inside the crop box will be scanned.</p>
-            <Button
-              type="button"
-              disabled={ocrState.status === "reading" || !completedCrop}
-              onClick={() => void scanCroppedImage()}
-              className="gap-2 sm:shrink-0"
-            >
-              <ScanText className="h-4 w-4" aria-hidden="true" />
-              Scan selection
-            </Button>
+            <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-2 sm:flex sm:justify-end">
+              <Button
+                type="button"
+                variant="outline"
+                disabled={ocrState.status === "reading" || !completedCrop}
+                onClick={() => void previewSelectedCrop()}
+                className="gap-2 sm:shrink-0"
+              >
+                <HelpCircle className="h-4 w-4" aria-hidden="true" />
+                Preview crop
+              </Button>
+              <Button
+                type="button"
+                disabled={ocrState.status === "reading" || !completedCrop}
+                onClick={() => void scanSelectedCrop()}
+                className="gap-2 sm:shrink-0"
+              >
+                <ScanText className="h-4 w-4" aria-hidden="true" />
+                Scan selection
+              </Button>
+            </div>
           </div>
+
+          {cropPreview ? (
+            <div className="mt-4 rounded-md border bg-background p-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-sm font-medium">Selected crop preview</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    This exact image will be scanned. Adjust the crop if the preview includes extra text.
+                  </p>
+                </div>
+                <Button type="button" variant="outline" disabled={ocrState.status === "reading"} onClick={clearCropPreview} className="sm:shrink-0">
+                  Hide preview
+                </Button>
+              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={cropPreview.url}
+                alt="Preview of the selected crop before OCR scanning"
+                className="mt-3 max-h-[20rem] w-full rounded-md border bg-black object-contain"
+              />
+            </div>
+          ) : null}
         </div>
       ) : null}
 
@@ -822,7 +982,10 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
               OCR text
               <textarea
                 value={ocrReview.text}
-                onChange={(event) => setOcrReview((review) => (review ? { ...review, text: event.target.value } : review))}
+                onChange={(event) => {
+                  setOcrReportStatus("");
+                  setOcrReview((review) => (review ? { ...review, text: event.target.value } : review));
+                }}
                 className="min-h-64 w-full resize-y rounded-md border bg-background px-3 py-2 font-mono text-sm font-normal leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 spellCheck={false}
               />
@@ -855,6 +1018,31 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
             </div>
           ) : null}
 
+          <div className="mt-3 rounded-md border bg-background p-3 text-sm">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="font-medium">Was the OCR wrong?</p>
+                <p className="mt-1 text-muted-foreground">
+                  Edit the OCR text above, then save the mistake example. Saved examples stay private in this browser.
+                </p>
+                {ocrReportCount ? (
+                  <p className="mt-2 text-xs text-muted-foreground">{ocrReportCount} OCR example{ocrReportCount === 1 ? "" : "s"} saved.</p>
+                ) : null}
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                className="gap-2 sm:shrink-0"
+                disabled={!reviewHasManualCorrection}
+                onClick={saveOcrCorrectionReport}
+              >
+                <MessageSquareText className="h-4 w-4" aria-hidden="true" />
+                Save OCR mistake
+              </Button>
+            </div>
+            {ocrReportStatus ? <p className="mt-3 text-sm font-medium text-primary">{ocrReportStatus}</p> : null}
+          </div>
+
           <div className="mt-4 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <Button
               type="button"
@@ -862,6 +1050,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
               onClick={() => {
                 setOcrReview(null);
                 setOcrCorrections([]);
+                setOcrReportStatus("");
                 setOcrState({ status: "idle", message: "Choose another photo or take a new one.", progress: 0 });
               }}
             >

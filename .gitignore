@@ -6,3 +6,8 @@ dist
 *.tsbuildinfo
 .env*
 !.env.example
+
+# Local demo captures
+demo-*.png
+halal-e-check-demo*.webm
+marketing-demo-video*/
