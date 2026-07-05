@@ -58,6 +58,7 @@ type BrowserTesseract = {
 };
 
 type OcrReview = {
+  rawText: string;
   originalText: string;
   text: string;
   confidence: number | null;
@@ -245,6 +246,35 @@ function getConfidenceLabel(confidence: number | null) {
   if (confidence < 70) return { label: "Low confidence", className: "border-red-300 bg-red-50 text-red-950" };
   if (confidence < 85) return { label: "Medium confidence", className: "border-amber-300 bg-amber-50 text-amber-950" };
   return { label: "High confidence", className: "border-emerald-300 bg-emerald-50 text-emerald-950" };
+}
+
+function buildFlexibleCodePattern(value: string) {
+  return new RegExp(value.trim().split("").map((character) => `${escapeRegExp(character)}[\\s-]*`).join("").replace(/\[\\s-\]\*$/, ""), "gi");
+}
+
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getDetectedOcrCodes(text: string) {
+  const result = checkIngredients(text);
+  const known = result.matches.map((match) => ({
+    code: match.additive.eNumber,
+    label: riskGuidanceCopy[getRiskGuidance(match.additive)].label,
+    className: "border-emerald-200 bg-emerald-50 text-emerald-950 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-100"
+  }));
+  const unknown = result.unknownCodes.map((item) => ({
+    code: item.code,
+    label: "Unknown",
+    className: "border-amber-300 bg-amber-50 text-amber-950 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100"
+  }));
+  const deduped = new Map<string, { code: string; label: string; className: string }>();
+
+  for (const item of [...known, ...unknown]) {
+    deduped.set(item.code.toUpperCase(), item);
+  }
+
+  return Array.from(deduped.values()).slice(0, 18);
 }
 
 async function preprocessOcrImage(file: File, mode: PreprocessMode) {
@@ -518,8 +548,11 @@ function writeOcrReports(items: OcrCorrectionReport[]) {
 }
 
 function OcrPanel({ onText }: { onText: (text: string) => void }) {
+  const cropSectionRef = useRef<HTMLDivElement | null>(null);
   const cropRootRef = useRef<HTMLDivElement | null>(null);
   const cropImageRef = useRef<HTMLImageElement | null>(null);
+  const reviewSectionRef = useRef<HTMLDivElement | null>(null);
+  const ocrTextRef = useRef<HTMLTextAreaElement | null>(null);
   const [ocrState, setOcrState] = useState<OcrState>({
     status: "idle",
     message: "Upload or take a clear photo of the ingredients label.",
@@ -554,6 +587,29 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
     return () => {
       if (ocrReview) URL.revokeObjectURL(ocrReview.imageUrl);
     };
+  }, [ocrReview]);
+
+  useEffect(() => {
+    if (!pendingImage) return;
+
+    const timeout = window.setTimeout(() => {
+      cropSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 80);
+
+    return () => window.clearTimeout(timeout);
+  }, [pendingImage]);
+
+  useEffect(() => {
+    if (!ocrReview) return;
+
+    const timeout = window.setTimeout(() => {
+      reviewSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (window.matchMedia("(pointer: fine)").matches) {
+        ocrTextRef.current?.focus({ preventScroll: true });
+      }
+    }, 120);
+
+    return () => window.clearTimeout(timeout);
   }, [ocrReview]);
 
   function resetCropEditor() {
@@ -626,6 +682,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
       const cleaned = cleanIngredientCodeText(text);
       setOcrCorrections(cleaned.corrections);
       setOcrReview({
+        rawText: text,
         originalText: cleaned.text || text,
         text: cleaned.text || text,
         confidence: selectedResult.confidence,
@@ -719,6 +776,27 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
     setOcrState({ status: "success", message: "Reviewed OCR text applied to the additive check.", progress: 100 });
   }
 
+  function applyOcrCorrection(correction: IngredientCodeCorrection) {
+    setOcrReportStatus("");
+    setOcrReview((review) => {
+      if (!review) return review;
+
+      const pattern = buildFlexibleCodePattern(correction.from);
+      const nextText = review.text.replace(pattern, correction.to);
+      const fallbackText = nextText === review.text ? `${review.text.trim()} ${correction.to}`.trim() : nextText;
+      const cleaned = cleanIngredientCodeText(fallbackText);
+
+      return {
+        ...review,
+        text: cleaned.text,
+        corrections: [...review.corrections, ...cleaned.corrections].filter(
+          (item, index, items) => items.findIndex((candidate) => candidate.from === item.from && candidate.to === item.to) === index
+        ),
+        suspiciousCodes: findSuspiciousOcrCodes(fallbackText, [...review.corrections, ...cleaned.corrections])
+      };
+    });
+  }
+
   function saveOcrCorrectionReport() {
     if (!ocrReview) return;
 
@@ -771,6 +849,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
     ocrReview && (ocrReview.confidence === null || ocrReview.confidence < 85 || ocrReview.corrections.length > 0)
   );
   const reviewHasManualCorrection = Boolean(ocrReview && ocrReview.originalText.trim() !== ocrReview.text.trim());
+  const detectedOcrCodes = ocrReview ? getDetectedOcrCodes(ocrReview.text) : [];
 
   return (
     <section className="rounded-lg border bg-card p-4 sm:p-5">
@@ -812,7 +891,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
       </div>
 
       {pendingImage ? (
-        <div className="mt-4 border-t pt-4">
+        <div ref={cropSectionRef} className="scroll-mt-4 mt-4 border-t pt-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="min-w-0">
               <h3 className="font-semibold">Manually crop ingredients</h3>
@@ -946,7 +1025,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
       ) : null}
 
       {ocrReview && confidenceDisplay ? (
-        <div className="mt-4 border-t pt-4">
+        <div ref={reviewSectionRef} className="scroll-mt-4 mt-4 border-t pt-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-2">
@@ -981,6 +1060,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
             <label className="grid content-start gap-2 text-sm font-medium">
               OCR text
               <textarea
+                ref={ocrTextRef}
                 value={ocrReview.text}
                 onChange={(event) => {
                   setOcrReportStatus("");
@@ -991,6 +1071,20 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
               />
             </label>
           </div>
+
+          {detectedOcrCodes.length ? (
+            <div className="mt-4 rounded-md border bg-background p-3 text-sm">
+              <p className="font-medium">Detected E-numbers in reviewed text</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {detectedOcrCodes.map((item) => (
+                  <span key={`${item.code}-${item.label}`} className={cn("rounded-full border px-2 py-1 font-mono text-xs font-semibold", item.className)}>
+                    {item.code}
+                    <span className="ml-1 font-sans font-medium">{item.label}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           {ocrReview.suspiciousCodes.length ? (
             <div className="mt-4 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100">
@@ -1007,12 +1101,22 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
 
           {ocrReview.corrections.length ? (
             <div className="mt-3 rounded-md border border-sky-200 bg-sky-50 p-3 text-sm text-sky-950 dark:border-sky-800 dark:bg-sky-950 dark:text-sky-100">
-              <p className="font-medium">Automatic OCR corrections</p>
+              <p className="font-medium">Quick OCR corrections</p>
+              <p className="mt-1 text-xs opacity-80">Use these if the OCR text still shows the wrong version.</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {ocrReview.corrections.slice(0, 6).map((correction) => (
-                  <span key={`${correction.from}-${correction.to}`} className="rounded-full border bg-background/70 px-2 py-1 text-xs font-semibold">
-                    {correction.from} to {correction.to}
-                  </span>
+                  <Button
+                    key={`${correction.from}-${correction.to}`}
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => applyOcrCorrection(correction)}
+                    className="h-auto gap-1 rounded-full bg-background/70 px-2 py-1 font-mono text-xs"
+                  >
+                    {correction.from}
+                    <span className="font-sans">to</span>
+                    {correction.to}
+                  </Button>
                 ))}
               </div>
             </div>
@@ -1113,7 +1217,18 @@ function RecentChecks({
   onDelete: (id: string) => void;
   onClear: () => void;
 }) {
+  const [copyStatus, setCopyStatus] = useState("");
+
   if (!items.length) return null;
+
+  async function copyRecentCheck(item: RecentCheck) {
+    try {
+      await navigator.clipboard.writeText(item.input);
+      setCopyStatus("Ingredient text copied from recent checks.");
+    } catch {
+      setCopyStatus("Copy failed. Reopen the check and copy the text manually.");
+    }
+  }
 
   return (
     <section className="rounded-lg border bg-card p-4 sm:p-5">
@@ -1130,6 +1245,7 @@ function RecentChecks({
           Clear all
         </Button>
       </div>
+      {copyStatus ? <p className="mt-3 text-sm font-medium text-primary">{copyStatus}</p> : null}
 
       <div className="mt-4 grid gap-3">
         {items.map((item) => (
@@ -1148,9 +1264,12 @@ function RecentChecks({
                   {item.counts["avoid-if-unclear"]} · Verify {item.counts.verify}
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+              <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
                 <Button type="button" size="sm" onClick={() => onLoad(item.input)}>
                   Reopen
+                </Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => void copyRecentCheck(item)}>
+                  Copy
                 </Button>
                 <Button type="button" variant="outline" size="sm" onClick={() => onDelete(item.id)}>
                   Delete
@@ -1191,6 +1310,69 @@ function SummaryPanel({ counts, unknownCount }: { counts: GuidanceCounts; unknow
         </div>
       </div>
     </div>
+  );
+}
+
+function ResultNextSteps({ counts, unknownCount }: { counts: GuidanceCounts; unknownCount: number }) {
+  const steps: Array<{ label: string; detail: string; active: boolean; className: string }> = [
+    {
+      label: "Avoid this product for now",
+      detail: "A strict avoid additive was detected. Use a halal-certified alternative unless a trusted authority accepts this exact product.",
+      active: counts.avoid > 0,
+      className: highlightStyles.avoid
+    },
+    {
+      label: "Verify source before buying",
+      detail: "Ask whether source-sensitive additives are plant, synthetic, vegan, halal-certified, or manufacturer-confirmed.",
+      active: counts["avoid-if-unclear"] > 0 || counts.verify > 0,
+      className: counts["avoid-if-unclear"] > 0 ? highlightStyles["avoid-if-unclear"] : highlightStyles.verify
+    },
+    {
+      label: "Check unknown codes",
+      detail: "Unknown codes are not in the current dataset yet. Treat them as unresolved until checked.",
+      active: unknownCount > 0,
+      className: highlightStyles.unknown
+    },
+    {
+      label: "No major additive concern found",
+      detail: "Detected additives are generally lower concern, but the full product and certification still matter.",
+      active: counts.avoid === 0 && counts["avoid-if-unclear"] === 0 && counts.verify === 0 && unknownCount === 0,
+      className: highlightStyles.permissible
+    }
+  ];
+
+  return (
+    <section className="rounded-lg border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h3 className="font-semibold">What to do now</h3>
+          <p className="mt-1 text-sm text-muted-foreground">Follow the active items first. They are based on the detected additives.</p>
+        </div>
+      </div>
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        {steps.map((step) => (
+          <div
+            key={step.label}
+            className={cn(
+              "rounded-md border p-3",
+              step.active ? step.className : "border-muted bg-muted/40 text-muted-foreground"
+            )}
+          >
+            <div className="flex items-start gap-2">
+              {step.active ? (
+                <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none" aria-hidden="true" />
+              ) : (
+                <span className="mt-1 h-3 w-3 flex-none rounded-full border" aria-hidden="true" />
+              )}
+              <div>
+                <p className="text-sm font-semibold">{step.label}</p>
+                <p className="mt-1 text-xs leading-5">{step.detail}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -1249,6 +1431,50 @@ function MatchCard({ additive, matchedBy, matchedText }: IngredientMatchItem) {
         </div>
       </div>
     </article>
+  );
+}
+
+function UnknownCodesPanel({ input, codes }: { input: string; codes: ReturnType<typeof checkIngredients>["unknownCodes"] }) {
+  if (!codes.length) return null;
+
+  return (
+    <section className="rounded-lg border bg-card p-4 sm:p-5">
+      <div>
+        <h3 className="font-semibold">Unknown E-numbers</h3>
+        <p className="mt-1 text-sm leading-6 text-muted-foreground">
+          These codes were found but are not in the current dataset yet. Treat them as unresolved until they are checked.
+        </p>
+      </div>
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        {codes.map((code) => {
+          const context = input.slice(Math.max(0, code.start - 80), Math.min(input.length, code.end + 80));
+
+          return (
+            <article key={code.code} className="rounded-md border bg-background p-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="font-mono text-base font-bold">{code.code}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">Matched text: {code.matchedText}</p>
+                </div>
+                <Link
+                  href={`/request?code=${encodeURIComponent(code.code)}&context=${encodeURIComponent(context)}`}
+                  className="inline-flex min-h-9 items-center justify-center rounded-md border px-3 py-2 text-sm font-semibold hover:bg-accent"
+                >
+                  Request review
+                </Link>
+              </div>
+              <div className="mt-3 rounded-md border bg-card p-3 text-sm leading-6">
+                <p className="font-medium">Next action</p>
+                <p className="mt-1 text-muted-foreground">
+                  Search the package, manufacturer website, or halal certificate for this code. If you cannot verify it, keep the product in the
+                  verify category.
+                </p>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -1327,6 +1553,8 @@ function HighlightedLabel({ input, result }: { input: string; result: ReturnType
 export function IngredientChecker() {
   const [input, setInput] = useState("");
   const [recentChecks, setRecentChecks] = useState<RecentCheck[]>([]);
+  const inputSectionRef = useRef<HTMLElement | null>(null);
+  const inputTextareaRef = useRef<HTMLTextAreaElement | null>(null);
   const result = useMemo(() => checkIngredients(input), [input]);
 
   const grouped = useMemo(
@@ -1393,15 +1621,26 @@ export function IngredientChecker() {
     setRecentChecks([]);
   }
 
+  function loadRecentCheck(nextInput: string) {
+    setInput(nextInput);
+    window.setTimeout(() => {
+      inputSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (window.matchMedia("(pointer: fine)").matches) {
+        inputTextareaRef.current?.focus({ preventScroll: true });
+      }
+    }, 50);
+  }
+
   return (
     <div className="grid gap-5 sm:gap-6">
       <OcrPanel onText={(text) => setInput(text)} />
 
-      <section className="rounded-lg border bg-card p-4 sm:p-5">
+      <section ref={inputSectionRef} className="scroll-mt-4 rounded-lg border bg-card p-4 sm:p-5">
         <label htmlFor="ingredients" className="text-sm font-semibold">
           Ingredients label
         </label>
         <textarea
+          ref={inputTextareaRef}
           id="ingredients"
           value={input}
           onChange={(event) => setInput(event.target.value)}
@@ -1435,6 +1674,7 @@ export function IngredientChecker() {
           {hasResults ? (
             <div className="grid gap-4 sm:gap-5">
               <SummaryPanel counts={counts} unknownCount={result.unknownCodes.length} />
+              <ResultNextSteps counts={counts} unknownCount={result.unknownCodes.length} />
               <ResultActions counts={counts} input={input} result={result} />
               <HighlightedLabel input={input} result={result} />
 
@@ -1454,25 +1694,7 @@ export function IngredientChecker() {
                 ) : null
               )}
 
-              {result.unknownCodes.length ? (
-                <div className="rounded-lg border bg-card p-4 sm:p-5">
-                  <h3 className="font-semibold">Unknown E-numbers</h3>
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                    These codes were found but are not in the current dataset yet.
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {result.unknownCodes.map((code) => (
-                      <Link
-                        key={code.code}
-                        href={`/request?code=${encodeURIComponent(code.code)}&context=${encodeURIComponent(input.slice(Math.max(0, code.start - 80), Math.min(input.length, code.end + 80)))}`}
-                        className="rounded-full border bg-background px-3 py-1 text-sm font-semibold hover:bg-accent"
-                      >
-                        Request {code.code}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : null}
+              <UnknownCodesPanel input={input} codes={result.unknownCodes} />
             </div>
           ) : (
             <div className="rounded-lg border bg-card p-6 text-sm leading-6 text-muted-foreground">
@@ -1491,7 +1713,7 @@ export function IngredientChecker() {
 
       <RecentChecks
         items={recentChecks}
-        onLoad={setInput}
+        onLoad={loadRecentCheck}
         onDelete={deleteRecentCheck}
         onClear={clearRecentChecks}
       />

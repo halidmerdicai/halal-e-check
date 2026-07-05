@@ -296,7 +296,15 @@
       "karmin",
       "karminska kiselina",
       "kosinela",
-      "crvena boja 4"
+      "crvena boja 4",
+      "cochineal extract",
+      "cochineal red",
+      "carmine color",
+      "carmine colour",
+      "boja karmin",
+      "prirodna crvena boja",
+      "kosjenil",
+      "kosenil"
     ],
     "category": "Color",
     "status": "haram",
@@ -312,11 +320,11 @@
       "Listed as carmine, cochineal, or carminic acid without trusted halal certification"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Ingredient names such as carmine or cochineal",
-      "Manufacturer source statement"
+      "Ingredient names such as carmine, cochineal extract, cochineal, carminic acid, Natural Red 4, karmin, or kosenil",
+      "Whether the product is halal-certified by a certifier that explicitly accepts this color",
+      "Whether the color is declared as insect-derived or hidden under natural color wording"
     ],
-    "saferAction": "Avoid unless the product has reliable halal certification that specifically covers this color.",
+    "saferAction": "Avoid products listing E120, carmine, cochineal extract, or carminic acid unless a trusted halal authority explicitly accepts that exact certified product.",
     "commonFoods": [
       "Yogurt",
       "Candy",
@@ -329,14 +337,14 @@
       "A vegan label usually excludes carmine because it is insect-derived.",
       "Only rely on it if a trusted halal certifier explicitly accepts the source and process."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e322",
       "e471"
     ],
     "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-confidence avoid entry because carmine/cochineal is insect-derived and commonly avoided by halal consumers.",
+    "reviewNotes": "Reviewed as a high-confidence avoid record. E120/carmine/cochineal is insect-derived and should be easy for users to recognize under English and Balkan label names.",
     "sources": [
       {
         "type": "identity",
@@ -3709,14 +3717,20 @@
     "numericCode": "250",
     "name": "Sodium nitrite",
     "aliases": [
-      "sodium nitrite"
+      "sodium nitrite",
+      "natrijev nitrit",
+      "natrijum nitrit",
+      "nitritna so",
+      "konzervans nitrit",
+      "curing salt",
+      "cure salt"
     ],
     "category": "Preservative",
     "status": "halal",
     "summary": "Sodium nitrite is generally considered halal as an additive when the finished product has no other halal concerns.",
     "sourceSensitivity": "low",
     "usuallyDerivedFrom": [
-      "Mineral, plant, microbial, or synthetic production depending on the additive"
+      "Mineral or synthetic nitrite salt"
     ],
     "halalWhen": [
       "Used in its usual non-haram source form",
@@ -3728,11 +3742,11 @@
       "It is part of a flavor, color, or processing system with a doubtful carrier"
     ],
     "whatToCheck": [
-      "Full ingredient list",
-      "Halal certification for complex foods",
-      "Other doubtful ingredients in the finished product"
+      "Whether the finished product is meat, poultry, or processed meat and whether that meat is halal-certified",
+      "Whether the label includes pork, non-halal meat, animal broth, wine/alcohol flavoring, or doubtful smoke/flavor carriers",
+      "Halal certification for sausages, deli meats, pizza toppings, and cured products"
     ],
-    "saferAction": "Usually acceptable as an additive; check the rest of the product ingredients.",
+    "saferAction": "E250 itself is generally low source concern, but in meat products the halal status depends mainly on the meat source and finished-product certification.",
     "commonFoods": [
       "Sauces",
       "Drinks",
@@ -3743,17 +3757,19 @@
     "notes": [
       "This is a general low source sensitivity entry. Product-level halal status can still depend on formulation and certification."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "General guidance still depends on the finished product, processing aids, and certification.",
+    "reviewNotes": "Reviewed as a low source-risk preservative that often appears in high-risk meat contexts. Guidance now emphasizes finished-product meat verification.",
     "sources": [
       {
+        "type": "identity",
         "label": "UK Food Standards Agency additive list",
         "url": "https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers",
         "note": "Used to cross-check additive identity and E-number naming, not halal status."
       },
       {
+        "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
       }
@@ -3765,14 +3781,18 @@
     "numericCode": "251",
     "name": "Sodium nitrate",
     "aliases": [
-      "sodium nitrate"
+      "sodium nitrate",
+      "natrijev nitrat",
+      "natrijum nitrat",
+      "konzervans nitrat",
+      "nitrate curing salt"
     ],
     "category": "Preservative",
     "status": "halal",
     "summary": "Sodium nitrate is generally considered halal as an additive when the finished product has no other halal concerns.",
     "sourceSensitivity": "low",
     "usuallyDerivedFrom": [
-      "Mineral, plant, microbial, or synthetic production depending on the additive"
+      "Mineral, plant, or synthetic nitrate salt"
     ],
     "halalWhen": [
       "Used in its usual non-haram source form",
@@ -3784,11 +3804,11 @@
       "It is part of a flavor, color, or processing system with a doubtful carrier"
     ],
     "whatToCheck": [
-      "Full ingredient list",
-      "Halal certification for complex foods",
-      "Other doubtful ingredients in the finished product"
+      "Whether the finished product is meat, poultry, or processed meat and whether that meat is halal-certified",
+      "Whether the label includes pork, non-halal meat, animal broth, wine/alcohol flavoring, or doubtful smoke/flavor carriers",
+      "Halal certification for cured meat products and seasoning blends"
     ],
-    "saferAction": "Usually acceptable as an additive; check the rest of the product ingredients.",
+    "saferAction": "E251 itself is generally low source concern, but verify the meat source and finished-product certification in cured or processed meat products.",
     "commonFoods": [
       "Sauces",
       "Drinks",
@@ -3799,17 +3819,19 @@
     "notes": [
       "This is a general low source sensitivity entry. Product-level halal status can still depend on formulation and certification."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "General guidance still depends on the finished product, processing aids, and certification.",
+    "reviewNotes": "Reviewed as a low source-risk nitrate preservative. The practical halal concern is usually the meat/product context rather than the additive source.",
     "sources": [
       {
+        "type": "identity",
         "label": "UK Food Standards Agency additive list",
         "url": "https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers",
         "note": "Used to cross-check additive identity and E-number naming, not halal status."
       },
       {
+        "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
       }
@@ -3821,14 +3843,20 @@
     "numericCode": "252",
     "name": "Potassium nitrate",
     "aliases": [
-      "potassium nitrate"
+      "potassium nitrate",
+      "kalijev nitrat",
+      "kalijum nitrat",
+      "salitra",
+      "saltpeter",
+      "saltpetre",
+      "konzervans kalijev nitrat"
     ],
     "category": "Preservative",
     "status": "halal",
     "summary": "Potassium nitrate is generally considered halal as an additive when the finished product has no other halal concerns.",
     "sourceSensitivity": "low",
     "usuallyDerivedFrom": [
-      "Mineral, plant, microbial, or synthetic production depending on the additive"
+      "Mineral, plant, or synthetic nitrate salt"
     ],
     "halalWhen": [
       "Used in its usual non-haram source form",
@@ -3840,11 +3868,11 @@
       "It is part of a flavor, color, or processing system with a doubtful carrier"
     ],
     "whatToCheck": [
-      "Full ingredient list",
-      "Halal certification for complex foods",
-      "Other doubtful ingredients in the finished product"
+      "Whether the finished product is meat, poultry, or processed meat and whether that meat is halal-certified",
+      "Whether the label includes pork, non-halal meat, animal broth, wine/alcohol flavoring, or doubtful smoke/flavor carriers",
+      "Halal certification for cured meat products and traditional preserved foods"
     ],
-    "saferAction": "Usually acceptable as an additive; check the rest of the product ingredients.",
+    "saferAction": "E252 itself is generally low source concern, but verify meat source, alcohol/flavor carriers, and finished-product certification.",
     "commonFoods": [
       "Sauces",
       "Drinks",
@@ -3855,17 +3883,19 @@
     "notes": [
       "This is a general low source sensitivity entry. Product-level halal status can still depend on formulation and certification."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "General guidance still depends on the finished product, processing aids, and certification.",
+    "reviewNotes": "Reviewed as a low source-risk nitrate preservative. Added common saltpeter/salitra label aliases and meat-context guidance.",
     "sources": [
       {
+        "type": "identity",
         "label": "UK Food Standards Agency additive list",
         "url": "https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers",
         "note": "Used to cross-check additive identity and E-number naming, not halal status."
       },
       {
+        "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
       }
@@ -4810,7 +4840,12 @@
     "name": "Fatty acid esters of ascorbic acid",
     "aliases": [
       "ascorbyl palmitate",
-      "ascorbyl stearate"
+      "ascorbyl stearate",
+      "askorbil palmitat",
+      "askorbil stearat",
+      "esteri askorbinske kiseline",
+      "vitamin c ester",
+      "fatty acid esters of vitamin c"
     ],
     "category": "Antioxidant",
     "status": "mashbooh",
@@ -5444,7 +5479,12 @@
       "lecitin",
       "sojin lecitin",
       "suncokretov lecitin",
-      "jajni lecitin"
+      "jajni lecitin",
+      "lecithins",
+      "soya lecithin",
+      "rapeseed lecithin",
+      "repicin lecitin",
+      "emulgator lecitin"
     ],
     "category": "Emulsifier",
     "status": "halal",
@@ -5466,11 +5506,11 @@
       "Source is unclear and the product is doubtful"
     ],
     "whatToCheck": [
-      "Plant source on label",
-      "Halal or vegan mark",
-      "Manufacturer confirmation for processing aids"
+      "Whether lecithin source is soy, sunflower, rapeseed, egg, or another source",
+      "Halal/vegan suitability if the source is not printed on the label",
+      "Whether the finished product contains alcohol flavor carriers, non-halal dairy/meat ingredients, or other doubtful additives"
     ],
-    "saferAction": "Generally acceptable when plant-based; verify if the source is not shown.",
+    "saferAction": "Generally acceptable when plant-based; verify source when only E322 or lecithins is listed without soy/sunflower/plant wording.",
     "commonFoods": [
       "Chocolate",
       "Bakery products",
@@ -5480,7 +5520,7 @@
     "notes": [
       "Vegan labeling helps identify plant-based lecithin but does not replace halal certification."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e471",
       "e472a",
@@ -5488,14 +5528,16 @@
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "General guidance still depends on the finished product, processing aids, and certification.",
+    "reviewNotes": "Reviewed as common medium-sensitivity lecithin record. Added common Balkan/label aliases and clearer source wording for soy, sunflower, rapeseed, and egg.",
     "sources": [
       {
+        "type": "identity",
         "label": "UK Food Standards Agency additive list",
         "url": "https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers",
         "note": "Used to cross-check additive identity and E-number naming, not halal status."
       },
       {
+        "type": "editorial",
         "label": "Halal E-Check source-risk review",
         "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
       }
@@ -7907,7 +7949,12 @@
       "glycerine",
       "glicerol",
       "glicerin",
-      "biljni glicerin"
+      "biljni glicerin",
+      "glycerol",
+      "vegetable glycerin",
+      "vegetable glycerine",
+      "biljni glicerol",
+      "humektant glicerol"
     ],
     "category": "Humectant / carrier",
     "status": "mashbooh",
@@ -7930,12 +7977,12 @@
       "Used with haram alcohol carriers in the finished product"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement",
-      "Vegan or plant-based label where relevant",
-      "Whether alcohol-based carriers or processing aids are used"
+      "Whether glycerol/glycerin is vegetable, synthetic, halal-certified animal, or non-halal animal/pork derived",
+      "Halal certificate or supplier statement for the additive and finished product",
+      "Vegan or plant-based claim where relevant",
+      "Whether glycerol is part of a flavor, color, coating, or carrier system with alcohol or animal-derived inputs"
     ],
-    "saferAction": "Verify glycerol source or choose halal-certified/vegan products.",
+    "saferAction": "Treat as source-dependent unless vegetable, synthetic, vegan, halal-certified, or manufacturer-confirmed as suitable.",
     "commonFoods": [
       "Slush drinks",
       "Icings",
@@ -7947,10 +7994,10 @@
       "Vegetable glycerin is generally acceptable, but the finished product still matters.",
       "Glycerol can also be used as a carrier or humectant, so check flavor systems and coatings."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority source-dependent record: glycerol source can be vegetable, synthetic, or animal.",
+    "reviewNotes": "Reviewed as a high-priority glycerol/glycerin record. Guidance now distinguishes vegetable/synthetic sources from animal/pork-derived supply chains and carrier-system use.",
     "sources": [
       {
         "type": "identity",
@@ -8627,7 +8674,14 @@
       "govedji zelatin",
       "svinjski zelatin",
       "ribiji zelatin",
-      "kolagen"
+      "kolagen",
+      "gelatin",
+      "hydrolysed gelatin",
+      "beef gelatin",
+      "bovine gelatin",
+      "fish gelatin",
+      "pork gelatin",
+      "govedi zelatin"
     ],
     "category": "Gelling agent",
     "status": "mashbooh",
@@ -8649,13 +8703,12 @@
       "Animal source is hidden or unclear"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Animal species",
-      "Slaughter status",
-      "Manufacturer confirmation",
-      "Vegetarian alternatives such as agar or pectin"
+      "Animal species: pork, beef/bovine, fish, or other source",
+      "If beef or other halal animal, whether slaughter and processing are halal-certified",
+      "Halal certificate covering gelatin and finished product",
+      "Whether plant alternatives such as agar, pectin, carrageenan, or starch are used instead"
     ],
-    "saferAction": "Avoid if the source is not disclosed; choose halal-certified gelatin or plant-based alternatives.",
+    "saferAction": "Avoid gelatin when species, slaughter status, or halal certification is unclear; use halal-certified gelatin or plant/fish alternatives accepted by your standard.",
     "commonFoods": [
       "Gummy candy",
       "Marshmallows",
@@ -8666,14 +8719,14 @@
     "notes": [
       "Do not assume gelatin is halal. Pork gelatin is haram."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e406",
       "e120"
     ],
     "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority animal-derived record: gelatin should never be assumed halal without source evidence.",
+    "reviewNotes": "Reviewed as a high-priority animal-derived record. Guidance now highlights species, slaughter, processing, and plant alternative checks.",
     "sources": [
       {
         "type": "identity",
@@ -8849,7 +8902,12 @@
     "aliases": [
       "glycerol ester of rosin",
       "ester gum",
-      "wood rosin ester"
+      "wood rosin ester",
+      "glycerol esters of wood rosin",
+      "esteri glicerola drvne smole",
+      "ester guma",
+      "drvna smola ester",
+      "rosin glycerol ester"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -9904,7 +9962,14 @@
       "mono i digliceridi",
       "mono i digliceridi masnih kiselina",
       "monogliceridi",
-      "digliceridi"
+      "digliceridi",
+      "mono glycerides",
+      "diglycerides",
+      "mono- and diglycerides",
+      "mono and diglycerides of fatty acids",
+      "mono- i digliceridi",
+      "mono- i digliceridi masnih kiselina",
+      "emulgator mono i digliceridi"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -9926,12 +9991,12 @@
       "Animal source is undisclosed and no halal certification is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement",
-      "Vegan or plant-based label where relevant",
-      "Whether alcohol-based carriers or processing aids are used"
+      "Whether the mono-/diglycerides or fatty acids are plant, synthetic, halal-certified animal, or non-halal animal/pork derived",
+      "Halal certificate that covers the additive and finished product",
+      "Vegan or plant-based claim where relevant",
+      "Whether glycerol, stearates, fatty acids, carriers, or processing aids are animal-derived"
     ],
-    "saferAction": "Verify with the manufacturer or choose halal-certified or vegan-labeled products.",
+    "saferAction": "Treat as avoid-if-unclear: use halal-certified, vegan, or manufacturer-confirmed plant/synthetic sources; otherwise choose another product.",
     "commonFoods": [
       "Bread",
       "Cakes",
@@ -9944,7 +10009,7 @@
       "A vegan label is useful source evidence, but halal certification is stronger for the full product.",
       "Ask specifically about the fatty acid or glycerol source when contacting a manufacturer."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e472a",
       "e472b",
@@ -9953,7 +10018,7 @@
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority source-dependent record: halal status depends on the fatty acid, glycerol, or stearate source.",
+    "reviewNotes": "Reviewed as a high-priority emulsifier record. Guidance emphasizes fatty-acid/glycerol source, not the E-number alone.",
     "sources": [
       {
         "type": "identity",
@@ -10317,7 +10382,14 @@
       "datem",
       "diacetyl tartaric acid esters",
       "datem emulsifier",
-      "mono i diacetil vinska kiselina esteri mono i diglicerida"
+      "mono i diacetil vinska kiselina esteri mono i diglicerida",
+      "DATEM",
+      "diacetyl tartaric acid esters of mono and diglycerides",
+      "diacetyl tartaric acid ester",
+      "esteri mono i diglicerida",
+      "esteri mono- i diglicerida",
+      "diacetil vinska kiselina",
+      "emulgator datem"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10339,12 +10411,12 @@
       "Animal source is undisclosed and no halal certification is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement",
-      "Vegan or plant-based label where relevant",
-      "Whether alcohol-based carriers or processing aids are used"
+      "Whether the mono-/diglyceride base is plant, synthetic, halal-certified animal, or non-halal animal/pork derived",
+      "Halal certificate covering bread improvers, emulsifier blends, and finished bakery product",
+      "Vegan or plant-based claim where relevant",
+      "Whether carriers or processing aids in the emulsifier blend are alcohol- or animal-derived"
     ],
-    "saferAction": "Prefer halal-certified bread products or ask the manufacturer.",
+    "saferAction": "Prefer halal-certified or vegan bakery products; if E472e/DATEM source is not stated, verify with the manufacturer before relying on it.",
     "commonFoods": [
       "Bread",
       "Buns",
@@ -10356,7 +10428,7 @@
       "A vegan label is useful source evidence, but halal certification is stronger for the full product.",
       "Ask specifically about the fatty acid or glycerol source when contacting a manufacturer."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e471",
       "e472a",
@@ -10364,7 +10436,7 @@
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority source-dependent record: halal status depends on the fatty acid, glycerol, or stearate source.",
+    "reviewNotes": "Reviewed as a DATEM/emulsifier record connected to mono- and diglyceride source risk. Added bakery-focused wording and label aliases.",
     "sources": [
       {
         "type": "identity",
@@ -10643,7 +10715,13 @@
       "polyglycerol esters",
       "pge",
       "polyglycerol fatty acid esters",
-      "poliglicerol esteri masnih kiselina"
+      "poliglicerol esteri masnih kiselina",
+      "polyglycerol fatty acid ester",
+      "polyglycerol esters of fatty acids",
+      "pge emulsifier",
+      "poliglicerolni esteri",
+      "poliglicerol esteri",
+      "esteri poliglicerola masnih kiselina"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10665,12 +10743,12 @@
       "Animal source is undisclosed and no halal certification is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement",
-      "Vegan or plant-based label where relevant",
-      "Whether alcohol-based carriers or processing aids are used"
+      "Whether glycerol and fatty acids are plant, synthetic, halal-certified animal, or non-halal animal/pork derived",
+      "Halal certificate covering the emulsifier blend",
+      "Vegan or plant-based claim where relevant",
+      "Whether the finished product contains other source-sensitive emulsifiers"
     ],
-    "saferAction": "Treat as source-dependent; verify the source or choose halal-certified products.",
+    "saferAction": "Treat as source-dependent; use halal-certified, vegan, or manufacturer-confirmed plant/synthetic sources when possible.",
     "commonFoods": [
       "Cakes",
       "Margarine",
@@ -10683,7 +10761,7 @@
       "A vegan label is useful source evidence, but halal certification is stronger for the full product.",
       "Ask specifically about the fatty acid or glycerol source when contacting a manufacturer."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e471",
       "e476",
@@ -10691,7 +10769,7 @@
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority source-dependent record: halal status depends on the fatty acid, glycerol, or stearate source.",
+    "reviewNotes": "Reviewed as a source-dependent polyglycerol/fatty-acid emulsifier. Added more direct source questions and Balkan search aliases.",
     "sources": [
       {
         "type": "identity",
@@ -10726,7 +10804,11 @@
       "pgpr",
       "polyglycerol esters",
       "polyricinoleate",
-      "poliglicerol poliricinoleat"
+      "poliglicerol poliricinoleat",
+      "PGPR",
+      "polyglycerol polyricinoleate",
+      "polyglycerol polyricinoleate emulsifier",
+      "poliglicerol poliricinoleat emulgator"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -10748,12 +10830,12 @@
       "Animal source is undisclosed and no halal certification is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement",
-      "Vegan or plant-based label where relevant",
-      "Whether alcohol-based carriers or processing aids are used"
+      "Whether the PGPR is castor oil/plant derived and whether glycerol inputs are plant, synthetic, or animal-derived",
+      "Halal certificate or supplier statement for chocolate/confectionery emulsifier blend",
+      "Vegan or plant-based claim where relevant",
+      "Whether other emulsifiers in the same product are source-sensitive"
     ],
-    "saferAction": "Usually lower concern than E471 when castor-based, but verify if doubtful.",
+    "saferAction": "Often lower concern when castor/plant-based, but still verify glycerol/source details if the product is not halal-certified or vegan-labeled.",
     "commonFoods": [
       "Chocolate",
       "Compound chocolate",
@@ -10765,7 +10847,7 @@
       "A vegan label is useful source evidence, but halal certification is stronger for the full product.",
       "Ask specifically about the fatty acid or glycerol source when contacting a manufacturer."
     ],
-    "lastReviewed": "2026-06-01",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e322",
       "e471",
@@ -10773,7 +10855,7 @@
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority source-dependent record: halal status depends on the fatty acid, glycerol, or stearate source.",
+    "reviewNotes": "Reviewed as a PGPR record: usually castor oil based, but glycerol/source details and finished-product certification can still matter.",
     "sources": [
       {
         "type": "identity",
@@ -11218,7 +11300,10 @@
       "span 60",
       "sorbitan stearate",
       "sorbitan monostearate",
-      "sorbitan monostearat"
+      "sorbitan monostearat",
+      "sorbitanski monostearat",
+      "emulgator span 60",
+      "sorbitan ester stearinske kiseline"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11301,7 +11386,10 @@
     "aliases": [
       "span 65",
       "sorbitan tristearate",
-      "sorbitan tristearat"
+      "sorbitan tristearat",
+      "sorbitanski tristearat",
+      "emulgator span 65",
+      "sorbitan ester stearinske kiseline"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11385,7 +11473,10 @@
       "span 20",
       "sorbitan laurate",
       "sorbitan monolaurate",
-      "sorbitan monolaurat"
+      "sorbitan monolaurat",
+      "sorbitanski monolaurat",
+      "emulgator span 20",
+      "sorbitan ester laurinske kiseline"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11469,7 +11560,10 @@
       "span 80",
       "sorbitan oleate",
       "sorbitan monooleate",
-      "sorbitan monooleat"
+      "sorbitan monooleat",
+      "sorbitanski monooleat",
+      "emulgator span 80",
+      "sorbitan ester oleinske kiseline"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -11553,7 +11647,10 @@
       "span 40",
       "sorbitan palmitate",
       "sorbitan monopalmitate",
-      "sorbitan monopalmitat"
+      "sorbitan monopalmitat",
+      "sorbitanski monopalmitat",
+      "emulgator span 40",
+      "sorbitan ester palmitinske kiseline"
     ],
     "category": "Emulsifier",
     "status": "mashbooh",
@@ -13239,7 +13336,9 @@
       "calcium phosphate from bone",
       "kostani fosfat",
       "kostani pepeo",
-      "fosfat iz kostiju"
+      "fosfat iz kostiju",
+      "bone phosphate",
+      "fosfat kostiju"
     ],
     "category": "Anti-caking agent",
     "status": "mashbooh",
@@ -13261,12 +13360,12 @@
       "Animal source is undisclosed"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Animal species",
-      "Slaughter status",
-      "Manufacturer source statement"
+      "Animal species used for the bone source",
+      "Whether the animal was halal-slaughtered and processing is halal-certified",
+      "Manufacturer statement or halal certificate for the bone-derived phosphate",
+      "Whether a non-bone mineral phosphate alternative is used"
     ],
-    "saferAction": "Avoid if the animal source and halal certification are not clear.",
+    "saferAction": "Avoid if animal species, slaughter status, and halal certification are not clear; prefer non-bone mineral phosphate alternatives.",
     "commonFoods": [
       "Supplements",
       "Tableted foods",
@@ -13276,7 +13375,7 @@
       "Animal-derived additives need more verification than mineral additives from non-animal sources.",
       "Treat bone-derived phosphates like other animal-derived additives: the source and certification matter."
     ],
-    "lastReviewed": "2026-06-07",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e441",
       "e631",
@@ -13284,7 +13383,7 @@
     ],
     "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Reviewed as animal-derived phosphate with explicit species/slaughter verification guidance.",
+    "reviewNotes": "Reviewed as a high-risk bone-derived phosphate. Guidance now stresses species, slaughter status, and non-bone alternatives.",
     "sources": [
       {
         "type": "identity",
@@ -13658,7 +13757,9 @@
       "fatty acids",
       "masne kiseline",
       "stearinska kiselina",
-      "palmitinska kiselina"
+      "palmitinska kiselina",
+      "oleic acid",
+      "oleinska kiselina"
     ],
     "category": "Anti-caking agent / glazing agent",
     "status": "mashbooh",
@@ -13679,12 +13780,12 @@
       "Animal source is undisclosed and no halal certification is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement",
-      "Vegan or plant-based label where relevant",
-      "Whether alcohol-based carriers or processing aids are used"
+      "Whether fatty acids are plant, synthetic, halal-certified animal, or non-halal animal/pork derived",
+      "Halal certificate or supplier statement for fatty acid source",
+      "Vegan or plant-based claim where relevant",
+      "Whether related stearates, glycerides, or emulsifier blends share the same source risk"
     ],
-    "saferAction": "Verify the source or choose a halal-certified product.",
+    "saferAction": "Treat as source-dependent; use halal-certified, vegan, or manufacturer-confirmed plant/synthetic sources when possible.",
     "commonFoods": [
       "Dry mixes",
       "Baked goods",
@@ -13696,10 +13797,10 @@
       "A vegan label is useful source evidence, but halal certification is stronger for the full product.",
       "Ask specifically about the fatty acid or glycerol source when contacting a manufacturer."
     ],
-    "lastReviewed": "2026-06-04",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "High-priority source-dependent record: halal status depends on the fatty acid, glycerol, or stearate source.",
+    "reviewNotes": "Reviewed as a high-priority fatty-acid source record. Added direct plant/synthetic/animal source guidance and common fatty acid aliases.",
     "sources": [
       {
         "type": "identity",
@@ -13712,6 +13813,93 @@
         "label": "American Halal Foundation mono/diglycerides guidance",
         "url": "https://halalfoundation.org/are-mono-diglycerides-halal/",
         "note": "Explains that mono- and diglycerides can be plant, synthetic, pork, or non-halal animal derived, so source confirmation is required."
+      },
+      {
+        "type": "editorial",
+        "label": "Halal E-Check source-risk review",
+        "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "manufacturer-needed",
+        "label": "Manufacturer or halal certifier verification needed",
+        "note": "For source-dependent additives, the final ruling depends on the actual source and finished-product certification."
+      }
+    ]
+  },
+  {
+    "id": "e572",
+    "eNumber": "E572",
+    "numericCode": "572",
+    "name": "Magnesium stearate",
+    "aliases": [
+      "magnesium stearate",
+      "magnesium salt of stearic acid",
+      "magnesium salts of stearic acid",
+      "magnezijum stearat",
+      "magnezijev stearat",
+      "magnezij stearat",
+      "stearat magnezijuma",
+      "stearat magnezija"
+    ],
+    "category": "Anti-caking agent / release agent",
+    "status": "mashbooh",
+    "summary": "Magnesium stearate is source-dependent because stearic acid can be plant-derived, synthetic, or animal-derived.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Vegetable stearic acid",
+      "Animal stearic acid",
+      "Synthetic or mineral processing with fatty acids"
+    ],
+    "halalWhen": [
+      "Stearic acid source is confirmed plant-derived or synthetic without haram inputs",
+      "The finished product is halal-certified",
+      "A vegan or plant-based supplier statement covers the additive"
+    ],
+    "haramWhen": [
+      "Stearic acid comes from pork fat",
+      "Stearic acid comes from non-halal animal fat",
+      "Animal source is undisclosed and no halal certification is present"
+    ],
+    "whatToCheck": [
+      "Whether magnesium stearate or stearic acid is plant, synthetic, halal-certified animal, or non-halal animal/pork derived",
+      "Halal certificate or supplier statement for supplements, tablets, powders, or dry mixes",
+      "Vegan or plant-based claim where relevant",
+      "Whether related stearates, fatty acids, glycerides, or emulsifier blends share the same source risk"
+    ],
+    "saferAction": "Treat as source-dependent; use halal-certified, vegan, or manufacturer-confirmed plant/synthetic sources when possible.",
+    "commonFoods": [
+      "Supplements",
+      "Tablets",
+      "Powdered foods",
+      "Dry mixes",
+      "Seasoning blends"
+    ],
+    "notes": [
+      "The E-number alone does not reveal whether the stearic acid source is plant, synthetic, or animal.",
+      "A vegan label is useful source evidence, but halal certification is stronger for the full product.",
+      "This record overlaps with E470b, but is kept separately because E572 is a common label and search target."
+    ],
+    "lastReviewed": "2026-07-05",
+    "related": [
+      "e470b",
+      "e570",
+      "e471"
+    ],
+    "guidanceConfidence": "medium",
+    "reviewedBy": "Halal E-Check editorial review",
+    "reviewNotes": "Added as a standalone source-dependent magnesium stearate record because E572 appears directly on labels and supplement products.",
+    "sources": [
+      {
+        "type": "identity",
+        "label": "UK Food Standards Agency additive list",
+        "url": "https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers",
+        "note": "Used to cross-check additive identity and E-number naming, not halal status."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation mono/diglycerides guidance",
+        "url": "https://halalfoundation.org/are-mono-diglycerides-halal/",
+        "note": "Explains that fatty-acid and glyceride ingredients can be plant, synthetic, pork, or non-halal animal derived, so source confirmation is required."
       },
       {
         "type": "editorial",
@@ -14217,12 +14405,19 @@
     "name": "Monosodium glutamate",
     "aliases": [
       "msg",
-      "monosodium l-glutamate"
+      "monosodium l-glutamate",
+      "MSG",
+      "monosodium glutamate",
+      "natrijev glutamat",
+      "natrijum glutamat",
+      "mononatrijev glutamat",
+      "mononatrijum glutamat",
+      "pojacivac okusa monosodium glutamate"
     ],
     "category": "Flavor enhancer",
     "status": "halal",
     "summary": "Monosodium glutamate is generally considered halal as an additive when the finished product has no other halal concerns.",
-    "sourceSensitivity": "medium",
+    "sourceSensitivity": "low",
     "usuallyDerivedFrom": [
       "Microbial fermentation"
     ],
@@ -14236,11 +14431,11 @@
       "It is part of a flavor, color, or processing system with a doubtful carrier"
     ],
     "whatToCheck": [
-      "Full ingredient list",
-      "Halal certification for complex foods",
-      "Other doubtful ingredients in the finished product"
+      "Whether the finished product contains meat extract, broth, alcohol-based flavor carriers, or other doubtful ingredients",
+      "Halal certification for complex savory products such as chips, soups, sauces, and instant noodles",
+      "If in doubt, ask whether MSG is fermentation-derived and whether processing aids are halal-suitable"
     ],
-    "saferAction": "Usually acceptable as an additive; check the rest of the product ingredients.",
+    "saferAction": "MSG itself is generally lower halal concern when fermentation-derived; focus verification on the full seasoning system and finished product.",
     "commonFoods": [
       "Seasonings",
       "Snacks",
@@ -14250,19 +14445,21 @@
     "notes": [
       "Product-level halal status can still depend on formulation, carriers, processing aids, and certification."
     ],
-    "lastReviewed": "2026-06-04",
-    "guidanceConfidence": "medium",
+    "lastReviewed": "2026-07-05",
+    "guidanceConfidence": "high",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "General guidance still depends on the finished product, processing aids, and certification.",
+    "reviewNotes": "Reviewed separately from nucleotide flavor enhancers. MSG is usually fermentation-derived and lower source risk, but savory products containing it may still need full-product verification.",
     "sources": [
       {
+        "type": "identity",
         "label": "UK Food Standards Agency additive list",
         "url": "https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers",
         "note": "Used to cross-check additive identity and E-number naming, not halal status."
       },
       {
+        "type": "editorial",
         "label": "Halal E-Check source-risk review",
-        "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+        "note": "Reviewed as generally lower source sensitivity than E627/E631/E635, while finished-product seasoning systems may still need verification."
       }
     ]
   },
@@ -14586,7 +14783,12 @@
       "dinatrijev gvanilat",
       "dinatrijum guanilat",
       "natrijev guanilat",
-      "natrijum guanilat"
+      "natrijum guanilat",
+      "disodium guanylate",
+      "flavour enhancer 627",
+      "flavor enhancer 627",
+      "pojacivac okusa 627",
+      "dinatrijev guanilat"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14609,12 +14811,12 @@
       "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement for the nucleotide",
+      "Whether the nucleotide is microbial/yeast/plant fermentation derived, fish derived, or animal/meat-extract derived",
+      "Halal certification or supplier statement for the flavor enhancer blend",
       "Vegetarian or vegan suitability",
-      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
+      "Whether the seasoning also contains E631, E635, meat extract, broth, animal enzymes, or alcohol-based carriers"
     ],
-    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
+    "saferAction": "Treat as avoid-if-unclear in savory snacks, soups, noodles, sauces, and seasoning blends unless source is halal-certified, vegetarian/vegan, or manufacturer-confirmed.",
     "commonFoods": [
       "Chips",
       "Instant noodles",
@@ -14626,14 +14828,14 @@
       "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
       "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-07",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e631",
       "e635"
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
+    "reviewNotes": "Reviewed as a source-dependent nucleotide flavor enhancer. Strengthened wording around fermentation, fish, animal extract, and seasoning blend risk.",
     "sources": [
       {
         "type": "identity",
@@ -14939,7 +15141,11 @@
       "dinatrijev inosinat",
       "dinatrijum inosinat",
       "natrijev inosinat",
-      "natrijum inosinat"
+      "natrijum inosinat",
+      "disodium inosinate",
+      "flavour enhancer 631",
+      "flavor enhancer 631",
+      "pojacivac okusa 631"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -14962,12 +15168,12 @@
       "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement for the nucleotide",
+      "Whether the inosinate is microbial/yeast/plant fermentation derived, fish derived, or animal/meat-extract derived",
+      "Halal certification or supplier statement for the flavor enhancer blend",
       "Vegetarian or vegan suitability",
-      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
+      "Whether the seasoning also contains E627, E635, meat extract, broth, animal enzymes, or alcohol-based carriers"
     ],
-    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
+    "saferAction": "Treat as avoid-if-unclear unless the source is halal-certified, vegetarian/vegan, or manufacturer-confirmed as suitable.",
     "commonFoods": [
       "Instant noodles",
       "Savory snacks",
@@ -14979,7 +15185,7 @@
       "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
       "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-07",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e627",
       "e635",
@@ -14987,7 +15193,7 @@
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
+    "reviewNotes": "Reviewed as a source-dependent nucleotide flavor enhancer. E631 is common in savory products and needs clear source verification guidance.",
     "sources": [
       {
         "type": "identity",
@@ -15293,7 +15499,12 @@
       "flavour enhancer 635",
       "dinatrijev ribonukleotid",
       "dinatrijum ribonukleotid",
-      "ribonukleotidi"
+      "ribonukleotidi",
+      "disodium 5 ribonucleotides",
+      "disodium 5-ribonucleotides",
+      "I+G",
+      "flavor enhancer 635",
+      "pojacivac okusa 635"
     ],
     "category": "Flavor enhancer",
     "status": "mashbooh",
@@ -15316,12 +15527,12 @@
       "Animal source is undisclosed and no halal certification or vegetarian/vegan evidence is present"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement for the nucleotide",
+      "Whether the ribonucleotide blend is microbial/yeast/plant fermentation derived, fish derived, or animal/meat-extract derived",
+      "Halal certification or supplier statement for the flavor enhancer blend",
       "Vegetarian or vegan suitability",
-      "Whether the flavor system also contains E631, E635, meat extract, broth, or alcohol-based carriers"
+      "Whether the seasoning also contains E627, E631, meat extract, broth, animal enzymes, or alcohol-based carriers"
     ],
-    "saferAction": "For savory snacks, instant noodles, soups, sauces, and seasoning blends, verify the source or choose a halal-certified/vegetarian product; avoid if the source is unclear.",
+    "saferAction": "Treat as avoid-if-unclear unless the flavor enhancer blend is halal-certified, vegetarian/vegan, or manufacturer-confirmed as suitable.",
     "commonFoods": [
       "Seasoned chips",
       "Instant noodles",
@@ -15333,14 +15544,14 @@
       "Vegetarian or vegan labeling is useful source evidence, but halal certification is stronger for the finished product.",
       "Ask the manufacturer whether the nucleotide is fermentation-derived, fish-derived, or made from animal extract."
     ],
-    "lastReviewed": "2026-06-07",
+    "lastReviewed": "2026-07-05",
     "related": [
       "e627",
       "e631"
     ],
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Reviewed as source-dependent nucleotide flavor enhancer. Conservative guidance kept as mashbooh because supplier source can determine halal status.",
+    "reviewNotes": "Reviewed as a combined nucleotide flavor enhancer record. Guidance now stresses that blend source and finished seasoning context determine confidence.",
     "sources": [
       {
         "type": "identity",
@@ -15602,7 +15813,10 @@
       "pcelinji vosak",
       "pcelji vosak",
       "bijeli pcelinji vosak",
-      "zuti pcelinji vosak"
+      "zuti pcelinji vosak",
+      "beeswax",
+      "bees wax",
+      "sredstvo za glaziranje pcelinji vosak"
     ],
     "category": "Glazing agent",
     "status": "mashbooh",
@@ -15621,11 +15835,12 @@
       "Used with haram carriers or in a non-halal finished product"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer statement on glazing/coating system",
-      "Whether vegan status matters to the user"
+      "Whether bee-derived wax is accepted by your halal standard",
+      "Halal certification or manufacturer statement for the glazing/coating system",
+      "Whether the coating solvent/carrier system includes alcohol or other doubtful processing aids",
+      "Vegan label if avoiding bee-derived ingredients"
     ],
-    "saferAction": "Use certified products if avoiding bee-derived ingredients or if the finished product is doubtful.",
+    "saferAction": "Usually lower concern than shellac/carmine, but verify coating system and certification if avoiding bee-derived ingredients or if the finished product is doubtful.",
     "commonFoods": [
       "Candy",
       "Chocolate",
@@ -15636,10 +15851,10 @@
       "Bee-derived; many halal consumers accept it, but it is not vegan.",
       "Finished-product context still matters because glazing agents can be combined with carriers or solvents."
     ],
-    "lastReviewed": "2026-06-07",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Reviewed as preference-sensitive bee-derived glazing agent with lower risk than shellac/carmine but still source/context dependent.",
+    "reviewNotes": "Reviewed as a bee-derived glazing agent. Added coating/carrier wording and common Balkan label aliases.",
     "sources": [
       {
         "type": "identity",
@@ -15786,7 +16001,13 @@
       "selak",
       "šelak",
       "lak smola",
-      "konditorska glazura"
+      "konditorska glazura",
+      "shellac",
+      "confectioners glaze",
+      "confectioner's glaze",
+      "pharmaceutical glaze",
+      "glazing agent shellac",
+      "sredstvo za glaziranje selak"
     ],
     "category": "Glazing agent",
     "status": "mashbooh",
@@ -15806,12 +16027,12 @@
       "Used in a non-halal finished product"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer statement on shellac source",
-      "Coating solvent/carrier system",
-      "Vegan label if avoiding insect-derived ingredients"
+      "Whether shellac/lac resin is accepted by your halal authority",
+      "Halal certification for the coating/glaze and finished product",
+      "Solvent or carrier system used in the coating, including any alcohol residues",
+      "Vegan label if you avoid insect-derived glazing agents"
     ],
-    "saferAction": "Avoid if insect-derived glazing agents are not accepted by your halal authority; choose certified or vegan alternatives.",
+    "saferAction": "Avoid if insect-derived glazing agents are not accepted by your standard; otherwise verify halal certification, solvent/carrier details, and finished-product context.",
     "commonFoods": [
       "Candy",
       "Chocolate",
@@ -15822,10 +16043,10 @@
       "Also appears as confectioner's glaze in some markets.",
       "Product-level halal status can depend on formulation, carriers, processing aids, and certification."
     ],
-    "lastReviewed": "2026-06-07",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Reviewed as insect-derived glazing agent with explicit solvent/carrier verification guidance.",
+    "reviewNotes": "Reviewed as an insect-derived glazing agent. Added common confectionery glaze names and stronger solvent/carrier verification wording.",
     "sources": [
       {
         "type": "identity",
@@ -15968,6 +16189,92 @@
     ]
   },
   {
+    "id": "e913",
+    "eNumber": "E913",
+    "numericCode": "913",
+    "name": "Lanolin",
+    "aliases": [
+      "lanolin",
+      "wool wax",
+      "wool grease",
+      "anhydrous lanolin",
+      "lanolin wax",
+      "vuna vosak",
+      "vuncani vosak",
+      "voscana mast od vune"
+    ],
+    "category": "Glazing agent",
+    "status": "mashbooh",
+    "summary": "Lanolin is wool-derived and source-dependent. It is not usually a pork concern, but halal confidence depends on animal source, processing aids, and finished-product certification.",
+    "sourceSensitivity": "high",
+    "usuallyDerivedFrom": [
+      "Sheep wool grease",
+      "Wool wax refined from animal fleece",
+      "Processing aids or carriers may vary by supplier"
+    ],
+    "halalWhen": [
+      "Lanolin source and processing are accepted by the user's halal authority",
+      "The finished product is halal-certified",
+      "No haram solvents, carriers, or non-halal animal inputs are used"
+    ],
+    "haramWhen": [
+      "Animal source, processing aids, or carrier system are unclear",
+      "A user's certifier or standard avoids wool-derived glazing agents",
+      "Used in a non-halal finished product"
+    ],
+    "whatToCheck": [
+      "Whether lanolin/wool wax is accepted by your halal authority",
+      "Animal source and supplier statement for wool-derived material",
+      "Halal certification for the coating/glaze and finished product",
+      "Solvent or carrier system used in the coating, including any alcohol residues"
+    ],
+    "saferAction": "Treat as source-dependent; verify halal certification or supplier source/processing details before relying on products listing E913 or lanolin.",
+    "commonFoods": [
+      "Candy coatings",
+      "Chocolate coatings",
+      "Fruit coatings",
+      "Glazed confectionery"
+    ],
+    "notes": [
+      "Lanolin is derived from wool grease, commonly associated with sheep wool.",
+      "The practical concern is source acceptance, processing aids, coating carriers, and the finished-product context.",
+      "A vegan label would normally exclude lanolin."
+    ],
+    "lastReviewed": "2026-07-05",
+    "related": [
+      "e901",
+      "e904",
+      "e914"
+    ],
+    "guidanceConfidence": "medium",
+    "reviewedBy": "Halal E-Check editorial review",
+    "reviewNotes": "Added as a standalone wool-derived glazing agent record with conservative manufacturer/certifier verification guidance.",
+    "sources": [
+      {
+        "type": "identity",
+        "label": "UK Food Standards Agency additive list",
+        "url": "https://www.food.gov.uk/business-guidance/approved-additives-and-e-numbers",
+        "note": "Used to cross-check additive identity and E-number naming, not halal status."
+      },
+      {
+        "type": "halal-guidance",
+        "label": "American Halal Foundation ingredient risk matrix",
+        "url": "https://halalfoundation.org/halal-ingredients-matrix/",
+        "note": "Classifies animal-derived inputs and processing concerns as higher halal risk requiring verification."
+      },
+      {
+        "type": "editorial",
+        "label": "Halal E-Check source-risk review",
+        "note": "General halal guidance based on source sensitivity: plant, microbial, insect, pork, non-halal animal, alcohol, and certification concerns."
+      },
+      {
+        "type": "manufacturer-needed",
+        "label": "Manufacturer or halal certifier verification needed",
+        "note": "For source-dependent additives, the final ruling depends on the actual source and finished-product certification."
+      }
+    ]
+  },
+  {
     "id": "e914",
     "eNumber": "E914",
     "numericCode": "914",
@@ -16032,7 +16339,11 @@
       "l-cysteine hydrochloride",
       "l cistein",
       "cistein",
-      "l-cistein"
+      "l-cistein",
+      "l-cysteine",
+      "l cysteine",
+      "sredstvo za tretiranje brasna",
+      "flour treatment agent cysteine"
     ],
     "category": "Flour treatment agent",
     "status": "mashbooh",
@@ -16055,12 +16366,12 @@
       "Source is undisclosed in bakery products"
     ],
     "whatToCheck": [
-      "Halal certification",
-      "Manufacturer source statement",
+      "Whether L-cysteine is synthetic, microbial/fermentation-derived, poultry-feather-derived, hair-derived, or other animal-derived",
+      "Halal certification for the flour treatment agent, bread improver, and finished bakery product",
       "Vegan, microbial, or synthetic source claim",
-      "Whether it is used in bread improvers or flour treatment"
+      "Whether bakery improver blends contain other animal-derived enzymes or carriers"
     ],
-    "saferAction": "Verify source or choose halal-certified bakery products.",
+    "saferAction": "Verify source before relying on bakery products containing E920/L-cysteine; prefer halal-certified, vegan, microbial, or synthetic-source products.",
     "commonFoods": [
       "Processed foods",
       "Packaged foods"
@@ -16069,10 +16380,10 @@
       "Historically source-sensitive; do not infer halal status from the E-number alone.",
       "Product-level halal status can still depend on formulation, carriers, processing aids, and certification."
     ],
-    "lastReviewed": "2026-06-07",
+    "lastReviewed": "2026-07-05",
     "guidanceConfidence": "medium",
     "reviewedBy": "Halal E-Check editorial review",
-    "reviewNotes": "Reviewed as high-risk flour-treatment additive because feather/hair or other animal-derived sources may require verification.",
+    "reviewNotes": "Reviewed as a high-risk flour-treatment additive. Guidance now distinguishes synthetic/microbial sources from feathers, hair, and other animal-derived supply chains.",
     "sources": [
       {
         "type": "identity",
@@ -17748,7 +18059,12 @@
     "aliases": [
       "lysozyme",
       "lizozim",
-      "lisozim"
+      "lisozim",
+      "egg lysozyme",
+      "egg white lysozyme",
+      "enzim lizozim",
+      "lizozim iz jaja",
+      "lisozim iz jaja"
     ],
     "category": "Preservative / enzyme",
     "status": "mashbooh",
@@ -18780,7 +19096,12 @@
     "numericCode": "1517",
     "name": "Glycerol diacetate",
     "aliases": [
-      "diacetin"
+      "diacetin",
+      "glycerol diacetate",
+      "glycerin diacetate",
+      "glicerol diacetat",
+      "diacetin carrier",
+      "carrier diacetin"
     ],
     "category": "Carrier / solvent",
     "status": "mashbooh",
@@ -18854,7 +19175,11 @@
     "aliases": [
       "glycerol triacetate",
       "triacetin",
-      "glicerol triacetat"
+      "glicerol triacetat",
+      "glycerin triacetate",
+      "triacetin carrier",
+      "carrier triacetin",
+      "triglycerol acetate"
     ],
     "category": "Carrier / solvent",
     "status": "mashbooh",

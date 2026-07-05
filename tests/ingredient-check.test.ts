@@ -75,3 +75,82 @@ test("valid suffixes are preserved", () => {
   assert.equal(cleaned.text, "E407, E407a, E472e, E160a");
   assert.deepEqual(cleaned.corrections, []);
 });
+
+test("priority review aliases detect common additive label names", () => {
+  const result = checkIngredients(
+    [
+      "boja kosenil",
+      "emulgator mono i digliceridi",
+      "emulgator datem",
+      "mononatrijev glutamat",
+      "pojacivac okusa 631",
+      "konditorska glazura",
+      "sredstvo za tretiranje brasna"
+    ].join(", ")
+  );
+  const detectedCodes = new Set(result.matches.map((match) => match.additive.eNumber));
+
+  for (const code of ["E120", "E471", "E472e", "E621", "E631", "E904", "E920"]) {
+    assert.ok(detectedCodes.has(code), `should detect ${code}`);
+  }
+});
+
+test("second review batch aliases detect common additive label names", () => {
+  const result = checkIngredients(
+    [
+      "konzervans nitrit",
+      "kalijum nitrat",
+      "emulgator lecitin",
+      "humektant glicerol",
+      "govedji zelatin",
+      "fosfat iz kostiju",
+      "stearinska kiselina",
+      "pcelinji vosak"
+    ].join(", ")
+  );
+  const detectedCodes = new Set(result.matches.map((match) => match.additive.eNumber));
+
+  for (const code of ["E250", "E252", "E322", "E422", "E441", "E542", "E570", "E901"]) {
+    assert.ok(detectedCodes.has(code), `should detect ${code}`);
+  }
+});
+
+test("new high-value records detect E572 and E913 labels", () => {
+  const result = checkIngredients(
+    [
+      "protiv zgrudnjavanja E572",
+      "magnesium stearate",
+      "magnezijum stearat",
+      "glazing agent E913",
+      "lanolin",
+      "wool wax"
+    ].join(", ")
+  );
+  const detectedCodes = new Set(result.matches.map((match) => match.additive.eNumber));
+
+  for (const code of ["E572", "E913"]) {
+    assert.ok(detectedCodes.has(code), `should detect ${code}`);
+  }
+});
+
+test("source-sensitive alias batch detects practical label names", () => {
+  const result = checkIngredients(
+    [
+      "antioksidans askorbil palmitat",
+      "stabilizator ester guma",
+      "emulgator span 60",
+      "sorbitanski tristearat",
+      "sorbitan ester laurinske kiseline",
+      "emulgator span 80",
+      "sorbitan ester palmitinske kiseline",
+      "enzim lizozim iz jaja",
+      "nosac glicerol diacetat",
+      "carrier triacetin"
+    ].join(", ")
+  );
+  const detectedCodes = new Set(result.matches.map((match) => match.additive.eNumber));
+
+  for (const code of ["E304", "E445", "E491", "E492", "E493", "E494", "E495", "E1105", "E1517", "E1518"]) {
+    assert.ok(detectedCodes.has(code), `should detect ${code}`);
+  }
+});

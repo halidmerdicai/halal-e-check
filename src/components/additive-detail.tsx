@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
 import { getRiskGuidance, riskGuidanceCopy } from "@/lib/risk-guidance";
 import { getManufacturerQuestions } from "@/lib/decision-guide";
+import { AdditiveReviewChecklist } from "@/components/additive-review-checklist";
 
 function ListSection({ title, items }: { title: string; items: string[] }) {
   return (
@@ -215,6 +216,9 @@ export function AdditiveDetail({ additive }: { additive: Additive }) {
         <ListSection title="Common foods" items={additive.commonFoods} />
         <ListSection title="Notes" items={additive.notes} />
 
+        <div id="review-checklist" className="scroll-mt-4">
+          <AdditiveReviewChecklist additive={additive} />
+        </div>
         <TrustSection additive={additive} />
         <RelatedAdditives additive={additive} />
         <DisclaimerBox />

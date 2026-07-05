@@ -1,5 +1,22 @@
 import type { Additive } from "@/data/additives";
 
+export type ReviewQueueReasonKey =
+  | "avoid"
+  | "mashbooh"
+  | "high-sensitivity"
+  | "medium-sensitivity"
+  | "low-confidence"
+  | "manufacturer-needed"
+  | "missing-aliases"
+  | "missing-external-source"
+  | "missing-guidance-source"
+  | "source-keyword";
+
+export type ReviewQueueReason = {
+  key: ReviewQueueReasonKey;
+  label: string;
+};
+
 const statusWeight = {
   haram: 6,
   mashbooh: 4,
@@ -35,6 +52,49 @@ const sourceKeywords = [
   "alcohol"
 ];
 
+function hasSourceType(additive: Additive, type: NonNullable<Additive["sources"][number]["type"]>) {
+  return additive.sources.some((source) => source.type === type);
+}
+
+function hasExternalSource(additive: Additive) {
+  return additive.sources.some((source) => Boolean(source.url));
+}
+
+export function getReviewReasons(additive: Additive): ReviewQueueReason[] {
+  const reasons: ReviewQueueReason[] = [];
+  const text = [
+    additive.name,
+    additive.summary,
+    additive.saferAction,
+    ...additive.usuallyDerivedFrom,
+    ...additive.haramWhen,
+    ...additive.notes
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  if (additive.status === "haram") reasons.push({ key: "avoid", label: "Avoid status" });
+  if (additive.status === "mashbooh") reasons.push({ key: "mashbooh", label: "Mashbooh" });
+  if (additive.sourceSensitivity === "high") reasons.push({ key: "high-sensitivity", label: "High source sensitivity" });
+  if (additive.sourceSensitivity === "medium") reasons.push({ key: "medium-sensitivity", label: "Medium source sensitivity" });
+  if (additive.guidanceConfidence === "low") reasons.push({ key: "low-confidence", label: "Low confidence" });
+  if (hasSourceType(additive, "manufacturer-needed")) reasons.push({ key: "manufacturer-needed", label: "Manufacturer needed" });
+  if (additive.aliases.length < 2) reasons.push({ key: "missing-aliases", label: "Few aliases" });
+  if (!hasExternalSource(additive)) reasons.push({ key: "missing-external-source", label: "Missing external source" });
+  if (
+    (additive.status !== "halal" || additive.sourceSensitivity === "high") &&
+    !hasSourceType(additive, "halal-guidance") &&
+    !hasSourceType(additive, "regulatory")
+  ) {
+    reasons.push({ key: "missing-guidance-source", label: "Missing guidance source" });
+  }
+  if (sourceKeywords.some((keyword) => text.includes(keyword))) {
+    reasons.push({ key: "source-keyword", label: "Sensitive source keyword" });
+  }
+
+  return reasons;
+}
+
 export function getRiskScore(additive: Additive) {
   const text = [
     additive.name,
@@ -59,7 +119,16 @@ export function getRiskScore(additive: Additive) {
 
 export function getReviewQueue(additives: Additive[]) {
   return additives
-    .map((additive) => ({ additive, riskScore: getRiskScore(additive) }))
-    .filter(({ additive, riskScore }) => additive.status !== "halal" || additive.sourceSensitivity !== "low" || riskScore >= 4)
-    .sort((a, b) => b.riskScore - a.riskScore || a.additive.numericCode.localeCompare(b.additive.numericCode, undefined, { numeric: true }));
+    .map((additive) => ({
+      additive,
+      riskScore: getRiskScore(additive),
+      reasons: getReviewReasons(additive)
+    }))
+    .filter(({ additive, riskScore, reasons }) => additive.status !== "halal" || additive.sourceSensitivity !== "low" || riskScore >= 4 || reasons.length > 0)
+    .sort(
+      (a, b) =>
+        b.riskScore - a.riskScore ||
+        b.reasons.length - a.reasons.length ||
+        a.additive.numericCode.localeCompare(b.additive.numericCode, undefined, { numeric: true })
+    );
 }
