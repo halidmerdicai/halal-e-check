@@ -28,6 +28,12 @@ export type IngredientCodeCorrection = {
 };
 
 const additiveByCode = new Map(additives.map((additive) => [additive.id, additive]));
+const confidenceRank = {
+  low: 0,
+  medium: 1,
+  high: 2
+};
+const duplicateNamePreferredId = new Map<string, string>();
 const additiveContextPattern =
   /\b(e\s*[-]?\s*)?(number|additive|aditiv|emulsifier|emulgator|stabilizer|stabiliser|stabilizator|color|colour|boja|bojilo|preservative|konzervans|raising agent|sredstvo za dizanje|antioxidant|antioksidans|thickener|zgusnjivac|zgušnjivač|zagusnjivac|zgušnjivač|flavour enhancer|flavor enhancer|pojacivac okusa|pojačivač okusa|pojacivac ukusa|pojačivač ukusa|sweetener|zasladivac|zaslađivač)s?\b/i;
 
@@ -37,6 +43,22 @@ const ocrDigitSuffixCorrections: Record<string, string> = {
   "1": "i",
   "4": "a"
 };
+
+for (const additive of additives) {
+  const normalizedName = normalizeText(additive.name);
+  const preferredId = duplicateNamePreferredId.get(normalizedName);
+  const preferred = preferredId ? additiveByCode.get(preferredId) : undefined;
+
+  if (
+    !preferred ||
+    confidenceRank[additive.guidanceConfidence] > confidenceRank[preferred.guidanceConfidence] ||
+    (confidenceRank[additive.guidanceConfidence] === confidenceRank[preferred.guidanceConfidence] &&
+      !additive.category.includes("historical coverage") &&
+      preferred.category.includes("historical coverage"))
+  ) {
+    duplicateNamePreferredId.set(normalizedName, additive.id);
+  }
+}
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -63,6 +85,11 @@ function addMatch(matches: Map<string, IngredientMatch>, match: IngredientMatch)
   if (!existing || existing.matchedBy === "alias") {
     matches.set(match.additive.id, match);
   }
+}
+
+function shouldSkipDuplicateNameMatch(additive: Additive) {
+  const preferredId = duplicateNamePreferredId.get(normalizeText(additive.name));
+  return Boolean(preferredId && preferredId !== additive.id);
 }
 
 function cleanUnknownCode(rawCode: string) {
@@ -184,17 +211,19 @@ export function checkIngredients(input: string): IngredientCheckResult {
   }
 
   for (const additive of additives) {
-    const nameRegex = phrasePattern(additive.name);
-    if (nameRegex?.test(normalizedInput)) {
-      const rawMatch = rawPhrasePattern(additive.name)?.exec(input);
-      addMatch(matches, {
-        additive,
-        matchedBy: "name",
-        matchedText: rawMatch?.[0] ?? additive.name,
-        start: rawMatch?.index ?? -1,
-        end: rawMatch ? rawMatch.index + rawMatch[0].length : -1
-      });
-      continue;
+    if (!shouldSkipDuplicateNameMatch(additive)) {
+      const nameRegex = phrasePattern(additive.name);
+      if (nameRegex?.test(normalizedInput)) {
+        const rawMatch = rawPhrasePattern(additive.name)?.exec(input);
+        addMatch(matches, {
+          additive,
+          matchedBy: "name",
+          matchedText: rawMatch?.[0] ?? additive.name,
+          start: rawMatch?.index ?? -1,
+          end: rawMatch ? rawMatch.index + rawMatch[0].length : -1
+        });
+        continue;
+      }
     }
 
     for (const alias of additive.aliases) {

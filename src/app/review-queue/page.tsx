@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { additives } from "@/data/additives";
 import { ReviewQueueBrowser } from "@/components/review-queue-browser";
 import { getReviewQueue } from "@/lib/risk";
+import { getRiskGuidance } from "@/lib/risk-guidance";
 
 export const metadata: Metadata = {
   title: "Review Queue",
-  description: "High-risk and source-dependent additive records that need the most careful halal review.",
+  description: "Editorial QA queue for medium-confidence, source-sensitive, and weakly sourced additive records.",
   robots: {
     index: false,
     follow: false
@@ -15,8 +16,10 @@ export const metadata: Metadata = {
 export default function ReviewQueuePage() {
   const queue = getReviewQueue(additives);
   const highPriority = queue.filter((item) => item.riskScore >= 10).length;
+  const mediumConfidence = additives.filter((additive) => additive.guidanceConfidence === "medium").length;
+  const avoidIfUnclear = additives.filter((additive) => getRiskGuidance(additive) === "avoid-if-unclear").length;
   const manufacturerNeeded = queue.filter((item) => item.reasons.some((reason) => reason.key === "manufacturer-needed")).length;
-  const missingSources = queue.filter((item) =>
+  const missingSourceWork = queue.filter((item) =>
     item.reasons.some((reason) => reason.key === "missing-external-source" || reason.key === "missing-guidance-source")
   ).length;
 
@@ -24,10 +27,11 @@ export default function ReviewQueuePage() {
     <div className="container py-10 sm:py-14">
       <div className="max-w-3xl space-y-4">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">Data quality</p>
-        <h1 className="text-4xl font-bold leading-tight">High-risk review queue</h1>
+        <h1 className="text-4xl font-bold leading-tight">Editorial QA queue</h1>
         <p className="text-base leading-7 text-muted-foreground">
-          These records are source-dependent, process-dependent, weakly sourced, or likely to need manufacturer or halal
-          certifier verification. The score is a prioritization aid, not a halal ruling.
+          Low-confidence coverage is now complete. Use this queue to improve medium-confidence, source-sensitive, and
+          weakly sourced records before treating the dataset as market-ready. The score is a prioritization aid, not a
+          halal ruling.
         </p>
       </div>
 
@@ -41,11 +45,22 @@ export default function ReviewQueuePage() {
           <p className="mt-1 text-sm text-muted-foreground">high priority</p>
         </div>
         <div className="rounded-lg border bg-card p-5">
-          <p className="text-3xl font-bold">{manufacturerNeeded}</p>
-          <p className="mt-1 text-sm text-muted-foreground">manufacturer needed</p>
+          <p className="text-3xl font-bold">{mediumConfidence}</p>
+          <p className="mt-1 text-sm text-muted-foreground">medium confidence</p>
         </div>
         <div className="rounded-lg border bg-card p-5">
-          <p className="text-3xl font-bold">{missingSources}</p>
+          <p className="text-3xl font-bold">{avoidIfUnclear}</p>
+          <p className="mt-1 text-sm text-muted-foreground">avoid if unclear</p>
+        </div>
+      </div>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-lg border bg-card p-5">
+          <p className="text-3xl font-bold">{manufacturerNeeded}</p>
+          <p className="mt-1 text-sm text-muted-foreground">manufacturer verification needed</p>
+        </div>
+        <div className="rounded-lg border bg-card p-5">
+          <p className="text-3xl font-bold">{missingSourceWork}</p>
           <p className="mt-1 text-sm text-muted-foreground">missing source work</p>
         </div>
       </div>

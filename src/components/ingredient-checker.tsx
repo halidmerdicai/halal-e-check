@@ -5,6 +5,7 @@ import Link from "next/link";
 import ReactCrop, { convertToPixelCrop, type Crop, type PixelCrop } from "react-image-crop";
 import {
   AlertTriangle,
+  BookmarkPlus,
   Camera,
   CheckCircle2,
   ClipboardCheck,
@@ -13,13 +14,15 @@ import {
   HelpCircle,
   History,
   MessageSquareText,
+  PackageCheck,
   ScanText,
   Trash2,
   RotateCcw,
   RotateCw,
   ShieldAlert,
   Upload,
-  X
+  X,
+  ChevronDown
 } from "lucide-react";
 import { checkIngredients, cleanIngredientCodeText, type IngredientCodeCorrection } from "@/lib/ingredient-check";
 import { getRiskGuidance, riskGuidanceCopy, type RiskGuidance } from "@/lib/risk-guidance";
@@ -31,8 +34,10 @@ import { cn } from "@/lib/utils";
 
 const groups: RiskGuidance[] = ["avoid", "avoid-if-unclear", "verify", "permissible"];
 const historyKey = "halal-e-check:recent-checks";
+const savedProductsKey = "halal-e-check:saved-products";
 const ocrReportsKey = "halal-e-check:ocr-correction-reports";
 const maxHistoryItems = 10;
+const maxSavedProducts = 50;
 const maxOcrReports = 25;
 
 const example =
@@ -357,6 +362,24 @@ type RecentCheck = {
   unknownCount: number;
 };
 
+type SavedProductDecision = "none" | "safe-for-me" | "avoid";
+
+type SavedProduct = {
+  id: string;
+  name: string;
+  brand: string;
+  note: string;
+  decision: SavedProductDecision;
+  input: string;
+  preview: string;
+  savedAt: string;
+  updatedAt: string;
+  verdict: RiskGuidance;
+  counts: GuidanceCounts;
+  knownCount: number;
+  unknownCount: number;
+};
+
 const verdictMeta = {
   avoid: {
     title: "Avoid",
@@ -486,7 +509,7 @@ function ResultActions({
   }
 
   return (
-    <section className="rounded-lg border bg-card p-4 sm:p-5">
+    <section className="scroll-mt-20 rounded-lg border bg-card p-4 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="font-semibold">Save or share result</h3>
@@ -530,6 +553,92 @@ function readHistory(): RecentCheck[] {
 
 function writeHistory(items: RecentCheck[]) {
   window.localStorage.setItem(historyKey, JSON.stringify(items.slice(0, maxHistoryItems)));
+}
+
+function readSavedProducts(): SavedProduct[] {
+  try {
+    const raw = window.localStorage.getItem(savedProductsKey);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeSavedProducts(items: SavedProduct[]) {
+  window.localStorage.setItem(savedProductsKey, JSON.stringify(items.slice(0, maxSavedProducts)));
+}
+
+function isGuidance(value: unknown): value is RiskGuidance {
+  return typeof value === "string" && groups.includes(value as RiskGuidance);
+}
+
+function isDecision(value: unknown): value is SavedProductDecision {
+  return value === "none" || value === "safe-for-me" || value === "avoid";
+}
+
+function sanitizeCounts(value: unknown): GuidanceCounts {
+  const source = value && typeof value === "object" ? (value as Partial<Record<RiskGuidance, unknown>>) : {};
+
+  return {
+    avoid: typeof source.avoid === "number" && Number.isFinite(source.avoid) ? Math.max(0, Math.round(source.avoid)) : 0,
+    "avoid-if-unclear":
+      typeof source["avoid-if-unclear"] === "number" && Number.isFinite(source["avoid-if-unclear"])
+        ? Math.max(0, Math.round(source["avoid-if-unclear"]))
+        : 0,
+    verify: typeof source.verify === "number" && Number.isFinite(source.verify) ? Math.max(0, Math.round(source.verify)) : 0,
+    permissible:
+      typeof source.permissible === "number" && Number.isFinite(source.permissible) ? Math.max(0, Math.round(source.permissible)) : 0
+  };
+}
+
+function sanitizeSavedProduct(value: unknown): SavedProduct | null {
+  if (!value || typeof value !== "object") return null;
+
+  const source = value as Record<string, unknown>;
+  const input = typeof source.input === "string" ? source.input.trim() : "";
+  const name = typeof source.name === "string" ? source.name.trim() : "";
+
+  if (!input || !name) return null;
+
+  const now = new Date().toISOString();
+  const counts = sanitizeCounts(source.counts);
+
+  return {
+    id: typeof source.id === "string" && source.id.trim() ? source.id.trim() : `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    name,
+    brand: typeof source.brand === "string" ? source.brand.trim() : "",
+    note: typeof source.note === "string" ? source.note.trim() : "",
+    decision: isDecision(source.decision) ? source.decision : "none",
+    input,
+    preview: typeof source.preview === "string" && source.preview.trim() ? source.preview.trim() : makePreview(input),
+    savedAt: typeof source.savedAt === "string" && source.savedAt.trim() ? source.savedAt : now,
+    updatedAt: typeof source.updatedAt === "string" && source.updatedAt.trim() ? source.updatedAt : now,
+    verdict: isGuidance(source.verdict) ? source.verdict : getVerdict(counts, 0),
+    counts,
+    knownCount: typeof source.knownCount === "number" && Number.isFinite(source.knownCount) ? Math.max(0, Math.round(source.knownCount)) : 0,
+    unknownCount:
+      typeof source.unknownCount === "number" && Number.isFinite(source.unknownCount) ? Math.max(0, Math.round(source.unknownCount)) : 0
+  };
+}
+
+function parseSavedProductsBackup(value: unknown): SavedProduct[] {
+  const rawItems = Array.isArray(value)
+    ? value
+    : value && typeof value === "object" && Array.isArray((value as { products?: unknown }).products)
+      ? (value as { products: unknown[] }).products
+      : [];
+
+  const deduped = new Map<string, SavedProduct>();
+
+  for (const rawItem of rawItems) {
+    const item = sanitizeSavedProduct(rawItem);
+    if (!item) continue;
+    deduped.set(item.input, item);
+  }
+
+  return Array.from(deduped.values()).slice(0, maxSavedProducts);
 }
 
 function readOcrReports(): OcrCorrectionReport[] {
@@ -852,7 +961,7 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
   const detectedOcrCodes = ocrReview ? getDetectedOcrCodes(ocrReview.text) : [];
 
   return (
-    <section className="rounded-lg border bg-card p-4 sm:p-5">
+    <section className="scroll-mt-20 rounded-lg border bg-card p-4 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex items-center gap-2">
@@ -1218,6 +1327,7 @@ function RecentChecks({
   onClear: () => void;
 }) {
   const [copyStatus, setCopyStatus] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
 
   if (!items.length) return null;
 
@@ -1231,22 +1341,29 @@ function RecentChecks({
   }
 
   return (
-    <section className="rounded-lg border bg-card p-4 sm:p-5">
+    <section className="scroll-mt-20 rounded-lg border bg-card p-4 sm:p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex gap-3">
+        <button type="button" onClick={() => setIsOpen((current) => !current)} className="flex min-w-0 gap-3 text-left" aria-expanded={isOpen}>
           <History className="mt-1 h-5 w-5 flex-none text-primary" aria-hidden="true" />
-          <div>
-            <h2 className="font-semibold">Recent checks</h2>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <h2 className="font-semibold">Recent checks</h2>
+              <span className="rounded-full border px-2 py-0.5 text-xs font-semibold">{items.length}</span>
+              <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen ? "rotate-180" : null)} aria-hidden="true" />
+            </div>
             <p className="mt-1 text-sm text-muted-foreground">Stored privately in this browser.</p>
           </div>
-        </div>
-        <Button type="button" variant="outline" size="sm" onClick={onClear} className="w-full gap-2 min-[420px]:w-auto">
-          <Trash2 className="h-4 w-4" aria-hidden="true" />
-          Clear all
-        </Button>
+        </button>
+        {isOpen ? (
+          <Button type="button" variant="outline" size="sm" onClick={onClear} className="w-full gap-2 min-[420px]:w-auto">
+            <Trash2 className="h-4 w-4" aria-hidden="true" />
+            Clear all
+          </Button>
+        ) : null}
       </div>
       {copyStatus ? <p className="mt-3 text-sm font-medium text-primary">{copyStatus}</p> : null}
 
+      {isOpen ? (
       <div className="mt-4 grid gap-3">
         {items.map((item) => (
           <div key={item.id} className="rounded-md border bg-background p-3">
@@ -1271,7 +1388,7 @@ function RecentChecks({
                 <Button type="button" variant="outline" size="sm" onClick={() => void copyRecentCheck(item)}>
                   Copy
                 </Button>
-                <Button type="button" variant="outline" size="sm" onClick={() => onDelete(item.id)}>
+                <Button type="button" variant="outline" size="sm" onClick={() => onDelete(item.id)} className="col-span-2 min-[460px]:col-span-1">
                   Delete
                 </Button>
               </div>
@@ -1279,6 +1396,263 @@ function RecentChecks({
           </div>
         ))}
       </div>
+      ) : null}
+    </section>
+  );
+}
+
+function SaveProductPanel({
+  input,
+  counts,
+  result,
+  verdict,
+  onSave
+}: {
+  input: string;
+  counts: GuidanceCounts;
+  result: ReturnType<typeof checkIngredients>;
+  verdict: RiskGuidance;
+  onSave: (product: SavedProduct) => void;
+}) {
+  const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [note, setNote] = useState("");
+  const [status, setStatus] = useState("");
+
+  function saveProduct() {
+    const trimmedInput = input.trim();
+    const trimmedName = name.trim();
+
+    if (!trimmedInput) {
+      setStatus("Check ingredients before saving a product.");
+      return;
+    }
+
+    if (!trimmedName) {
+      setStatus("Add a product name before saving.");
+      return;
+    }
+
+    const now = new Date().toISOString();
+    const product: SavedProduct = {
+      id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+      name: trimmedName,
+      brand: brand.trim(),
+      note: note.trim(),
+      decision: "none",
+      input: trimmedInput,
+      preview: makePreview(trimmedInput),
+      savedAt: now,
+      updatedAt: now,
+      verdict,
+      counts,
+      knownCount: result.matches.length,
+      unknownCount: result.unknownCodes.length
+    };
+
+    onSave(product);
+    setStatus("Product saved privately in this browser.");
+    setName("");
+    setBrand("");
+    setNote("");
+  }
+
+  return (
+    <section className="rounded-lg border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <div className="flex items-center gap-2">
+            <BookmarkPlus className="h-5 w-5 text-primary" aria-hidden="true" />
+            <h3 className="font-semibold">Save product</h3>
+          </div>
+          <p className="mt-1 text-sm text-muted-foreground">Keep this check in a private product list on this device.</p>
+        </div>
+        <span className="rounded-full border px-2 py-1 text-xs font-semibold">{riskGuidanceCopy[verdict].label}</span>
+      </div>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2">
+        <label className="grid gap-2 text-sm font-medium">
+          Product name
+          <input
+            value={name}
+            onChange={(event) => {
+              setStatus("");
+              setName(event.target.value);
+            }}
+            placeholder="Pizza Capricciosa"
+            className="min-h-10 rounded-md border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        </label>
+        <label className="grid gap-2 text-sm font-medium">
+          Brand
+          <input
+            value={brand}
+            onChange={(event) => {
+              setStatus("");
+              setBrand(event.target.value);
+            }}
+            placeholder="Brand or store"
+            className="min-h-10 rounded-md border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        </label>
+        <label className="grid gap-2 text-sm font-medium md:col-span-2">
+          Note
+          <textarea
+            value={note}
+            onChange={(event) => {
+              setStatus("");
+              setNote(event.target.value);
+            }}
+            placeholder="Why you saved it, where you found it, or what still needs checking."
+            className="min-h-20 rounded-md border bg-background px-3 py-2 text-sm font-normal leading-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        </label>
+      </div>
+
+      <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        {status ? <p className="text-sm font-medium text-primary">{status}</p> : <p className="text-sm text-muted-foreground">Saved products stay on this device.</p>}
+        <Button type="button" onClick={saveProduct} className="gap-2 sm:shrink-0">
+          <PackageCheck className="h-4 w-4" aria-hidden="true" />
+          Save product
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+function SavedProducts({
+  items,
+  onLoad,
+  onCopy,
+  onDelete,
+  onDecisionChange,
+  onClear,
+  onExport,
+  onImport
+}: {
+  items: SavedProduct[];
+  onLoad: (input: string) => void;
+  onCopy: (input: string) => void;
+  onDelete: (id: string) => void;
+  onDecisionChange: (id: string, decision: SavedProductDecision) => void;
+  onClear: () => void;
+  onExport: () => void;
+  onImport: (file: File) => void;
+}) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <section className="scroll-mt-20 rounded-lg border bg-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <button type="button" onClick={() => setIsOpen((current) => !current)} className="flex min-w-0 gap-3 text-left" aria-expanded={isOpen}>
+          <PackageCheck className="mt-1 h-5 w-5 flex-none text-primary" aria-hidden="true" />
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <h2 className="font-semibold">Saved products</h2>
+              <span className="rounded-full border px-2 py-0.5 text-xs font-semibold">{items.length}</span>
+              <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen ? "rotate-180" : null)} aria-hidden="true" />
+            </div>
+            <p className="mt-1 text-sm text-muted-foreground">Your private product list on this device.</p>
+          </div>
+        </button>
+        {isOpen ? (
+        <div className="grid grid-cols-1 gap-2 min-[420px]:grid-cols-3 sm:flex sm:flex-wrap sm:justify-end">
+          <Button type="button" variant="outline" size="sm" onClick={onExport} disabled={!items.length} className="gap-2">
+            <Download className="h-4 w-4" aria-hidden="true" />
+            Export
+          </Button>
+          <label className="inline-flex min-h-9 cursor-pointer items-center justify-center gap-2 rounded-md border bg-background px-3 py-2 text-sm font-medium hover:bg-accent">
+            <Upload className="h-4 w-4" aria-hidden="true" />
+            Import
+            <input
+              type="file"
+              accept="application/json,.json"
+              className="sr-only"
+              onChange={(event) => {
+                const file = event.target.files?.[0];
+                event.target.value = "";
+                if (file) onImport(file);
+              }}
+            />
+          </label>
+          <Button type="button" variant="outline" size="sm" onClick={onClear} disabled={!items.length} className="gap-2">
+            <Trash2 className="h-4 w-4" aria-hidden="true" />
+            Clear
+          </Button>
+        </div>
+        ) : null}
+      </div>
+
+      {isOpen ? (
+      items.length ? (
+      <div className="mt-4 grid gap-3">
+        {items.map((item) => (
+          <article key={item.id} className="rounded-md border bg-background p-3">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="font-semibold">{item.name}</h3>
+                  {item.brand ? <span className="text-sm text-muted-foreground">{item.brand}</span> : null}
+                  <span className="rounded-full border px-2 py-1 text-xs font-semibold">{riskGuidanceCopy[item.verdict].label}</span>
+                  {item.decision !== "none" ? (
+                    <span
+                      className={cn(
+                        "rounded-full border px-2 py-1 text-xs font-semibold",
+                        item.decision === "safe-for-me"
+                          ? "border-emerald-200 bg-emerald-50 text-emerald-950"
+                          : "border-red-200 bg-red-50 text-red-950"
+                      )}
+                    >
+                      {item.decision === "safe-for-me" ? "Safe for me" : "Avoid"}
+                    </span>
+                  ) : null}
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground">Saved {new Date(item.savedAt).toLocaleString()}</p>
+                <p className="mt-2 break-words text-sm leading-6">{item.preview}</p>
+                {item.note ? <p className="mt-2 rounded-md border bg-card p-2 text-sm leading-6">{item.note}</p> : null}
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {item.knownCount} known, {item.unknownCount} unknown · Avoid {item.counts.avoid} · Avoid if unclear{" "}
+                  {item.counts["avoid-if-unclear"]} · Verify {item.counts.verify}
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-2 min-[460px]:grid-cols-3 lg:flex lg:flex-wrap lg:justify-end">
+                <Button type="button" size="sm" onClick={() => onLoad(item.input)}>
+                  Reopen
+                </Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => onCopy(item.input)}>
+                  Copy
+                </Button>
+                <Button
+                  type="button"
+                  variant={item.decision === "safe-for-me" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onDecisionChange(item.id, item.decision === "safe-for-me" ? "none" : "safe-for-me")}
+                >
+                  Safe
+                </Button>
+                <Button
+                  type="button"
+                  variant={item.decision === "avoid" ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => onDecisionChange(item.id, item.decision === "avoid" ? "none" : "avoid")}
+                >
+                  Avoid
+                </Button>
+                <Button type="button" variant="outline" size="sm" onClick={() => onDelete(item.id)} className="col-span-2 min-[460px]:col-span-1">
+                  Delete
+                </Button>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+      ) : (
+        <div className="mt-4 rounded-md border bg-background p-4 text-sm leading-6 text-muted-foreground">
+          <p className="font-medium text-foreground">No saved products yet</p>
+          <p className="mt-1">Save a checked product here, or import a Halal E-Check backup from another browser.</p>
+        </div>
+      )
+      ) : null}
     </section>
   );
 }
@@ -1553,6 +1927,8 @@ function HighlightedLabel({ input, result }: { input: string; result: ReturnType
 export function IngredientChecker() {
   const [input, setInput] = useState("");
   const [recentChecks, setRecentChecks] = useState<RecentCheck[]>([]);
+  const [savedProducts, setSavedProducts] = useState<SavedProduct[]>([]);
+  const [savedProductStatus, setSavedProductStatus] = useState("");
   const inputSectionRef = useRef<HTMLElement | null>(null);
   const inputTextareaRef = useRef<HTMLTextAreaElement | null>(null);
   const result = useMemo(() => checkIngredients(input), [input]);
@@ -1584,6 +1960,7 @@ export function IngredientChecker() {
 
   useEffect(() => {
     setRecentChecks(readHistory());
+    setSavedProducts(readSavedProducts());
   }, []);
 
   useEffect(() => {
@@ -1619,6 +1996,95 @@ export function IngredientChecker() {
   function clearRecentChecks() {
     writeHistory([]);
     setRecentChecks([]);
+  }
+
+  function saveProduct(product: SavedProduct) {
+    const next = [product, ...savedProducts.filter((item) => item.input !== product.input)].slice(0, maxSavedProducts);
+    writeSavedProducts(next);
+    setSavedProducts(next);
+    setSavedProductStatus("Product saved.");
+  }
+
+  async function copySavedProductInput(savedInput: string) {
+    try {
+      await navigator.clipboard.writeText(savedInput);
+      setSavedProductStatus("Saved product ingredients copied.");
+    } catch {
+      setSavedProductStatus("Copy failed. Reopen the product and copy the text manually.");
+    }
+  }
+
+  function deleteSavedProduct(id: string) {
+    const next = savedProducts.filter((item) => item.id !== id);
+    writeSavedProducts(next);
+    setSavedProducts(next);
+    setSavedProductStatus("Saved product deleted.");
+  }
+
+  function updateSavedProductDecision(id: string, decision: SavedProductDecision) {
+    const now = new Date().toISOString();
+    const next = savedProducts.map((item) => (item.id === id ? { ...item, decision, updatedAt: now } : item));
+    writeSavedProducts(next);
+    setSavedProducts(next);
+    setSavedProductStatus(decision === "none" ? "Product mark cleared." : "Product mark updated.");
+  }
+
+  function clearSavedProducts() {
+    writeSavedProducts([]);
+    setSavedProducts([]);
+    setSavedProductStatus("Saved products cleared.");
+  }
+
+  function exportSavedProducts() {
+    if (!savedProducts.length) {
+      setSavedProductStatus("No saved products to export.");
+      return;
+    }
+
+    const backup = {
+      app: "Halal E-Check",
+      type: "saved-products",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      products: savedProducts
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `halal-e-check-saved-products-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    setSavedProductStatus("Saved products exported.");
+  }
+
+  async function importSavedProducts(file: File) {
+    try {
+      const text = await file.text();
+      const parsed = JSON.parse(text);
+      const imported = parseSavedProductsBackup(parsed);
+
+      if (!imported.length) {
+        setSavedProductStatus("No valid saved products found in that backup.");
+        return;
+      }
+
+      const mergedByInput = new Map<string, SavedProduct>();
+      for (const item of savedProducts) mergedByInput.set(item.input, item);
+      for (const item of imported) mergedByInput.set(item.input, item);
+
+      const next = Array.from(mergedByInput.values())
+        .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+        .slice(0, maxSavedProducts);
+
+      writeSavedProducts(next);
+      setSavedProducts(next);
+      setSavedProductStatus(`Imported ${imported.length} saved product${imported.length === 1 ? "" : "s"}.`);
+    } catch {
+      setSavedProductStatus("Import failed. Choose a valid Halal E-Check JSON backup.");
+    }
   }
 
   function loadRecentCheck(nextInput: string) {
@@ -1676,6 +2142,7 @@ export function IngredientChecker() {
               <SummaryPanel counts={counts} unknownCount={result.unknownCodes.length} />
               <ResultNextSteps counts={counts} unknownCount={result.unknownCodes.length} />
               <ResultActions counts={counts} input={input} result={result} />
+              <SaveProductPanel input={input} counts={counts} result={result} verdict={verdict} onSave={saveProduct} />
               <HighlightedLabel input={input} result={result} />
 
               {grouped.map(({ group, matches }) =>
@@ -1716,6 +2183,18 @@ export function IngredientChecker() {
         onLoad={loadRecentCheck}
         onDelete={deleteRecentCheck}
         onClear={clearRecentChecks}
+      />
+
+      {savedProductStatus ? <p className="text-sm font-medium text-primary">{savedProductStatus}</p> : null}
+      <SavedProducts
+        items={savedProducts}
+        onLoad={loadRecentCheck}
+        onCopy={copySavedProductInput}
+        onDelete={deleteSavedProduct}
+        onDecisionChange={updateSavedProductDecision}
+        onClear={clearSavedProducts}
+        onExport={exportSavedProducts}
+        onImport={(file) => void importSavedProducts(file)}
       />
     </div>
   );

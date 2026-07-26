@@ -1,11 +1,14 @@
 import type { Additive } from "@/data/additives";
+import { getRiskGuidance } from "@/lib/risk-guidance";
 
 export type ReviewQueueReasonKey =
   | "avoid"
+  | "avoid-if-unclear"
   | "mashbooh"
   | "high-sensitivity"
   | "medium-sensitivity"
   | "low-confidence"
+  | "medium-confidence"
   | "manufacturer-needed"
   | "missing-aliases"
   | "missing-external-source"
@@ -74,10 +77,14 @@ export function getReviewReasons(additive: Additive): ReviewQueueReason[] {
     .toLowerCase();
 
   if (additive.status === "haram") reasons.push({ key: "avoid", label: "Avoid status" });
+  if (getRiskGuidance(additive) === "avoid-if-unclear") {
+    reasons.push({ key: "avoid-if-unclear", label: "Avoid if unclear" });
+  }
   if (additive.status === "mashbooh") reasons.push({ key: "mashbooh", label: "Mashbooh" });
   if (additive.sourceSensitivity === "high") reasons.push({ key: "high-sensitivity", label: "High source sensitivity" });
   if (additive.sourceSensitivity === "medium") reasons.push({ key: "medium-sensitivity", label: "Medium source sensitivity" });
   if (additive.guidanceConfidence === "low") reasons.push({ key: "low-confidence", label: "Low confidence" });
+  if (additive.guidanceConfidence === "medium") reasons.push({ key: "medium-confidence", label: "Medium confidence" });
   if (hasSourceType(additive, "manufacturer-needed")) reasons.push({ key: "manufacturer-needed", label: "Manufacturer needed" });
   if (additive.aliases.length < 2) reasons.push({ key: "missing-aliases", label: "Few aliases" });
   if (!hasExternalSource(additive)) reasons.push({ key: "missing-external-source", label: "Missing external source" });

@@ -24,18 +24,18 @@ export const riskGuidanceCopy: Record<RiskGuidance, { label: string; description
 export function getRiskGuidance(additive: Additive): RiskGuidance {
   if (additive.status === "haram") return "avoid";
 
-  const text = [
+  const reviewText = [
     additive.summary,
     additive.saferAction,
     additive.reviewNotes,
     ...additive.usuallyDerivedFrom,
-    ...additive.haramWhen,
     ...additive.notes
   ]
     .join(" ")
     .toLowerCase();
+  const fullText = [reviewText, ...additive.haramWhen].join(" ").toLowerCase();
 
-  const avoidSignals = [
+  const sourceAvoidSignals = [
     "avoid if",
     "pork",
     "non-halal animal",
@@ -47,9 +47,16 @@ export function getRiskGuidance(additive: Additive): RiskGuidance {
     "bone",
     "gelatin"
   ];
+  const regulatoryAvoidSignals = ["antibiotic", "banned", "forbidden", "not permitted", "not approved", "very high concern", "withdrawn"];
 
   if (additive.status === "mashbooh" && additive.sourceSensitivity === "high") return "avoid-if-unclear";
-  if (additive.status === "mashbooh" && avoidSignals.some((signal) => text.includes(signal))) return "avoid-if-unclear";
+  if (
+    additive.status === "mashbooh" &&
+    (sourceAvoidSignals.some((signal) => fullText.includes(signal)) ||
+      regulatoryAvoidSignals.some((signal) => reviewText.includes(signal)))
+  ) {
+    return "avoid-if-unclear";
+  }
   if (additive.status === "mashbooh") return "verify";
   if (additive.sourceSensitivity === "medium") return "verify";
 

@@ -22,9 +22,10 @@ type ReviewQueueItem = {
 type FilterKey =
   | "all"
   | "avoid"
+  | "avoid-if-unclear"
   | "mashbooh"
   | "source"
-  | "confidence"
+  | "medium-confidence"
   | "manufacturer"
   | "aliases"
   | "sources";
@@ -32,9 +33,10 @@ type FilterKey =
 const filters: Array<{ key: FilterKey; label: string; reasonKeys?: ReviewQueueReasonKey[] }> = [
   { key: "all", label: "All" },
   { key: "avoid", label: "Avoid", reasonKeys: ["avoid"] },
+  { key: "avoid-if-unclear", label: "Avoid if unclear", reasonKeys: ["avoid-if-unclear"] },
   { key: "mashbooh", label: "Mashbooh", reasonKeys: ["mashbooh"] },
   { key: "source", label: "Source-sensitive", reasonKeys: ["high-sensitivity", "medium-sensitivity", "source-keyword"] },
-  { key: "confidence", label: "Low confidence", reasonKeys: ["low-confidence"] },
+  { key: "medium-confidence", label: "Medium confidence", reasonKeys: ["medium-confidence"] },
   { key: "manufacturer", label: "Manufacturer needed", reasonKeys: ["manufacturer-needed"] },
   { key: "aliases", label: "Missing aliases", reasonKeys: ["missing-aliases"] },
   { key: "sources", label: "Missing sources", reasonKeys: ["missing-external-source", "missing-guidance-source"] }
@@ -42,9 +44,11 @@ const filters: Array<{ key: FilterKey; label: string; reasonKeys?: ReviewQueueRe
 
 const reasonStyles: Partial<Record<ReviewQueueReasonKey, string>> = {
   avoid: "border-red-200 bg-red-50 text-red-950 dark:border-red-800 dark:bg-red-950 dark:text-red-100",
+  "avoid-if-unclear": "border-red-200 bg-red-50 text-red-950 dark:border-red-800 dark:bg-red-950 dark:text-red-100",
   mashbooh: "border-orange-200 bg-orange-50 text-orange-950 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-100",
   "high-sensitivity": "border-orange-200 bg-orange-50 text-orange-950 dark:border-orange-800 dark:bg-orange-950 dark:text-orange-100",
   "low-confidence": "border-amber-200 bg-amber-50 text-amber-950 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100",
+  "medium-confidence": "border-amber-200 bg-amber-50 text-amber-950 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100",
   "manufacturer-needed": "border-sky-200 bg-sky-50 text-sky-950 dark:border-sky-800 dark:bg-sky-950 dark:text-sky-100"
 };
 
@@ -101,7 +105,7 @@ export function ReviewQueueBrowser({ queue }: { queue: ReviewQueueItem[] }) {
               <h2 className="text-xl font-semibold">Review filters</h2>
             </div>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Use this queue to review source-sensitive, weakly sourced, or low-confidence records first.
+              Use this queue to review source-sensitive, medium-confidence, or weakly sourced records first.
             </p>
           </div>
           <label className="relative block lg:w-80">

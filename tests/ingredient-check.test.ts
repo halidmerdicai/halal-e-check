@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { checkIngredients, cleanIngredientCodeText } from "../src/lib/ingredient-check";
+import { getRiskGuidance } from "../src/lib/risk-guidance";
+import { realUseLabelCases } from "../src/data/qa-label-cases";
 
 type LabelCase = {
   name: string;
@@ -154,3 +156,82 @@ test("source-sensitive alias batch detects practical label names", () => {
     assert.ok(detectedCodes.has(code), `should detect ${code}`);
   }
 });
+
+test("official coverage entries detect newly added approved codes", () => {
+  const result = checkIngredients(
+    [
+      "E325 sodium lactate",
+      "E326 potassium lactate",
+      "E327 calcium lactate",
+      "modified gum arabic E423",
+      "stannous chloride E512",
+      "microcrystalline wax E905",
+      "invertase enzyme E1103",
+      "basic methacrylate copolymer E1205",
+      "neutral methacrylate copolymer E1206",
+      "anionic methacrylate copolymer E1207",
+      "pvp va copolymer E1208",
+      "pva peg graft copolymer E1209",
+      "polyethylene glycol E1521"
+    ].join(", ")
+  );
+  const detectedCodes = new Set(result.matches.map((match) => match.additive.eNumber));
+
+  for (const code of ["E325", "E326", "E327", "E423", "E512", "E905", "E1103", "E1205", "E1206", "E1207", "E1208", "E1209", "E1521"]) {
+    assert.ok(detectedCodes.has(code), `should detect ${code}`);
+  }
+});
+
+test("historical coverage entries detect representative non-current E-numbers", () => {
+  const result = checkIngredients(
+    [
+      "color E103 alkannin",
+      "preservative E240 formaldehyde",
+      "antioxidant E314 guaiac resin",
+      "stabilizer E430 polyoxyethene stearate",
+      "emulsifier E472g succinylated monoglycerides",
+      "antibiotic E701 tetracyclines",
+      "glazing agent E912 montanic acid esters",
+      "improving agent E924 potassium bromate",
+      "solvent E1510 ethanol",
+      "thickener E1525 hydroxyethyl cellulose"
+    ].join(", ")
+  );
+  const detectedCodes = new Set(result.matches.map((match) => match.additive.eNumber));
+
+  for (const code of ["E103", "E240", "E314", "E430", "E472g", "E701", "E912", "E924", "E1510", "E1525"]) {
+    assert.ok(detectedCodes.has(code), `should detect ${code}`);
+  }
+});
+
+for (const labelCase of realUseLabelCases) {
+  test(`real-use QA: ${labelCase.name}`, () => {
+    const cleaned = cleanIngredientCodeText(labelCase.text);
+    const result = checkIngredients(cleaned.text);
+    const detectedCodes = new Set(result.matches.map((match) => match.additive.eNumber));
+
+    for (const code of labelCase.expectedCodes) {
+      assert.ok(detectedCodes.has(code), `${labelCase.name} should detect ${code}`);
+    }
+
+    for (const code of labelCase.expectedAbsentCodes ?? []) {
+      assert.ok(!detectedCodes.has(code), `${labelCase.name} should not falsely detect ${code}`);
+    }
+
+    for (const [code, expectedGuidance] of Object.entries(labelCase.expectedGuidance ?? {})) {
+      const match = result.matches.find((item) => item.additive.eNumber === code);
+
+      assert.ok(match, `${labelCase.name} should have a match for ${code}`);
+      assert.equal(getRiskGuidance(match.additive), expectedGuidance, `${labelCase.name} should classify ${code}`);
+    }
+
+    if (labelCase.expectedCorrections) {
+      assert.deepEqual(
+        cleaned.corrections.map((correction) => [correction.from, correction.to]),
+        labelCase.expectedCorrections
+      );
+    }
+
+    assert.deepEqual(result.unknownCodes, [], `${labelCase.name} should not create unknown E-numbers`);
+  });
+}
