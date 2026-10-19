@@ -45,6 +45,30 @@ NEXT_PUBLIC_SITE_URL=https://halidmerdicai.github.io/halal-e-check
 
 ## Launch checklist
 
+Run the same checks that gate deployment (install Chromium once first):
+
+```bash
+npm ci
+npx playwright install chromium
+npm run verify
+```
+
+`build:pages` creates the production base-path export. Browser tests serve that
+artifact locally, on desktop and mobile viewports. They exercise exact search,
+unknown codes, longest-name matching, negation and the real crop/preview/confirm
+flow. Only the external OCR engine is substituted with deterministic output; the
+image and canvas crop remain real. A fault-injection test verifies that a missing
+JavaScript chunk fails the resource monitor.
+
+Pull requests must pass unit tests, lint, type checking, build and browser tests.
+The deployment job depends on these checks and uploads the tested artifact.
+After deployment, `production-smoke` checks the live URL without mocked resources.
+A smoke failure marks the workflow failed and retains browser traces; it does
+not automatically roll back an already published site.
+
+For an explicit live check, set `SMOKE_BASE_URL` to the published site root and run
+`npm run test:smoke`. Without that variable, tests use the local static export.
+
 After each deploy, verify the live GitHub Pages site:
 
 - Open `https://halidmerdicai.github.io/halal-e-check/`
@@ -106,6 +130,17 @@ The `/review-queue` page ranks source-sensitive and higher-risk entries so the h
 ## Guidance principle
 
 This app gives general halal ingredient guidance, not final fatwa-level certainty. Some additives are source-dependent and require manufacturer confirmation or halal certification. Vegan and plant-based labels can help identify source, but they do not replace halal certification for the finished product.
+
+Source categories are mandatory. Identity and regulatory references are not
+halal approval. Existing editorial confidence and review dates are preserved as
+editorial history, not promoted to expert review. Unreviewed records visibly say
+`provisional`, remain in the review queue and cannot produce `Generally OK`.
+
+Only an actual expert review may populate `halalReview`: named reviewer, valid
+date, the current status and summary, and URLs of additive-specific halal
+guidance. A changed conclusion invalidates the review until it is updated by
+the reviewer. `checkedAt` on a citation records a source check, not expert
+approval. General background sources do not satisfy this requirement.
 
 ## Future extension points
 

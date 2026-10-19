@@ -27,9 +27,9 @@ export const realUseLabelCases: RealUseLabelCase[] = [
     expectedCodes: ["E160b", "E202", "E450", "E471", "E500"],
     expectedAbsentCodes: ["E430", "E926"],
     expectedGuidance: {
-      E202: "permissible",
+      E202: "verify",
       E471: "avoid-if-unclear",
-      E500: "permissible"
+      E500: "verify"
     }
   },
   {
@@ -43,10 +43,10 @@ export const realUseLabelCases: RealUseLabelCase[] = [
       ["E4O7", "E407"]
     ],
     expectedGuidance: {
-      E250: "permissible",
-      E407: "permissible",
-      E407a: "permissible",
-      E621: "permissible"
+      E250: "verify",
+      E407: "verify",
+      E407a: "verify",
+      E621: "verify"
     }
   },
   {
@@ -67,9 +67,9 @@ export const realUseLabelCases: RealUseLabelCase[] = [
     text: "Sastojci: limunska kiselina, ksantan guma, guar guma, kalijum-sorbat, natrijev benzoat.",
     expectedCodes: ["E202", "E330", "E412", "E415"],
     expectedGuidance: {
-      E202: "permissible",
+      E202: "verify",
       E330: "verify",
-      E412: "permissible",
+      E412: "verify",
       E415: "verify"
     }
   },
@@ -80,7 +80,7 @@ export const realUseLabelCases: RealUseLabelCase[] = [
     expectedGuidance: {
       E322: "verify",
       E422: "avoid-if-unclear",
-      E621: "permissible",
+      E621: "verify",
       E631: "avoid-if-unclear",
       E1510: "verify"
     }
@@ -101,10 +101,10 @@ export const realUseLabelCases: RealUseLabelCase[] = [
     text: "Ingredients: pectin, agar, carrageenan E407, locust bean gum, cellulose.",
     expectedCodes: ["E407", "E410", "E440", "E460"],
     expectedGuidance: {
-      E407: "permissible",
-      E410: "permissible",
-      E440: "permissible",
-      E460: "permissible"
+      E407: "verify",
+      E410: "verify",
+      E440: "verify",
+      E460: "verify"
     }
   },
   {
@@ -123,9 +123,9 @@ export const realUseLabelCases: RealUseLabelCase[] = [
     expectedCodes: ["E101", "E150d", "E160a", "E171"],
     expectedGuidance: {
       E101: "verify",
-      E150d: "permissible",
-      E160a: "permissible",
-      E171: "permissible"
+      E150d: "verify",
+      E160a: "verify",
+      E171: "verify"
     }
   }
 ];

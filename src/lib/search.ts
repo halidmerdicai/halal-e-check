@@ -4,13 +4,7 @@ import type { Additive } from "@/data/additives";
 export function normalizeCode(input: string) {
   const compact = input.trim().toLowerCase().replace(/[\s-]/g, "");
   if (!compact) return "";
-  const withPrefix = compact.startsWith("e") ? compact : `e${compact}`;
-  const body = withPrefix.slice(1);
-  const numericLike = body.match(/^[0-9o]{3,4}/)?.[0];
-
-  if (!numericLike) return withPrefix;
-
-  return `e${numericLike.replace(/o/g, "0")}${body.slice(numericLike.length)}`;
+  return compact.startsWith("e") ? compact : `e${compact}`;
 }
 
 export function normalizeText(input: string) {
@@ -83,6 +77,44 @@ const spellingReplacements: Array<[RegExp, string]> = [
 
 function applyCommonSpellings(input: string) {
   return spellingReplacements.reduce((value, [pattern, replacement]) => value.replace(pattern, replacement), input);
+}
+
+// Keep original label positions while normalizing translated names and accents.
+// A replacement phrase maps back to the whole phrase it replaced.
+export function normalizeTextWithOffsets(input: string) {
+  type Span = { start: number; end: number };
+  let text = "";
+  let offsets: Span[] = [];
+  let index = 0;
+  for (const character of input) {
+    const folded = character.toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]/g, " ");
+    text += folded;
+    for (let i = 0; i < folded.length; i += 1) offsets.push({ start: index, end: index + character.length });
+    index += character.length;
+  }
+  function replace(pattern: RegExp, replacement: string) {
+    let next = "";
+    const nextOffsets: Span[] = [];
+    let cursor = 0;
+    for (const match of Array.from(text.matchAll(pattern))) {
+      next += text.slice(cursor, match.index) + replacement;
+      nextOffsets.push(...offsets.slice(cursor, match.index));
+      const span = { start: offsets[match.index].start, end: offsets[match.index + match[0].length - 1].end };
+      for (let i = 0; i < replacement.length; i += 1) nextOffsets.push(span);
+      cursor = match.index + match[0].length;
+    }
+    next += text.slice(cursor);
+    nextOffsets.push(...offsets.slice(cursor));
+    text = next;
+    offsets = nextOffsets;
+  }
+  replace(/\s+/g, " ");
+  const leading = text.length - text.trimStart().length;
+  const trailing = text.trimEnd().length;
+  text = text.slice(leading, trailing);
+  offsets = offsets.slice(leading, trailing);
+  for (const [pattern, replacement] of spellingReplacements) replace(pattern, replacement);
+  return { text, offsets };
 }
 
 function editDistance(a: string, b: string, maxDistance: number) {
@@ -190,6 +222,13 @@ function scoreMatch(additive: Additive, query: string) {
 export function searchAdditives(query: string, limit = 8) {
   const trimmed = query.trim();
   if (!trimmed) return [];
+
+  // Fuzzy names are helpful, but a similar number identifies a different
+  // additive. Never let Enter navigate to a substitute for an unknown code.
+  if (/^e?(?=[0-9o]*\d)[0-9o]+[a-z]*$/i.test(trimmed.replace(/[\s-]/g, ""))) {
+    const exact = findAdditiveByCode(trimmed);
+    return exact && limit > 0 ? [exact] : [];
+  }
 
   return additives
     .map((additive) => ({ additive, score: scoreMatch(additive, trimmed) }))

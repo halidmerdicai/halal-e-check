@@ -145,7 +145,7 @@ export function ReviewQueueBrowser({ queue }: { queue: ReviewQueueItem[] }) {
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="rounded-full border bg-background px-3 py-1 text-sm font-bold">Score {riskScore}</span>
-                  <StatusBadge status={additive.status} className="px-2 py-1 text-xs" />
+                  <StatusBadge additive={additive} className="px-2 py-1 text-xs" />
                   <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs" />
                   {riskScore >= 10 ? (
                     <span className="inline-flex items-center gap-1 rounded-full border border-red-200 bg-red-50 px-2 py-1 text-xs font-semibold text-red-950 dark:border-red-800 dark:bg-red-950 dark:text-red-100">

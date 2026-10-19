@@ -16,7 +16,7 @@ export function AdditiveCard({ additive }: { additive: Additive }) {
           <p className="mt-1 text-sm text-muted-foreground">{additive.category}</p>
         </div>
         <div className="flex flex-col items-end gap-2">
-          <StatusBadge status={additive.status} />
+          <StatusBadge additive={additive} />
           <RiskGuidanceBadge additive={additive} />
         </div>
       </CardHeader>

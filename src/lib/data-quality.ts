@@ -1,5 +1,6 @@
 import type { Additive, AdditiveSource } from "@/data/additives";
-import { getRiskGuidance } from "@/lib/risk-guidance";
+import { getEditorialRiskGuidance } from "@/lib/risk-guidance";
+import { hasExpertHalalReview, hasHalalGuidanceSource } from "@/lib/evidence";
 import { getRiskScore } from "@/lib/risk";
 
 export type DataQualityIssueKey =
@@ -8,7 +9,8 @@ export type DataQualityIssueKey =
   | "highRiskMissingGuidanceSource"
   | "lowConfidence"
   | "manufacturerNeeded"
-  | "staleReview";
+  | "staleReview"
+  | "expertReviewPending";
 
 export type DataQualityIssue = {
   key: DataQualityIssueKey;
@@ -25,6 +27,7 @@ export type DataQualitySummary = {
   lowConfidence: number;
   manufacturerNeeded: number;
   staleReview: number;
+  expertReviewPending: number;
 };
 
 const staleReviewDays = 180;
@@ -38,7 +41,7 @@ function hasExternalSource(additive: Additive) {
 }
 
 function hasTypedSource(additive: Additive) {
-  return additive.sources.some((source) => Boolean(source.type));
+  return additive.sources.length > 0 && additive.sources.every((source) => Boolean(source.type));
 }
 
 function reviewAgeDays(additive: Additive, referenceDate: Date) {
@@ -49,7 +52,7 @@ function reviewAgeDays(additive: Additive, referenceDate: Date) {
 }
 
 export function isHighRiskRecord(additive: Additive) {
-  return additive.status !== "halal" || additive.sourceSensitivity === "high" || getRiskGuidance(additive) !== "permissible";
+  return additive.status !== "halal" || additive.sourceSensitivity === "high" || getEditorialRiskGuidance(additive) !== "permissible";
 }
 
 export function getDataQuality(additives: Additive[], referenceDate = new Date()) {
@@ -57,17 +60,24 @@ export function getDataQuality(additives: Additive[], referenceDate = new Date()
   const missingExternalSource = additives.filter((additive) => !hasExternalSource(additive));
   const missingTypedSource = additives.filter((additive) => !hasTypedSource(additive));
   const highRiskMissingGuidanceSource = highRiskRecords.filter(
-    (additive) => !hasSourceType(additive, "halal-guidance") && !hasSourceType(additive, "regulatory")
+    (additive) => !hasHalalGuidanceSource(additive)
   );
   const lowConfidence = additives.filter((additive) => additive.guidanceConfidence === "low");
   const manufacturerNeeded = additives.filter((additive) => hasSourceType(additive, "manufacturer-needed"));
   const staleReview = additives.filter((additive) => reviewAgeDays(additive, referenceDate) > staleReviewDays);
+  const expertReviewPending = additives.filter((additive) => !hasExpertHalalReview(additive));
 
   const issues: DataQualityIssue[] = [
     {
+      key: "expertReviewPending",
+      label: "Expert halal review pending",
+      description: "These records are explicitly provisional. Generally OK is withheld until a named, dated expert review is tied to additive-specific halal evidence. Editorial confidence does not close this task.",
+      records: expertReviewPending
+    },
+    {
       key: "highRiskMissingGuidanceSource",
-      label: "High-risk records missing guidance/regulatory source",
-      description: "Source-sensitive records should eventually have a halal-guidance or regulatory reference, not only editorial notes.",
+      label: "High-risk records missing linked halal guidance",
+      description: "Identity and regulatory approval do not establish halal status. These records remain provisional until relevant halal evidence and expert review are recorded.",
       records: highRiskMissingGuidanceSource
     },
     {
@@ -109,7 +119,8 @@ export function getDataQuality(additives: Additive[], referenceDate = new Date()
     highRisk: highRiskRecords.length,
     lowConfidence: lowConfidence.length,
     manufacturerNeeded: manufacturerNeeded.length,
-    staleReview: staleReview.length
+    staleReview: staleReview.length,
+    expertReviewPending: expertReviewPending.length
   };
 
   const priorityRecords = additives

@@ -11,6 +11,7 @@ import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
 import { getRiskGuidance, riskGuidanceCopy } from "@/lib/risk-guidance";
 import { getManufacturerQuestions } from "@/lib/decision-guide";
 import { AdditiveReviewChecklist } from "@/components/additive-review-checklist";
+import { EvidenceNotice } from "@/components/evidence-notice";
 
 function ListSection({ title, items }: { title: string; items: string[] }) {
   return (
@@ -100,7 +101,7 @@ function TrustSection({ additive }: { additive: Additive }) {
     <section className="rounded-lg border bg-card p-4 sm:p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
-          <h2 className="text-lg font-semibold sm:text-xl">Data confidence</h2>
+          <h2 className="text-lg font-semibold sm:text-xl">Editorial confidence</h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">{additive.reviewNotes}</p>
         </div>
         <span
@@ -115,11 +116,11 @@ function TrustSection({ additive }: { additive: Additive }) {
 
       <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2 sm:gap-3">
         <div className="rounded-md border bg-background p-3">
-          <dt className="font-semibold">Reviewed by</dt>
+          <dt className="font-semibold">Editorial reviewer</dt>
           <dd className="mt-1 text-muted-foreground">{additive.reviewedBy}</dd>
         </div>
         <div className="rounded-md border bg-background p-3">
-          <dt className="font-semibold">Last reviewed</dt>
+          <dt className="font-semibold">Last editorial review</dt>
           <dd className="mt-1 text-muted-foreground">{additive.lastReviewed}</dd>
         </div>
       </dl>
@@ -155,6 +156,8 @@ function TrustSection({ additive }: { additive: Additive }) {
                 <p className="break-words font-semibold">{source.label}</p>
               )}
               {source.note ? <p className="mt-1 text-muted-foreground">{source.note}</p> : null}
+              {source.scope ? <p className="mt-1 text-muted-foreground">Scope: {source.scope.replaceAll("-", " ")}</p> : null}
+              {source.checkedAt ? <p className="mt-1 text-muted-foreground">Citation checked: {source.checkedAt}. Expert review is separate.</p> : null}
             </li>
           ))}
         </ul>
@@ -170,7 +173,7 @@ export function AdditiveDetail({ additive }: { additive: Additive }) {
     <article className="container max-w-4xl py-6 sm:py-12">
       <div className="mb-6 space-y-4 sm:mb-8 sm:space-y-5">
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-          <StatusBadge status={additive.status} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+          <StatusBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
           <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
           <span className="rounded-full border px-2 py-1 text-xs text-muted-foreground sm:px-3 sm:text-sm">{additive.category}</span>
           <span className="rounded-full border px-2 py-1 text-xs text-muted-foreground sm:px-3 sm:text-sm">
@@ -182,6 +185,7 @@ export function AdditiveDetail({ additive }: { additive: Additive }) {
           <h1 className="mt-2 break-words text-3xl font-bold leading-tight sm:text-5xl">{additive.name}</h1>
         </div>
         <p className="text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8">{additive.summary}</p>
+        <EvidenceNotice additive={additive} />
         <Link
           href={`/corrections?code=${encodeURIComponent(additive.eNumber)}&name=${encodeURIComponent(additive.name)}`}
           className="inline-flex rounded-md border bg-card px-3 py-2 text-sm font-semibold text-primary hover:bg-accent sm:border-0 sm:bg-transparent sm:p-0 sm:hover:underline"

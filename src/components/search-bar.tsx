@@ -65,7 +65,7 @@ export function SearchBar({ className, autoFocus = false }: { className?: string
                       <span className="block truncate text-sm text-muted-foreground">{additive.category}</span>
                     </span>
                     <span className="flex flex-wrap gap-2 min-[520px]:flex-none min-[520px]:flex-col min-[520px]:items-end">
-                      <StatusBadge status={additive.status} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+                      <StatusBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
                       <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
                     </span>
                   </Link>

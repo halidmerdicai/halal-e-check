@@ -7,18 +7,13 @@ import type { Additive } from "@/data/additives";
 import { getReviewReasons } from "@/lib/risk";
 import { getRiskGuidance, riskGuidanceCopy } from "@/lib/risk-guidance";
 import { Button } from "@/components/ui/button";
-
-function hasSourceType(additive: Additive, type: NonNullable<Additive["sources"][number]["type"]>) {
-  return additive.sources.some((source) => source.type === type);
-}
+import { hasExpertHalalReview, hasHalalGuidanceSource } from "@/lib/evidence";
 
 function hasExternalSource(additive: Additive) {
   return additive.sources.some((source) => Boolean(source.url));
 }
 
 function reviewChecklist(additive: Additive) {
-  const isSensitive = additive.status !== "halal" || additive.sourceSensitivity !== "low";
-
   return [
     {
       label: "External source URL",
@@ -27,13 +22,13 @@ function reviewChecklist(additive: Additive) {
     },
     {
       label: "Typed source category",
-      done: additive.sources.some((source) => Boolean(source.type)),
+      done: additive.sources.length > 0 && additive.sources.every((source) => Boolean(source.type)),
       detail: "Sources should be categorized so weak editorial notes do not look stronger than they are."
     },
     {
-      label: "Guidance or regulatory source",
-      done: !isSensitive || hasSourceType(additive, "halal-guidance") || hasSourceType(additive, "regulatory"),
-      detail: "High-risk or source-sensitive records should have stronger support than a generic identity source."
+      label: "Linked halal guidance",
+      done: hasHalalGuidanceSource(additive),
+      detail: "Regulatory approval and identity references cannot establish halal status. General guidance still needs a review against this specific additive."
     },
     {
       label: "Aliases for search/OCR",
@@ -46,9 +41,9 @@ function reviewChecklist(additive: Additive) {
       detail: "The record should tell users exactly what source, carrier, or certification question to ask."
     },
     {
-      label: "Confidence reviewed",
-      done: additive.guidanceConfidence !== "low",
-      detail: "Low-confidence records should be reviewed before being treated as launch-ready."
+      label: "Expert halal review",
+      done: hasExpertHalalReview(additive),
+      detail: "Record a named expert, date, exact conclusion and additive-specific halal evidence. Editorial confidence is not expert approval."
     }
   ];
 }

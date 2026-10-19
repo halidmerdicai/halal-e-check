@@ -1,4 +1,5 @@
-import type { HalalStatus } from "@/data/additives";
+import type { Additive, HalalStatus } from "@/data/additives";
+import { getEvidenceNotice, hasExpertHalalReview } from "@/lib/evidence";
 import { statusCopy } from "@/lib/status";
 import { cn } from "@/lib/utils";
 
@@ -8,10 +9,14 @@ const styles: Record<HalalStatus, string> = {
   mashbooh: "border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-200"
 };
 
-export function StatusBadge({ status, className }: { status: HalalStatus; className?: string }) {
+type Props = ({ additive: Additive; status?: never } | { status: HalalStatus; additive?: never }) & { className?: string };
+
+export function StatusBadge({ status, additive, className }: Props) {
+  const value = additive?.status ?? status!;
+  const provisional = additive && !hasExpertHalalReview(additive);
   return (
-    <span className={cn("inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold", styles[status], className)}>
-      {statusCopy[status].label}
+    <span title={additive ? getEvidenceNotice(additive) : undefined} className={cn("inline-flex items-center rounded-full border px-3 py-1 text-sm font-semibold", provisional ? styles.mashbooh : styles[value], className)}>
+      {statusCopy[value].label}{provisional ? " · provisional" : ""}
     </span>
   );
 }

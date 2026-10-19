@@ -1,4 +1,5 @@
 import type { Additive } from "@/data/additives";
+import { hasExpertHalalReview } from "@/lib/evidence";
 
 export type RiskGuidance = "permissible" | "verify" | "avoid-if-unclear" | "avoid";
 
@@ -22,6 +23,11 @@ export const riskGuidanceCopy: Record<RiskGuidance, { label: string; description
 };
 
 export function getRiskGuidance(additive: Additive): RiskGuidance {
+  const guidance = getEditorialRiskGuidance(additive);
+  return guidance === "permissible" && !hasExpertHalalReview(additive) ? "verify" : guidance;
+}
+
+export function getEditorialRiskGuidance(additive: Additive): RiskGuidance {
   if (additive.status === "haram") return "avoid";
 
   const reviewText = [

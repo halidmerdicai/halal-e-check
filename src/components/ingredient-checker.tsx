@@ -31,6 +31,8 @@ import { StatusBadge } from "@/components/status-badge";
 import { RiskGuidanceBadge } from "@/components/risk-guidance-badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { EvidenceNotice } from "@/components/evidence-notice";
+import { getSourceCropRect } from "@/lib/image-crop";
 
 const groups: RiskGuidance[] = ["avoid", "avoid-if-unclear", "verify", "permissible"];
 const historyKey = "halal-e-check:recent-checks";
@@ -199,12 +201,10 @@ async function createCroppedImageFromVisibleSelection(image: HTMLImageElement, c
     throw new Error("The selected crop is outside the image.");
   }
 
-  const scaleX = image.naturalWidth / imageRect.width;
-  const scaleY = image.naturalHeight / imageRect.height;
-  const sourceX = Math.max(0, Math.round((left - imageRect.left) * scaleX));
-  const sourceY = Math.max(0, Math.round((top - imageRect.top) * scaleY));
-  const sourceWidth = Math.max(1, Math.min(Math.round((right - left) * scaleX), image.naturalWidth - sourceX));
-  const sourceHeight = Math.max(1, Math.min(Math.round((bottom - top) * scaleY), image.naturalHeight - sourceY));
+  const { x: sourceX, y: sourceY, width: sourceWidth, height: sourceHeight } = getSourceCropRect(
+    image.naturalWidth, image.naturalHeight, imageRect.width, imageRect.height,
+    { x: left - imageRect.left, y: top - imageRect.top, width: right - left, height: bottom - top }
+  );
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d", { willReadFrequently: true });
   if (!context) throw new Error("Image cropping is not supported in this browser.");
@@ -254,7 +254,8 @@ function getConfidenceLabel(confidence: number | null) {
 }
 
 function buildFlexibleCodePattern(value: string) {
-  return new RegExp(value.trim().split("").map((character) => `${escapeRegExp(character)}[\\s-]*`).join("").replace(/\[\\s-\]\*$/, ""), "gi");
+  const code = value.replace(/[\s-]/g, "");
+  return new RegExp(`\\b${code.split("").map(escapeRegExp).join("[\\s-]*")}\\b`, "gi");
 }
 
 function escapeRegExp(value: string) {
@@ -792,8 +793,8 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
       setOcrCorrections(cleaned.corrections);
       setOcrReview({
         rawText: text,
-        originalText: cleaned.text || text,
-        text: cleaned.text || text,
+        originalText: text,
+        text,
         confidence: selectedResult.confidence,
         imageUrl,
         corrections: cleaned.corrections,
@@ -892,16 +893,10 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
 
       const pattern = buildFlexibleCodePattern(correction.from);
       const nextText = review.text.replace(pattern, correction.to);
-      const fallbackText = nextText === review.text ? `${review.text.trim()} ${correction.to}`.trim() : nextText;
-      const cleaned = cleanIngredientCodeText(fallbackText);
-
       return {
         ...review,
-        text: cleaned.text,
-        corrections: [...review.corrections, ...cleaned.corrections].filter(
-          (item, index, items) => items.findIndex((candidate) => candidate.from === item.from && candidate.to === item.to) === index
-        ),
-        suspiciousCodes: findSuspiciousOcrCodes(fallbackText, [...review.corrections, ...cleaned.corrections])
+        text: nextText,
+        suspiciousCodes: findSuspiciousOcrCodes(nextText, review.corrections)
       };
     });
   }
@@ -1210,8 +1205,8 @@ function OcrPanel({ onText }: { onText: (text: string) => void }) {
 
           {ocrReview.corrections.length ? (
             <div className="mt-3 rounded-md border border-sky-200 bg-sky-50 p-3 text-sm text-sky-950 dark:border-sky-800 dark:bg-sky-950 dark:text-sky-100">
-              <p className="font-medium">Quick OCR corrections</p>
-              <p className="mt-1 text-xs opacity-80">Use these if the OCR text still shows the wrong version.</p>
+              <p className="font-medium">Suggested OCR corrections</p>
+              <p className="mt-1 text-xs opacity-80">The original text is unchanged. Apply a suggestion only after checking it against the image.</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {ocrReview.corrections.slice(0, 6).map((correction) => (
                   <Button
@@ -1782,11 +1777,12 @@ function MatchCard({ additive, matchedBy, matchedText }: IngredientMatchItem) {
           </p>
         </div>
         <div className="flex flex-wrap gap-2 sm:max-w-48 sm:justify-end">
-          <StatusBadge status={additive.status} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+          <StatusBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
           <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
         </div>
       </div>
 
+      <div className="mt-3"><EvidenceNotice additive={additive} /></div>
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         <div className="rounded-md border bg-background p-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Why it matters</p>

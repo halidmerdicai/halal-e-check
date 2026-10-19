@@ -82,6 +82,16 @@ export default function MethodologyPage() {
       </div>
 
       <div className="mt-8 grid gap-6">
+        <section className="rounded-lg border border-amber-300 bg-card p-5">
+          <h2 className="text-xl font-semibold">Provisional assessments and expert review</h2>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Editorial confidence describes an internal assessment, not independent halal approval. A record remains
+            provisional until a named expert, review date, current conclusion and additive-specific halal sources
+            are recorded together. Identity lists, regulatory approval and general halal background do not complete
+            this review. Unreviewed records require verification and cannot produce Generally OK guidance.
+          </p>
+          <Link href="/data-quality" className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">See the open review backlog</Link>
+        </section>
         <section className="rounded-lg border bg-card p-5">
           <h2 className="text-xl font-semibold">Core principle</h2>
           <p className="mt-2 text-sm leading-6 text-muted-foreground">

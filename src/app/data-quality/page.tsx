@@ -47,7 +47,7 @@ const metricCards = [
 export default function DataQualityPage() {
   const { issues, priorityRecords, summary } = getDataQuality(additives);
   const launchBlockers = issues.filter((issue) =>
-    ["highRiskMissingGuidanceSource", "missingExternalSource", "lowConfidence"].includes(issue.key)
+    ["highRiskMissingGuidanceSource", "missingExternalSource", "expertReviewPending"].includes(issue.key)
   );
 
   return (
@@ -80,7 +80,7 @@ export default function DataQualityPage() {
           <div>
             <h2 className="text-xl font-semibold">Launch blockers</h2>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              These are the highest-value data issues to reduce before a public launch.
+              Expert review remains open for {summary.expertReviewPending} records. Until completed, assessments are visibly provisional and cannot produce Generally OK guidance. This mitigates unsupported certainty; it does not complete the expert review.
             </p>
           </div>
           <div className="flex flex-wrap gap-3 text-sm font-semibold">
@@ -165,7 +165,7 @@ export default function DataQualityPage() {
               <span className="hidden text-sm text-muted-foreground sm:block">{riskGuidanceCopy[getRiskGuidance(additive)].label}</span>
               <span className="hidden text-sm text-muted-foreground sm:block">{sensitivityCopy[additive.sourceSensitivity]}</span>
               <span className="hidden sm:block">
-                <StatusBadge status={additive.status} />
+                <StatusBadge additive={additive} />
               </span>
             </Link>
           ))}

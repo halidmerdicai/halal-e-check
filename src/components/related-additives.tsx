@@ -18,7 +18,7 @@ export function RelatedAdditives({ additive }: { additive: Additive }) {
                 <p className="font-semibold">{item.eNumber}</p>
                 <p className="mt-1 break-words text-sm text-muted-foreground">{item.name}</p>
               </div>
-              <StatusBadge status={item.status} className="w-fit px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+              <StatusBadge additive={item} className="w-fit px-2 py-1 text-xs sm:px-3 sm:text-sm" />
             </div>
           </Link>
         ))}

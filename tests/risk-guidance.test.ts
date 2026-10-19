@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { additiveById } from "../src/data/additives";
-import { getRiskGuidance } from "../src/lib/risk-guidance";
+import { getRiskGuidance, getEditorialRiskGuidance } from "../src/lib/risk-guidance";
+import { hasExpertHalalReview } from "../src/lib/evidence";
 
 test("historical regulatory-risk coverage records escalate to avoid-if-unclear", () => {
   for (const id of ["e701", "e924", "e927a", "e940"]) {
@@ -22,12 +23,10 @@ test("reviewed historical regulatory-risk records have medium-confidence conserv
   }
 });
 
-test("all additive guidance records have completed confidence review", () => {
-  const lowConfidenceIds = Array.from(additiveById.values())
-    .filter((additive) => additive.guidanceConfidence === "low")
-    .map((additive) => additive.id);
-
-  assert.deepEqual(lowConfidenceIds, []);
+test("editorial confidence never substitutes for expert review", () => {
+  for (const additive of Array.from(additiveById.values())) {
+    if (!hasExpertHalalReview(additive)) assert.notEqual(getRiskGuidance(additive), "permissible", additive.id);
+  }
 });
 
 test("reviewed historical mineral coverage records remain verify", () => {
@@ -58,13 +57,14 @@ test("reviewed elevated product-use records avoid if unclear", () => {
   }
 });
 
-test("reviewed official synthetic and mineral coverage records are generally ok", () => {
+test("synthetic and mineral editorial assessments still need expert evidence", () => {
   for (const id of ["e512", "e1205", "e1206", "e1207", "e1208"]) {
     const additive = additiveById.get(id);
 
     assert.ok(additive, `${id} should exist`);
     assert.equal(additive.guidanceConfidence, "medium", `${id} should be reviewed to medium confidence`);
-    assert.equal(getRiskGuidance(additive), "permissible", `${id} should be generally ok`);
+    assert.equal(getEditorialRiskGuidance(additive), "permissible", `${id} has a lower-risk editorial assessment`);
+    assert.equal(getRiskGuidance(additive), "verify", `${id} still needs expert evidence`);
   }
 });
 

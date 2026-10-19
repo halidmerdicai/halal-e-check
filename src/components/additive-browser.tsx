@@ -201,7 +201,7 @@ export function AdditiveBrowser({ additives }: { additives: Additive[] }) {
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 min-[520px]:flex-none min-[520px]:flex-col min-[520px]:items-end">
-                  <StatusBadge status={additive.status} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
+                  <StatusBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
                   <RiskGuidanceBadge additive={additive} className="px-2 py-1 text-xs sm:px-3 sm:text-sm" />
                 </div>
               </div>

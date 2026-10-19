@@ -15,7 +15,7 @@ export function getManufacturerQuestions(additive: Additive) {
     questions[0] = `Is the ${additive.name} source fermentation-derived, fish-derived, plant-derived, or animal-derived?`;
   }
 
-  if (additive.usuallyDerivedFrom.some((source) => /insect|lac|cochineal|bee/i.test(source))) {
+  if (additive.usuallyDerivedFrom.some((source) => /\b(?:insects?|lac|cochineal|bees?|beeswax)\b/i.test(source))) {
     questions[0] = `What exact insect/bee-derived source and processing method is used for ${additive.name}?`;
   }
 

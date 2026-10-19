@@ -1,5 +1,6 @@
 import type { Additive } from "@/data/additives";
 import { getRiskGuidance } from "@/lib/risk-guidance";
+import { hasExpertHalalReview, hasHalalGuidanceSource } from "@/lib/evidence";
 
 export type ReviewQueueReasonKey =
   | "avoid"
@@ -13,7 +14,8 @@ export type ReviewQueueReasonKey =
   | "missing-aliases"
   | "missing-external-source"
   | "missing-guidance-source"
-  | "source-keyword";
+  | "source-keyword"
+  | "expert-review-pending";
 
 export type ReviewQueueReason = {
   key: ReviewQueueReasonKey;
@@ -65,6 +67,7 @@ function hasExternalSource(additive: Additive) {
 
 export function getReviewReasons(additive: Additive): ReviewQueueReason[] {
   const reasons: ReviewQueueReason[] = [];
+  if (!hasExpertHalalReview(additive)) reasons.push({ key: "expert-review-pending", label: "Expert review pending" });
   const text = [
     additive.name,
     additive.summary,
@@ -90,8 +93,7 @@ export function getReviewReasons(additive: Additive): ReviewQueueReason[] {
   if (!hasExternalSource(additive)) reasons.push({ key: "missing-external-source", label: "Missing external source" });
   if (
     (additive.status !== "halal" || additive.sourceSensitivity === "high") &&
-    !hasSourceType(additive, "halal-guidance") &&
-    !hasSourceType(additive, "regulatory")
+    !hasHalalGuidanceSource(additive)
   ) {
     reasons.push({ key: "missing-guidance-source", label: "Missing guidance source" });
   }

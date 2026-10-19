@@ -58,6 +58,22 @@ function assertAdditive(value: unknown): asserts value is Additive {
   if (!["low", "medium", "high"].includes(additive.guidanceConfidence as string)) {
     throw new Error(`Invalid additive record ${additive.id}: unsupported guidance confidence`);
   }
+
+  for (const source of additive.sources as AdditiveSource[]) {
+    if (!source || !["identity", "regulatory", "halal-guidance", "manufacturer-needed", "editorial"].includes(source.type) || !source.label) {
+      throw new Error(`Invalid additive record ${additive.id}: source type and label are required`);
+    }
+    if (source.url !== undefined && (typeof source.url !== "string" || !/^https?:\/\//.test(source.url))) {
+      throw new Error(`Invalid additive record ${additive.id}: invalid source URL`);
+    }
+  }
+  if (additive.halalReview !== undefined) {
+    const review = additive.halalReview as Additive["halalReview"];
+    if (!review || ![review.reviewer, review.reviewedAt, review.status, review.summary].every((item) => typeof item === "string") ||
+      !Array.isArray(review.sourceUrls) || !review.sourceUrls.every((item) => typeof item === "string")) {
+      throw new Error(`Invalid additive record ${additive.id}: malformed expert review`);
+    }
+  }
 }
 
 function loadAdditives(records: unknown[]) {

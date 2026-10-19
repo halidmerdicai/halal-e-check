@@ -29,8 +29,8 @@ export default function ReviewQueuePage() {
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">Data quality</p>
         <h1 className="text-4xl font-bold leading-tight">Editorial QA queue</h1>
         <p className="text-base leading-7 text-muted-foreground">
-          Low-confidence coverage is now complete. Use this queue to improve medium-confidence, source-sensitive, and
-          weakly sourced records before treating the dataset as market-ready. The score is a prioritization aid, not a
+          Expert review remains open wherever a named, dated review and additive-specific halal evidence are missing.
+          Use this queue to resolve those records before treating the dataset as market-ready. The score is a prioritization aid, not a
           halal ruling.
         </p>
       </div>
